@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hellolinux.xyz/posts/4a17b156.html</loc>
+    
+    <lastmod>2020-03-30T11:00:40.024Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hellolinux.xyz/tags/index.html</loc>
+    
+    <lastmod>2020-03-30T08:44:14.278Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hellolinux.xyz/about/index.html</loc>
     
-    <lastmod>2020-03-30T03:03:40.820Z</lastmod>
+    <lastmod>2020-03-30T08:44:03.203Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hellolinux.xyz/categories/index.html</loc>
+    
+    <lastmod>2020-03-30T08:43:49.257Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hellolinux.xyz/posts/8c1a34bd.html</loc>
+    
+    <lastmod>2020-03-30T08:42:04.907Z</lastmod>
     
   </url>
   
@@ -33,34 +61,6 @@
     <loc>https://hellolinux.xyz/404.html</loc>
     
     <lastmod>2020-03-29T11:01:36.704Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hellolinux.xyz/posts/8c1a34bd.html</loc>
-    
-    <lastmod>2020-03-29T04:35:52.382Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hellolinux.xyz/tags/index.html</loc>
-    
-    <lastmod>2020-03-29T04:05:58.885Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hellolinux.xyz/categories/index.html</loc>
-    
-    <lastmod>2020-03-29T04:05:43.015Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hellolinux.xyz/posts/4a17b156.html</loc>
-    
-    <lastmod>2020-03-29T03:42:18.217Z</lastmod>
     
   </url>
   

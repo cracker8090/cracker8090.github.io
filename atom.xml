@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hellolinux.xyz/"/>
-  <updated>2020-03-29T04:35:52.382Z</updated>
+  <updated>2020-03-30T02:42:56.986Z</updated>
   <id>https://hellolinux.xyz/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo配置</title>
+    <link href="https://hellolinux.xyz/posts/aed3dd41.html"/>
+    <id>https://hellolinux.xyz/posts/aed3dd41.html</id>
+    <published>2020-03-30T02:42:48.000Z</published>
+    <updated>2020-03-30T02:42:56.986Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>博客名字</title>

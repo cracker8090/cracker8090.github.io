@@ -18,13 +18,190 @@
   <entry>
     <title>hexo配置</title>
     <url>/posts/aed3dd41.html</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>本文主要讲述hexo主题配置相关问题</p>
+<h1 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h1><figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> [layout] &lt;<span class="built_in">title</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在命令中指定文章的布局（layout），默认为 <code>post</code>，可以通过修改 <code>_config.yml</code> 中的 <code>default_layout</code> 参数来指定默认布局。</p>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p>Hexo 有三种默认布局：<code>post</code>、<code>page</code> 和 <code>draft</code>。在创建者三种不同类型的文件时，它们将会被保存到不同的路径；而您自定义的其他布局和 <code>post</code> 相同，都将储存到 <code>source/_posts</code> 文件夹。</p>
+<table>
+<thead>
+<tr>
+<th align="left">布局</th>
+<th align="left">路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>post</code></td>
+<td align="left"><code>source/_posts</code></td>
+</tr>
+<tr>
+<td align="left"><code>page</code></td>
+<td align="left"><code>source</code></td>
+</tr>
+<tr>
+<td align="left"><code>draft</code></td>
+<td align="left"><code>source/_drafts</code></td>
+</tr>
+</tbody></table>
+<p>如果你不想你的文章被处理，你可以将 Front-Matter 中的<code>layout:</code> 设为 <code>false</code> 。</p>
+<h2 id="文件名称"><a href="#文件名称" class="headerlink" title="文件名称"></a>文件名称</h2><p>Hexo 默认以标题做为文件名称，但您可编辑 <code>new_post_name</code> 参数来改变默认的文件名称，举例来说，设为 <code>:year-:month-:day-:title.md</code> 可让您更方便的通过日期来管理文章。</p>
+<table>
+<thead>
+<tr>
+<th align="left">变量</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>:title</code></td>
+<td align="left">标题（小写，空格将会被替换为短杠）</td>
+</tr>
+<tr>
+<td align="left"><code>:year</code></td>
+<td align="left">建立的年份，比如， <code>2015</code></td>
+</tr>
+<tr>
+<td align="left"><code>:month</code></td>
+<td align="left">建立的月份（有前导零），比如， <code>04</code></td>
+</tr>
+<tr>
+<td align="left"><code>:i_month</code></td>
+<td align="left">建立的月份（无前导零），比如， <code>4</code></td>
+</tr>
+<tr>
+<td align="left"><code>:day</code></td>
+<td align="left">建立的日期（有前导零），比如， <code>07</code></td>
+</tr>
+<tr>
+<td align="left"><code>:i_day</code></td>
+<td align="left">建立的日期（无前导零），比如， <code>7</code></td>
+</tr>
+</tbody></table>
+<h2 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h2><p>Hexo 的一种特殊布局：<code>draft</code>，这种布局在建立时会被保存到 <code>source/_drafts</code> 文件夹，您可通过 <code>publish</code> 命令将草稿移动到 <code>source/_posts</code> 文件夹，该命令的使用方式与 <code>new</code> 十分类似，您也可在命令中指定 <code>layout</code> 来指定布局。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">hexo publish [layout] <span class="tag">&lt;<span class="name">title</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>草稿默认不会显示在页面中，您可在执行时加上 <code>--draft</code> 参数，或是把 <code>render_drafts</code> 参数设为 <code>true</code>来预览草稿。</p>
+<h2 id="模版（Scaffold）"><a href="#模版（Scaffold）" class="headerlink" title="模版（Scaffold）"></a>模版（Scaffold）</h2><p>在新建文章时，Hexo 会根据 <code>scaffolds</code> 文件夹内相对应的文件来建立文件，例如：</p>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> <span class="type">photo</span> <span class="string">"My Gallery"</span></span><br></pre></td></tr></table></figure>
+
+<p>在执行这行指令时，Hexo 会尝试在 <code>scaffolds</code> 文件夹中寻找 <code>photo.md</code>，并根据其内容建立文章，以下是您可以在模版中使用的变量：</p>
+<table>
+<thead>
+<tr>
+<th align="left">变量</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>layout</code></td>
+<td align="left">布局</td>
+</tr>
+<tr>
+<td align="left"><code>title</code></td>
+<td align="left">标题</td>
+</tr>
+<tr>
+<td align="left"><code>date</code></td>
+<td align="left">文件建立日期</td>
+</tr>
+</tbody></table>
+<h2 id="支持的格式"><a href="#支持的格式" class="headerlink" title="支持的格式"></a>支持的格式</h2><p>Hexo 支持以任何格式书写文章，只要安装了相应的渲染插件。</p>
+<p>例如，Hexo 默认安装了 <code>hexo-renderer-marked</code> 和 <code>hexo-renderer-ejs</code>，因此你不仅可以用 Markdown 写作，你还可以用 EJS 写作。如果你安装了 <code>hexo-renderer-pug</code>，你甚至可以用 Pug 模板语言书写文章。</p>
+<p>只需要将文章的扩展名从 <code>md</code> 改成 <code>ejs</code>，Hexo 就会使用 <code>hexo-renderer-ejs</code> 渲染这个文件，其他格式同理。</p>
+<h1 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h1><p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2013</span><span class="string">/7/13</span> <span class="number">20</span><span class="string">:46:25</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+<th align="left">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>layout</code></td>
+<td align="left">布局</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>title</code></td>
+<td align="left">标题</td>
+<td align="left">文章的文件名</td>
+</tr>
+<tr>
+<td align="left"><code>date</code></td>
+<td align="left">建立日期</td>
+<td align="left">文件建立日期</td>
+</tr>
+<tr>
+<td align="left"><code>updated</code></td>
+<td align="left">更新日期</td>
+<td align="left">文件更新日期</td>
+</tr>
+<tr>
+<td align="left"><code>comments</code></td>
+<td align="left">开启文章的评论功能</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>tags</code></td>
+<td align="left">标签（不适用于分页）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>categories</code></td>
+<td align="left">分类（不适用于分页）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>permalink</code></td>
+<td align="left">覆盖文章网址</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h2 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a>分类和标签</h2><p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">- Diary</span><br><span class="line"><span class="keyword">tags:</span></span><br><span class="line">- PS3</span><br><span class="line">- Games</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line"><span class="bullet">  - </span>Diary</span><br><span class="line"><span class="bullet">  - </span>Life</span><br></pre></td></tr></table></figure>
+
+<p>会使分类<code>Life</code>成为<code>Diary</code>的子分类，而不是并列分类。因此，有必要为您的文章选择尽可能准确的分类。</p>
+<p>如果你需要为文章添加多个分类，可以尝试以下 list 中的方法。</p>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line"><span class="bullet">- </span>[Diary, PlayStation]</span><br><span class="line"><span class="bullet">- </span>[Diary, Games]</span><br><span class="line"><span class="bullet">- </span>[Life]</span><br></pre></td></tr></table></figure>
+
+<p>此时这篇文章同时包括三个分类： <code>PlayStation</code> 和 <code>Games</code> 分别都是父分类 <code>Diary</code> 的子分类，同时 <code>Life</code> 是一个没有子分类的分类。</p>
+<h1 id="标签插件"><a href="#标签插件" class="headerlink" title="标签插件"></a>标签插件</h1><p>标签插件和 Front-matter 中的标签不同，它们是用于在文章中快速插入特定内容的插件。</p>
+<p>虽然你可以使用任何格式书写你的文章，但是标签插件永远可用，且语法也都是一致的。</p>
+<h2 id="文章摘要和截断"><a href="#文章摘要和截断" class="headerlink" title="文章摘要和截断"></a>文章摘要和截断</h2><h3 id="more方法"><a href="#more方法" class="headerlink" title="more方法"></a>more方法</h3><p>在文章中使用 <code>&lt;!-- more --&gt;</code>，那么 <code>&lt;!-- more --&gt;</code> 之前的文字将会被视为摘要。首页中将只出现这部分文字，同时这部分文字也会出现在正文之中。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><br><span class="line"><span class="comment">&lt;!-- more --&gt;</span></span><br><span class="line">Ut enim ad···</span><br></pre></td></tr></table></figure>
+
+<h3 id="hexo-excerpt插件"><a href="#hexo-excerpt插件" class="headerlink" title="hexo-excerpt插件"></a>hexo-excerpt插件</h3><p>npm install hexo-excerpt –save</p>
+<p>打开站点配置文件，加入</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt:</span></span><br><span class="line">  <span class="attr">depth:</span> <span class="number">2</span>  <span class="comment">#按层来算，也就是按代码块来算</span></span><br><span class="line">  <span class="attr">excerpt_excludes:</span> <span class="string">[]</span></span><br><span class="line">  <span class="attr">more_excludes:</span> <span class="string">[]</span></span><br><span class="line">  <span class="attr">hideWholePostExcerpts:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>打开主题配置文件，将下面两项设置为 <code>true</code></p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="attr">read_more_btn:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="引用块"><a href="#引用块" class="headerlink" title="引用块"></a>引用块</h2><p>在文章中插入引言，可包含作者、来源和标题。</p>
+<p><strong>别号：</strong> quote</p>
+<figure class="highlight twig"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">blockquote</span> [author[, <span class="name">source</span>]] [link] [source_link_title] %&#125;</span></span><br><span class="line"><span class="xml">content</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endblockquote</span> %&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">blockquote</span> %&#125;</span></span><br><span class="line"><span class="xml">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endblockquote</span> %&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">blockquote</span> David Levithan, Wide Awake %&#125;</span></span><br><span class="line"><span class="xml">Do not just seek happiness for yourself. </span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endblockquote</span> %&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">blockquote</span> @DevDocs https://twitter.com/devdocs/status/356095192085962752 %&#125;</span></span><br><span class="line"><span class="xml">NEW: DevDocs now comes with syntax highlighting. http://devdocs.io</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endblockquote</span> %&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">blockquote</span> Seth Godin http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html Welcome to Island Marketing %&#125;</span></span><br><span class="line"><span class="xml">Every interaction is both precious and an opportunity to delight.</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name">endblockquote</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="插入视频"><a href="#插入视频" class="headerlink" title="插入视频"></a>插入视频</h2><figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">&#123;<span class="meta">%</span> youtube video_id [type] [cookie] <span class="meta">%</span>&#125;</span><br><span class="line">&#123;<span class="meta">%</span> youtube lJIrF<span class="number">4</span>YjHfQ <span class="meta">%</span>&#125; <span class="comment">//视频</span></span><br><span class="line">&#123;<span class="meta">%</span> youtube PL<span class="number">9</span>hW<span class="number">1</span>uS<span class="number">6</span>HUfscJ<span class="number">9</span>DHkOSoOX<span class="number">45</span>MjXduUxo <span class="string">'playlist'</span> <span class="meta">%</span>&#125; <span class="comment">//播放列表</span></span><br><span class="line">&#123;<span class="meta">%</span> youtube lJIrF<span class="number">4</span>YjHfQ false <span class="meta">%</span>&#125;</span><br><span class="line">&#123;<span class="meta">%</span> youtube PL<span class="number">9</span>hW<span class="number">1</span>uS<span class="number">6</span>HUfscJ<span class="number">9</span>DHkOSoOX<span class="number">45</span>MjXduUxo <span class="string">'playlist'</span> false <span class="meta">%</span>&#125; <span class="comment">//禁止 YouTube cookie</span></span><br><span class="line">&#123;<span class="meta">%</span> vimeo video_id <span class="meta">%</span>&#125; <span class="comment">//vimeo视频</span></span><br></pre></td></tr></table></figure>
+
+<div class="video-container"><iframe src="https://www.youtube.com/embed/bH9HVCMCVs0" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://xfdj_dragon.gitee.io/2020/05/02/%E4%BC%98%E5%8C%96%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%8D%81%E5%85%AD%EF%BC%89%EF%BC%9ANexT%E4%B8%BB%E9%A2%98%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81autoto-excerpt%E4%B9%8B%E5%90%8E/" target="_blank" rel="noopener">文章截断hexo-excerpt</a> </li>
+</ol>
+]]></content>
   </entry>
   <entry>
     <title>博客名字</title>
     <url>/posts/8c1a34bd.html</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>官网主题(模板)： <a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a><br>中文版官网：<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a></p>
+    <content><![CDATA[<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>官网主题(模板)： <a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a><br>中文版官网：<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a></p>
 <h3 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="1.安装Node.js"></a>1.安装Node.js</h3><h3 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="2.安装Hexo"></a>2.安装Hexo</h3><p>npm install -g hexo-cli</p>
 <p>hexo init hexofolder  </p>
 <p>cd hexofolder<br>npm install </p>

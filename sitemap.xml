@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hellolinux.xyz/posts/aed3dd41.html</loc>
+    
+    <lastmod>2020-09-03T04:46:20.312Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hellolinux.xyz/posts/8c1a34bd.html</loc>
+    
+    <lastmod>2020-09-03T03:57:13.395Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hellolinux.xyz/posts/16d2428d.html</loc>
     
     <lastmod>2020-03-31T11:31:49.178Z</lastmod>
@@ -33,20 +47,6 @@
     <loc>https://hellolinux.xyz/categories/index.html</loc>
     
     <lastmod>2020-03-30T08:43:49.257Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hellolinux.xyz/posts/8c1a34bd.html</loc>
-    
-    <lastmod>2020-03-30T08:42:04.907Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hellolinux.xyz/posts/aed3dd41.html</loc>
-    
-    <lastmod>2020-03-30T02:42:56.986Z</lastmod>
     
   </url>
   

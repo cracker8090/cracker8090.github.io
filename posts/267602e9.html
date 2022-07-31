@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gK77_o5sjFpw2K4KqFStbOtHEl8m_97Zb9BMK88lWZY">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hellolinux.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="对于开发者免费的资源，目前是记录，后面会陆续更新自己体验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发者免费资源记录">
+<meta property="og:url" content="https://hellolinux.xyz/posts/267602e9.html">
+<meta property="og:site_name" content="无拘无束的猪">
+<meta property="og:description" content="对于开发者免费的资源，目前是记录，后面会陆续更新自己体验">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-24T15:09:35.000Z">
+<meta property="article:modified_time" content="2022-06-24T15:09:35.000Z">
+<meta property="article:author" content="hellolinux">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hellolinux.xyz/posts/267602e9.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>开发者免费资源记录 | 无拘无束的猪</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162293825-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-162293825-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="无拘无束的猪" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无拘无束的猪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">hellolinux的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hellolinux.xyz/posts/267602e9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+      <meta itemprop="name" content="hellolinux">
+      <meta itemprop="description" content="每天进步百分之一">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无拘无束的猪">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开发者免费资源记录
+        </h1>
+
+        <div class="post-meta">
+		
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-24 23:09:35" itemprop="dateCreated datePublished" datetime="2022-06-24T23:09:35+08:00">2022-06-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/267602e9.html" class="post-meta-item leancloud_visitors" data-flag-title="开发者免费资源记录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+            <div class="post-description">对于开发者免费的资源，目前是记录，后面会陆续更新自己体验</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>资源主要来自下面网站，目前是记录，因为类别太多，后面自己体验之后会更新一些。</p>
+<p><a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener">https://github.com/ripienaar/free-for-dev</a></p>
+<p><a href="https://gist.github.com/imba-tjd/d73258f0817255dbe77d64d40d985e76" target="_blank" rel="noopener">https://gist.github.com/imba-tjd/d73258f0817255dbe77d64d40d985e76</a></p>
+<p><a href="https://free-for.dev/#/" target="_blank" rel="noopener">https://free-for.dev/#/</a></p>
+<h1 id="云"><a href="#云" class="headerlink" title="云"></a>云</h1><p>IaaS指提供系统（可以自己选）或者储存空间之类的硬件，软件要自己手动装；PaaS提供语言环境和框架（可以自己选）；SaaS只能使用开发好的软件（卖软件本身）；BaaS一般类似于非关系数据库，但各家不通用，有时还有一些其它东西。</p>
+<h2 id="其他人的集合"><a href="#其他人的集合" class="headerlink" title="其他人的集合"></a>其他人的集合</h2><ul>
+<li><a href="https://education.github.com/pack" target="_blank" rel="noopener">https://education.github.com/pack</a> GitHub学生包，需用教育邮箱验证。各种福利，可从DigitalOcean上手</li>
+<li><a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener">https://github.com/ripienaar/free-for-dev</a> 本文尽量不与此项目重复</li>
+<li><a href="https://github.com/AchoArnold/discount-for-student-dev" target="_blank" rel="noopener">https://github.com/AchoArnold/discount-for-student-dev</a></li>
+<li><a href="https://github.com/ivmm/Student-resources" target="_blank" rel="noopener">https://github.com/ivmm/Student-resources</a></li>
+<li><a href="https://www.freeforstudents.org/" target="_blank" rel="noopener">https://www.freeforstudents.org/</a></li>
+<li><a href="https://github.com/255kb/stack-on-a-budget" target="_blank" rel="noopener">https://github.com/255kb/stack-on-a-budget</a></li>
+<li><a href="https://github.com/Ibexoft/awesome-startup-tools-list" target="_blank" rel="noopener">https://github.com/Ibexoft/awesome-startup-tools-list</a></li>
+<li><a href="https://www.cokemine.com/" target="_blank" rel="noopener">https://www.cokemine.com/</a></li>
+</ul>
+<h2 id="Paas"><a href="#Paas" class="headerlink" title="Paas"></a>Paas</h2><ul>
+<li><a href="https://www.heroku.com/" target="_blank" rel="noopener">https://www.heroku.com/</a> java go py docker。国内访问不佳</li>
+<li><a href="https://fly.io/docs/pricing/" target="_blank" rel="noopener">https://fly.io/docs/pricing/</a> py node go 静态，感觉很完美</li>
+<li><a href="https://www.deta.sh/" target="_blank" rel="noopener">https://www.deta.sh/</a> py3.9 node14 内存128MB，依赖250MB，支持定时任务。有类dict数据库和10GB存储且可独立使用</li>
+<li><a href="https://www.pythonanywhere.com/" target="_blank" rel="noopener">https://www.pythonanywhere.com/</a> 限制非常多，免费账户不允许访问白名单之外的网站。但好歹能提供一个自动https的web app</li>
+<li><a href="https://www.divio.com/" target="_blank" rel="noopener">https://www.divio.com/</a> docker</li>
+<li><a href="https://render.com/" target="_blank" rel="noopener">https://render.com/</a> 曾经免费plan只有静态网页，现在提供service和database了。有node py go pg</li>
+<li><a href="https://www.clever-cloud.com/en/pricing" target="_blank" rel="noopener">https://www.clever-cloud.com/en/pricing</a> 看介绍送20€，但应该只会送一次，可以用4个月；数据库好像有完全免费的</li>
+<li><a href="https://cloud.google.com/appengine/docs/" target="_blank" rel="noopener">https://cloud.google.com/appengine/docs/</a> 标准环境有一点储存空间和流量，要求启用API即要求绑卡，柔性环境(.NET)必须启用结算。国内无法访问</li>
+<li><a href="https://clustered.com/pricing" target="_blank" rel="noopener">https://clustered.com/pricing</a> 现在只免费14天，永久免费的plan还没出，但至少从2020年11月就是这样了</li>
+<li><a href="https://www.koyeb.com/" target="_blank" rel="noopener">https://www.koyeb.com</a> docker node py go，首页被RST</li>
+<li><a href="https://railway.app/" target="_blank" rel="noopener">https://railway.app/</a> node py go java，用了类似于heroku的buildpacks，RST</li>
+<li><a href="https://qoddi.com/" target="_blank" rel="noopener">https://qoddi.com/</a></li>
+</ul>
+<h3 id="net"><a href="#net" class="headerlink" title=".net"></a>.net</h3><ul>
+<li><a href="https://appharbor.com/" target="_blank" rel="noopener">https://appharbor.com</a> 看起来比较好，支持3.1。好像不支持5：<a href="https://support.appharbor.com/discussions/problems/117063-net-5-support" target="_blank" rel="noopener">https://support.appharbor.com/discussions/problems/117063-net-5-support</a></li>
+<li><a href="https://freeasphosting.net/" target="_blank" rel="noopener">https://freeasphosting.net/</a> 网站说了一大堆学习的东西，不过说支持.NET5</li>
+<li><a href="https://www.gearhost.com/" target="_blank" rel="noopener">https://www.gearhost.com/</a> 看起来比较好，支持3.1。还支持PHP7和node。现在开了CF屏蔽大陆IP</li>
+<li><a href="https://order.aspify.com/en/freehosting/" target="_blank" rel="noopener">https://order.aspify.com/en/freehosting/</a> 100MB硬盘100MB数据库，支持5。但之前不让注册说服务在中国不可用</li>
+<li><a href="https://somee.com/" target="_blank" rel="noopener">https://somee.com/</a> 被墙了，且IP被封了</li>
+<li><a href="https://www.myasp.net/hosting_plans" target="_blank" rel="noopener">https://www.myasp.net/hosting_plans</a> 免费两个月但好像能免费续期</li>
+</ul>
+<h2 id="云端空间-IDE"><a href="#云端空间-IDE" class="headerlink" title="云端空间/IDE"></a>云端空间/IDE</h2><ul>
+<li><a href="https://cloudstudio.net/" target="_blank" rel="noopener">https://cloudstudio.net</a> VSC，服务器在上海，每月免费1000分钟=16.7小时，4G内存，8G硬盘（但/tmp很大）</li>
+<li><a href="https://www.gitpod.io/" target="_blank" rel="noopener">https://www.gitpod.io/</a> VSC，免费版每月50小时，支持在本地打开；专业版在学生包里免费6个月但要求Primary Email是学校的账户</li>
+<li><a href="https://repl.it/" target="_blank" rel="noopener">https://repl.it/</a> 有免费版，专业版在学生包里免费3个月。支持许多语言，支持类Heroku的hosting，只要监听0.0.0.0上任意端口即可。自带kv数据库。配置文件为隐藏的.replit和nix，内容参考configuring-repl</li>
+<li>GitHub Codespaces：可能收费，目前个人版暂时是免费的</li>
+<li><a href="https://workspaces.openshift.com/" target="_blank" rel="noopener">https://workspaces.openshift.com/</a> 魔改VSC，不支持扩展，国内访问慢；之前是codenvy和che.openshift.io</li>
+<li><a href="https://paiza.cloud/en/" target="_blank" rel="noopener">https://paiza.cloud/en/</a> 日产，好像还支持SSH连上去</li>
+<li><a href="https://codetasty.com/" target="_blank" rel="noopener">https://codetasty.com/</a></li>
+<li><a href="https://next.tech/" target="_blank" rel="noopener">https://next.tech/</a> 学生包中有</li>
+<li><a href="https://ide.goorm.io/pricing" target="_blank" rel="noopener">https://ide.goorm.io/pricing</a> 可以建立五个工作区，可以用SSH连上去。好像是自制的，界面完成度蛮高的，有终端，但没有intellisense，只能玩玩。好像可以运行docker容器？</li>
+<li><a href="https://www.tutorialspoint.com/codingground.htm" target="_blank" rel="noopener">https://www.tutorialspoint.com/codingground.htm</a> <a href="http://codepad.org/" target="_blank" rel="noopener">http://codepad.org/</a> <a href="https://ideone.com/" target="_blank" rel="noopener">https://ideone.com/</a> <a href="https://coliru.stacked-crooked.com/" target="_blank" rel="noopener">https://coliru.stacked-crooked.com/</a> <a href="https://wandbox.org/" target="_blank" rel="noopener">https://wandbox.org/</a> <a href="https://tio.run/" target="_blank" rel="noopener">https://tio.run</a> <a href="https://code.xueersi.com/ide/code/1" target="_blank" rel="noopener">https://code.xueersi.com/ide/code/1</a> <a href="https://jsrun.net/" target="_blank" rel="noopener">https://jsrun.net/</a> <a href="https://www.jdoodle.com/" target="_blank" rel="noopener">https://www.jdoodle.com/</a> <a href="https://rextester.com/" target="_blank" rel="noopener">https://rextester.com/</a> <a href="https://ide.progman.in/" target="_blank" rel="noopener">https://ide.progman.in</a> 无需登录，能执行许多语言，但只能说能运行代码，称不上IDE。<a href="https://www.codiva.io/" target="_blank" rel="noopener">https://www.codiva.io</a> 有一点intellisense</li>
+<li><a href="https://www.keil.arm.com/" target="_blank" rel="noopener">https://www.keil.arm.com/</a></li>
+<li><a href="https://www.jetbrains.com/zh-cn/space/" target="_blank" rel="noopener">https://www.jetbrains.com/zh-cn/space/</a></li>
+<li><a href="https://lightly.teamcode.com/" target="_blank" rel="noopener">https://lightly.teamcode.com/</a> 国产，新出的</li>
+</ul>
+<h3 id="前端在线IDE"><a href="#前端在线IDE" class="headerlink" title="前端在线IDE"></a>前端在线IDE</h3><ul>
+<li><a href="https://jsbin.com/" target="_blank" rel="noopener">https://jsbin.com</a> 简洁，无需注册，开源。国内搭建的：<a href="https://code.h5jun.com/" target="_blank" rel="noopener">https://code.h5jun.com</a> <a href="http://http//js.jirengu.com" target="_blank" rel="noopener">http://http://js.jirengu.com</a></li>
+<li><a href="https://codepen.io/" target="_blank" rel="noopener">https://codepen.io/</a> 可不注册</li>
+<li><a href="https://stackblitz.com/" target="_blank" rel="noopener">https://stackblitz.com/</a></li>
+<li><a href="https://codesandbox.io/" target="_blank" rel="noopener">https://codesandbox.io/</a></li>
+<li><a href="https://bit.dev/" target="_blank" rel="noopener">https://bit.dev/</a> RST</li>
+<li><a href="https://runkit.com/" target="_blank" rel="noopener">https://runkit.com</a> 类似于jupyter notebook，也能创建api，以及把js的codeblock变得可运行</li>
+<li><a href="https://www.codeply.com/" target="_blank" rel="noopener">https://www.codeply.com/</a></li>
+<li><a href="https://plnkr.co/" target="_blank" rel="noopener">https://plnkr.co/</a> 比较简陋</li>
+<li><a href="https://jsfiddle.net/" target="_blank" rel="noopener">https://jsfiddle.net/</a> 我这里打不开，且感觉是他们封的我们</li>
+</ul>
+<h3 id="Jupyter-Notebook-Lab-大数据机器学习平台"><a href="#Jupyter-Notebook-Lab-大数据机器学习平台" class="headerlink" title="Jupyter Notebook/Lab 大数据机器学习平台"></a>Jupyter Notebook/Lab 大数据机器学习平台</h3><ul>
+<li><a href="https://colab.research.google.com/" target="_blank" rel="noopener">https://colab.research.google.com/</a> 有免费gpu额度，国内无法直接打开。免费版无终端</li>
+<li><a href="https://tianchi.aliyun.com/notebook-ai/home" target="_blank" rel="noopener">https://tianchi.aliyun.com/notebook-ai/home</a> 免费gpu 60小时/年。登录要用阿里云账号，不想记住密码，每次都要用手机扫很麻烦，有时还要短信二次验证</li>
+<li><a href="https://aistudio.baidu.com/aistudio/projectoverview/private" target="_blank" rel="noopener">https://aistudio.baidu.com/aistudio/projectoverview/private</a> 内存8G，磁盘100G，work目录永久保存，实名认证有一些GPU资源；长时间不用无法自动重连</li>
+<li><a href="https://www.kaggle.com/" target="_blank" rel="noopener">https://www.kaggle.com</a> 验证电话后有免费gpu和外网，能连续运行9小时，有机器学习的教程</li>
+<li><a href="https://www.heywhale.com/home/project" target="_blank" rel="noopener">https://www.heywhale.com/home/project</a> 国产</li>
+<li><a href="https://datalore.jetbrains.com/" target="_blank" rel="noopener">https://datalore.jetbrains.com/</a></li>
+<li><a href="https://cocalc.com/doc/jupyter-notebook.html" target="_blank" rel="noopener">https://cocalc.com/doc/jupyter-notebook.html</a></li>
+<li><a href="https://jupyter.org/try" target="_blank" rel="noopener">https://jupyter.org/try</a> 官方，资源非常少，有C++；mybinder可以从GitHub仓库建立临时NB</li>
+<li><a href="https://kogence.com/app/landing/pricing" target="_blank" rel="noopener">https://kogence.com/app/landing/pricing</a></li>
+<li><a href="https://deepnote.com/" target="_blank" rel="noopener">https://deepnote.com</a> 免费额度750小时，5G空间</li>
+<li><a href="https://www.dclab.run/project_list.html" target="_blank" rel="noopener">https://www.dclab.run/project_list.html</a> 国产</li>
+<li><a href="https://software.intel.com/content/www/cn/zh/develop/tools/devcloud.html" target="_blank" rel="noopener">https://software.intel.com/content/www/cn/zh/develop/tools/devcloud.html</a></li>
+<li><a href="https://lab.datafountain.cn/" target="_blank" rel="noopener">https://lab.datafountain.cn/</a> 国产，CCF</li>
+<li><a href="https://www.datacastle.cn/" target="_blank" rel="noopener">https://www.datacastle.cn</a> 国产</li>
+</ul>
+<h2 id="数据库DBaaS"><a href="#数据库DBaaS" class="headerlink" title="数据库DBaaS"></a>数据库DBaaS</h2><ul>
+<li><a href="https://db4free.net/" target="_blank" rel="noopener">https://db4free.net/</a> mysql 200M</li>
+<li><a href="https://dbhub.io/" target="_blank" rel="noopener">https://dbhub.io/</a> SQLite</li>
+<li><a href="https://memfiredb.com/" target="_blank" rel="noopener">https://memfiredb.com/</a> 兼容PG11，国产，5GB，目前在公测，管理员说后续收费计划还没决定</li>
+<li><a href="https://remotemysql.com/" target="_blank" rel="noopener">https://remotemysql.com/</a> mysql 8.0 100M，需要花不少时间回答调查问卷，允许常见的DQL和DML和创建索引，不能创建Proc 视图 触发器</li>
+<li><a href="https://mlab.com/" target="_blank" rel="noopener">https://mlab.com/</a> <a href="https://www.mongodb.com/pricing" target="_blank" rel="noopener">https://www.mongodb.com/pricing</a> 500MB；后者学生包中有</li>
+<li><a href="https://www.freemysqlhosting.net/" target="_blank" rel="noopener">https://www.freemysqlhosting.net/</a> mysql 5.5，5MB，每周会收到要手动操作来延期的邮件</li>
+<li><a href="https://www.datastax.com/products/datastax-astra/pricing" target="_blank" rel="noopener">https://www.datastax.com/products/datastax-astra/pricing</a> ApacheCassandra(NoSQL)</li>
+<li><del><a href="https://www.freesqldatabase.com/" target="_blank" rel="noopener">https://www.freesqldatabase.com/</a> mysql 5MB</del> 会过期</li>
+<li><a href="http://sqlpub.com/" target="_blank" rel="noopener">http://sqlpub.com/</a> MySQL，国产</li>
+</ul>
+<h2 id="BaaS"><a href="#BaaS" class="headerlink" title="BaaS"></a>BaaS</h2><ul>
+<li><a href="https://bmob.cn/" target="_blank" rel="noopener">https://bmob.cn/</a></li>
+<li><a href="https://leancloud.cn/pricing/" target="_blank" rel="noopener">https://leancloud.cn/pricing/</a></li>
+<li><a href="https://firebase.google.cn/pricing" target="_blank" rel="noopener">https://firebase.google.cn/pricing</a> 用处：<a href="https://zhuanlan.zhihu.com/p/95334890" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/95334890</a></li>
+<li><a href="https://www.zhihu.com/question/34124789/answer/72495188" target="_blank" rel="noopener">https://www.zhihu.com/question/34124789/answer/72495188</a></li>
+<li><a href="https://maxleap.cn/s/web/zh_cn/devcenter-pricing.html" target="_blank" rel="noopener">https://maxleap.cn/s/web/zh_cn/devcenter-pricing.html</a></li>
+<li><a href="https://www.8base.com/" target="_blank" rel="noopener">https://www.8base.com</a> GraphQL</li>
+<li><a href="https://www.easycsv.io/pricing" target="_blank" rel="noopener">https://www.easycsv.io/pricing</a></li>
+<li>JSON<ul>
+<li><a href="https://jsonstores.com/" target="_blank" rel="noopener">https://jsonstores.com/</a> 100个JSON对象，每个最大2MB</li>
+<li><a href="https://jsonbin.io/" target="_blank" rel="noopener">https://jsonbin.io/</a></li>
+<li><a href="https://extendsclass.com/json-storage.html" target="_blank" rel="noopener">https://extendsclass.com/json-storage.html</a></li>
+<li><a href="https://json.psty.io/" target="_blank" rel="noopener">https://json.psty.io/</a></li>
+<li><a href="https://www.jsonstorage.net/" target="_blank" rel="noopener">https://www.jsonstorage.net/</a> 有无需注册的</li>
+<li><a href="https://db.neelr.dev/" target="_blank" rel="noopener">https://db.neelr.dev/</a> 无需注册，打开网页时自动生成一个TOKEN。但国内打不开</li>
+</ul>
+</li>
+</ul>
+<h2 id="Managed-K8S"><a href="#Managed-K8S" class="headerlink" title="Managed K8S"></a>Managed K8S</h2><ul>
+<li><a href="https://www.openshift.com/products/online/" target="_blank" rel="noopener">https://www.openshift.com/products/online/</a> 每60天清除</li>
+<li><a href="https://okteto.com/pricing" target="_blank" rel="noopener">https://okteto.com/pricing</a> 免费版2CPU，4G内存，10G储存。刚注册送一个月pro，不付款自动降到免费版。免费版24小时不活动就sleep。原意是为开发者日常开发使用的</li>
+<li><a href="https://usekrucible.com/" target="_blank" rel="noopener">https://usekrucible.com</a> 一个月能用25小时，自己分配</li>
+<li><a href="https://kubernauts.sh/" target="_blank" rel="noopener">https://kubernauts.sh/</a> 宣传免费版有1CPU，1G内存；申请注册后没收到任何邮件，无法登录</li>
+<li><a href="https://labs.play-with-k8s.com/" target="_blank" rel="noopener">https://labs.play-with-k8s.com/</a> 好像每天只有四小时；<a href="https://labs.play-with-docker.com/" target="_blank" rel="noopener">https://labs.play-with-docker.com/</a></li>
+<li>zarvis.ai staroid.com 网页都用的是Google的服务器，无法直接访问</li>
+<li><a href="https://kubesail.com/" target="_blank" rel="noopener">https://kubesail.com/</a> 停止免费版了，不过还是能作为管理平台</li>
+<li><a href="https://loft.sh/" target="_blank" rel="noopener">https://loft.sh/</a> 好像只是客户端或者管理平台</li>
+<li>挂了的：k8spin.cloud tryk8s.com</li>
+</ul>
+<h2 id="Serverless-Node-Paas（无状态的api）"><a href="#Serverless-Node-Paas（无状态的api）" class="headerlink" title="Serverless/Node Paas（无状态的api）"></a>Serverless/Node Paas（无状态的api）</h2><ul>
+<li><a href="https://glitch.com/" target="_blank" rel="noopener">https://glitch.com/</a></li>
+<li><a href="https://workers.cloudflare.com/" target="_blank" rel="noopener">https://workers.cloudflare.com/</a> ；<a href="https://github.com/booster-labs/rocket-booster" target="_blank" rel="noopener">https://github.com/booster-labs/rocket-booster</a></li>
+<li><a href="https://vercel.com/" target="_blank" rel="noopener">https://vercel.com/</a> node go py</li>
+<li><a href="https://deno.com/deploy" target="_blank" rel="noopener">https://deno.com/deploy</a></li>
+<li><a href="https://pipedream.com/" target="_blank" rel="noopener">https://pipedream.com/</a></li>
+<li><a href="https://keen.io/" target="_blank" rel="noopener">https://keen.io/</a></li>
+<li><a href="https://www.openode.io/pricing" target="_blank" rel="noopener">https://www.openode.io/pricing</a></li>
+<li><a href="https://www.cloud66.com/node/" target="_blank" rel="noopener">https://www.cloud66.com/node/</a> 免费一个月</li>
+<li><a href="https://www.jexia.com/" target="_blank" rel="noopener">https://www.jexia.com/</a></li>
+<li><a href="https://encore.dev/" target="_blank" rel="noopener">https://encore.dev/</a> RST</li>
+<li>谷歌的functions有一些免费额度，但一定会产生部署费用，最少$0.03/mo</li>
+<li>国内的云服务厂商一般都有FaaS服务，也有一定的免费额度，但问题是公网流出流量是没有免费额度的</li>
+<li><a href="https://www.slappforge.com/sigma" target="_blank" rel="noopener">https://www.slappforge.com/sigma</a> 仅开发平台</li>
+<li><a href="https://catalyst.zoho.com/" target="_blank" rel="noopener">https://catalyst.zoho.com/</a> 有免费的</li>
+<li><a href="https://hook.io/pricing" target="_blank" rel="noopener">https://hook.io/pricing</a></li>
+<li><a href="https://jotcode.io/" target="_blank" rel="noopener">https://jotcode.io/</a></li>
+</ul>
+<h2 id="静态网页托管（必须要能自动更新）"><a href="#静态网页托管（必须要能自动更新）" class="headerlink" title="静态网页托管（必须要能自动更新）"></a>静态网页托管（必须要能自动更新）</h2><ul>
+<li><a href="https://surge.sh/" target="_blank" rel="noopener">https://surge.sh/</a></li>
+<li><a href="https://www.netlify.com/" target="_blank" rel="noopener">https://www.netlify.com/</a></li>
+<li><a href="https://cloudcannon.com/" target="_blank" rel="noopener">https://cloudcannon.com</a></li>
+<li><a href="https://tiiny.host/" target="_blank" rel="noopener">https://tiiny.host</a> 只能存活7天？</li>
+<li><a href="https://pages.cloudflare.com/" target="_blank" rel="noopener">https://pages.cloudflare.com/</a></li>
+<li><a href="https://cloud.digitalocean.com/apps" target="_blank" rel="noopener">https://cloud.digitalocean.com/apps</a> starter版本免费3个静态网站，用了cf的cdn国内可能无法访问</li>
+</ul>
+<h2 id="也许可用的IaaS"><a href="#也许可用的IaaS" class="headerlink" title="也许可用的IaaS"></a>也许可用的IaaS</h2><ul>
+<li>euserv，德国的，只有IPV6，亲测确实可以，但硬盘很慢 <a href="https://github.com/YG-tsj/EUserv-warp" target="_blank" rel="noopener">https://github.com/YG-tsj/EUserv-warp</a></li>
+<li><a href="https://open.iot.10086.cn/cloud/introduction/cloud-server" target="_blank" rel="noopener">https://open.iot.10086.cn/cloud/introduction/cloud-server</a> OneNET移动的，MQ、对象储存、可视化、CI都有一定的免费额度</li>
+<li><a href="https://activity.xinruiyun.cn/free/" target="_blank" rel="noopener">https://activity.xinruiyun.cn/free/</a> 新睿云，发个广告可以免费用一个月的ECS</li>
+<li><a href="https://www.oracle.com/cn/cloud/free/" target="_blank" rel="noopener">https://www.oracle.com/cn/cloud/free/</a> 体验文章：<a href="https://51.ruyo.net/14138.html" target="_blank" rel="noopener">https://51.ruyo.net/14138.html</a> 不支持prepaid card；<a href="https://www.blueskyxn.com/202109/5232.html" target="_blank" rel="noopener">https://www.blueskyxn.com/202109/5232.html</a></li>
+<li><a href="https://51.ruyo.net/14583.html" target="_blank" rel="noopener">https://51.ruyo.net/14583.html</a> Azure</li>
+<li><a href="https://www.atlantic.net/" target="_blank" rel="noopener">https://www.atlantic.net/</a> <del>免费12个月</del>现在好像变成免费一个月了，需要信用卡</li>
+<li><a href="https://hax.co.id/" target="_blank" rel="noopener">https://hax.co.id/</a> <a href="https://woiden.id/" target="_blank" rel="noopener">https://woiden.id/</a> <a href="https://blog.kermsite.com/p/hax/" target="_blank" rel="noopener">https://blog.kermsite.com/p/hax/</a></li>
+<li><a href="https://evolution-host.com/" target="_blank" rel="noopener">https://evolution-host.com/</a></li>
+<li><a href="https://microlxc.net/" target="_blank" rel="noopener">https://microlxc.net/</a> <a href="https://nanokvm.net/" target="_blank" rel="noopener">https://nanokvm.net/</a> 需要注册 <a href="https://lowendtalk.com/" target="_blank" rel="noopener">https://lowendtalk.com/</a> 满足一定条件才能申请</li>
+<li>谷歌云、Amazon、Azure、Yandex Cloud：注册后都会送一些额度</li>
+</ul>
+<h3 id="IBM-Cloud"><a href="#IBM-Cloud" class="headerlink" title="IBM Cloud"></a><a href="https://www.ibm.com/cn-zh/cloud/free" target="_blank" rel="noopener">IBM Cloud</a></h3><ul>
+<li>Lite(轻量)版无需信用卡，没有到期时间，完全不会变到付费套餐上，额度到了就无法使用，30天不活动自动删除，一共44项服务</li>
+<li>Cloud Foundry：PaaS 256M内存，支持Java Node .NET GO PHP Py。10天不活动就休眠。apic.mybluemix.net和mybluemix.net都被墙了。要用ibmcloud命令行</li>
+<li>对象储存：25GB储存，5GB出站；Cloudant JSON文档数据库：1GB；DB2数据库：200MB，每90天要邮件延期</li>
+<li>机器翻译：但无ja-zh模型，只能和en互转，每月100万字符</li>
+<li><del>API Gateway：转发一次到另一个endpoint上，能用于静态文件的反代，能设定密钥验证和限制速率，显示调用频率。免费调用100万次但是没写每月，之后限速</del> 他们关闭此服务了，说要迁移到API Connect Reserved，然而这东西是付费的，介绍中的Lite能用的V5版也不存在</li>
+<li>Cloud for Education：持续时间一小时的ECS，能用RDP连上但卡到完全无法使用，好像无外部互联网连接</li>
+<li>机器学习</li>
+<li>Docker Registry：储存0.5GB，流量5GB</li>
+<li>Event Streams：Kafka</li>
+<li>那些“软件”虽然有非常多免费的，但必须部署到k8s上；k8s也有免费套餐，但lite无法创建，因为流量和IP可能要收费</li>
+<li>函数计算：虽然有一点免费额度，但是无lite版</li>
+</ul>
+<h3 id="腾讯云"><a href="#腾讯云" class="headerlink" title="腾讯云"></a><a href="https://cloud.tencent.com/act/free" target="_blank" rel="noopener">腾讯云</a></h3><ul>
+<li>对象储存：免费半年</li>
+<li>CDN：免费半年</li>
+<li>Serverless：免费一年</li>
+<li>文件储存：免费10G</li>
+<li>机器翻译：免费500万字符/月，开通免费版必不会收任何费用</li>
+<li>云托管 CloudBase Run：不知道干什么用的</li>
+</ul>
+<h3 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a><a href="https://free.aliyun.com/" target="_blank" rel="noopener">阿里云</a></h3><ul>
+<li>ECS：<a href="https://www.aliyun.com/daily-act/ecs/free" target="_blank" rel="noopener">https://www.aliyun.com/daily-act/ecs/free</a> 需要实名认证且未购买过任何产品，有个t6的ECS可以免费试用一年</li>
+<li>MaxCompute大数据计算服务开发者版<a href="https://www.aliyun.com/product/odps" target="_blank" rel="noopener">https://www.aliyun.com/product/odps</a></li>
+<li>云效DevOps有一些免费额度，包括5GB Maven仓库</li>
+<li>机器翻译通用版：每月100万字符免费额度</li>
+</ul>
+<h2 id="低代码平台-aPaaS"><a href="#低代码平台-aPaaS" class="headerlink" title="低代码平台/aPaaS"></a>低代码平台/aPaaS</h2><ul>
+<li>指不用写很多代码就能设计出软件，有可视化工具</li>
+<li>大部分都是BPM平台，即 表单+工作流审批，适合企业建立业务逻辑在线办公</li>
+<li>往往与平台本身严重绑定，难以复用和维护，切换平台代价大，开发者自身难以提升</li>
+</ul>
+<h3 id="国内的"><a href="#国内的" class="headerlink" title="国内的"></a>国内的</h3><ul>
+<li><a href="https://github.com/taowen/awesome-lowcode" target="_blank" rel="noopener">https://github.com/taowen/awesome-lowcode</a> 收集</li>
+<li><a href="https://www.aliwork.com/" target="_blank" rel="noopener">https://www.aliwork.com/</a> 宜搭，阿里+钉钉</li>
+<li><a href="https://www.apicloud.com/" target="_blank" rel="noopener">https://www.apicloud.com/</a> 云端开发管理类</li>
+<li><a href="https://www.mingdao.com/" target="_blank" rel="noopener">https://www.mingdao.com/</a> 明道云</li>
+<li><a href="https://www.jiandaoyun.com/" target="_blank" rel="noopener">https://www.jiandaoyun.com/</a> 简道云</li>
+<li><a href="https://www.huoban.com/" target="_blank" rel="noopener">https://www.huoban.com/</a> 伙伴云</li>
+<li><a href="https://qingflow.com/" target="_blank" rel="noopener">https://qingflow.com/</a> 轻流</li>
+<li><a href="https://www.steedos.com/pricing/platform/" target="_blank" rel="noopener">https://www.steedos.com/pricing/platform/</a> 华炎魔方，开源，私有部署免费</li>
+<li><a href="https://baidu.gitee.io/amis/docs/index" target="_blank" rel="noopener">https://baidu.gitee.io/amis/docs/index</a> 开源，偏程序员</li>
+<li><a href="https://modao.cc/" target="_blank" rel="noopener">https://modao.cc/</a> 墨刀，原型设计工具</li>
+<li><a href="https://www.imgcook.com/" target="_blank" rel="noopener">https://www.imgcook.com/</a> 淘宝，由设计稿生成界面</li>
+<li><a href="https://www.huaweicloud.com/product/appcube.html" target="_blank" rel="noopener">https://www.huaweicloud.com/product/appcube.html</a> 华为云应用魔方，太新</li>
+<li><a href="https://www.informat.cn/" target="_blank" rel="noopener">https://www.informat.cn/</a> 织信</li>
+<li><a href="https://seatable.cn/" target="_blank" rel="noopener">https://seatable.cn/</a> 在线协同表格和信息管理工具，类似于excel，本体不开源但开源了一些组件</li>
+<li><a href="https://www.baishuyun.com/" target="_blank" rel="noopener">https://www.baishuyun.com/</a> 百数云</li>
+<li><a href="https://kalacloud.com/" target="_blank" rel="noopener">https://kalacloud.com/</a> 卡拉云</li>
+<li><a href="https://js.design/" target="_blank" rel="noopener">https://js.design/</a> 即时设计，原型设计工具</li>
+<li>网页感觉不太好的<ul>
+<li><a href="https://www.iyunbiao.com/" target="_blank" rel="noopener">https://www.iyunbiao.com/</a> 云表</li>
+<li><a href="https://www.grapecity.com.cn/solutions/huozige" target="_blank" rel="noopener">https://www.grapecity.com.cn/solutions/huozige</a> 活字格</li>
+<li><a href="https://www.learun.cn/" target="_blank" rel="noopener">https://www.learun.cn/</a> 力软敏捷框架</li>
+<li><a href="https://www.ivx.cn/" target="_blank" rel="noopener">https://www.ivx.cn</a> 号称零代码开发Web App和小程序，前身是ih5.cn，不是BPM</li>
+<li><a href="https://wuyuan.io/" target="_blank" rel="noopener">https://wuyuan.io/</a> <a href="https://enhancer.io/" target="_blank" rel="noopener">https://enhancer.io/</a> 无远开发平台，个人使用免费，商业收费</li>
+<li><a href="https://www.wudaima.com/" target="_blank" rel="noopener">https://www.wudaima.com/</a> 宜创无代码，官网的footer的链接都是废的，一点也不透明</li>
+<li><a href="https://www.bn100.com/" target="_blank" rel="noopener">https://www.bn100.com/</a> 柏思科技/Workfine</li>
+</ul>
+</li>
+<li>收费的<ul>
+<li><a href="https://h3yun.com/" target="_blank" rel="noopener">https://h3yun.com/</a> 氚云，只免费15天，集成钉钉 <a href="https://www.cloudpivot.cn/" target="_blank" rel="noopener">https://www.cloudpivot.cn/</a> 云枢 <a href="https://www.h3bpm.com/" target="_blank" rel="noopener">https://www.h3bpm.com/</a> 都是“奥哲”公司的</li>
+<li><a href="https://www.newdao.net/" target="_blank" rel="noopener">https://www.newdao.net/</a> 牛刀，免费两周</li>
+<li><a href="https://www.clickpaas.com/" target="_blank" rel="noopener">https://www.clickpaas.com/</a> 不支持个人</li>
+<li><a href="https://www.dadayun.cn/" target="_blank" rel="noopener">https://www.dadayun.cn/</a> 搭搭云 没有注册的地方</li>
+</ul>
+</li>
+<li>没有https的： <a href="http://www.joget.cn/" target="_blank" rel="noopener">http://www.joget.cn/</a> 捷得 、<a href="http://www.putdb.com/" target="_blank" rel="noopener">http://www.putdb.com/</a> WebBuilder 、<a href="http://www.mf999.com/" target="_blank" rel="noopener">http://www.mf999.com/</a> 魔方网表(纯表单类)、<a href="http://www.delit.cn/" target="_blank" rel="noopener">http://www.delit.cn/</a> 度量快速开发平台、<a href="http://www.jinyunweb.com/" target="_blank" rel="noopener">http://www.jinyunweb.com</a> 进云、<a href="http://dev.easydo.cn/" target="_blank" rel="noopener">http://dev.easydo.cn</a> 易开发、<a href="http://www.jepaas.com/" target="_blank" rel="noopener">http://www.jepaas.com/</a> 、</li>
+</ul>
+<h3 id="国外的"><a href="#国外的" class="headerlink" title="国外的"></a>国外的</h3><ul>
+<li><a href="https://anvil.works/" target="_blank" rel="noopener">https://anvil.works/</a> py全栈，前端Drag and Drop UI，后端和数据储存用的是该网站的库</li>
+<li><a href="https://www.outsystems.com/pricing-and-editions/" target="_blank" rel="noopener">https://www.outsystems.com/pricing-and-editions/</a> 开发移动应用，是该行的老大；前端组件比较多，后台相对弱一点儿；注册需要姓名，邮箱</li>
+<li><a href="https://www.mendix.com/" target="_blank" rel="noopener">https://www.mendix.com/</a> 开发移动应用，后台能力比较强（有微流系统）</li>
+<li><a href="https://free.caspio.com/" target="_blank" rel="noopener">https://free.caspio.com/</a> Database-Powered Apps</li>
+<li><a href="https://thunkable.com/" target="_blank" rel="noopener">https://thunkable.com</a> 开发移动应用</li>
+<li><a href="https://www.appsheet.com/" target="_blank" rel="noopener">https://www.appsheet.com/</a> 无法直接打开</li>
+<li><a href="https://www.zoho.com/creator/" target="_blank" rel="noopener">https://www.zoho.com/creator/</a> 网页在我这里打开巨慢。可以一直用免费版只要不使用高级特性</li>
+<li><a href="https://airtable.com/" target="_blank" rel="noopener">https://airtable.com/</a></li>
+<li><a href="https://zenkit.com/" target="_blank" rel="noopener">https://zenkit.com/</a> 无法直接打开</li>
+<li>Google的App Maker（G Suite收费）、微软的PowerApps（收费10$/mo）</li>
+<li><a href="https://www.dronahq.com/" target="_blank" rel="noopener">https://www.dronahq.com/</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/375252561" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/375252561</a></li>
+<li><a href="https://www.odoo.com/zh_CN/" target="_blank" rel="noopener">https://www.odoo.com/zh_CN/</a> 开源</li>
+<li><a href="https://bubble.io/" target="_blank" rel="noopener">https://bubble.io/</a> 新出的</li>
+<li><a href="https://github.com/appsmithorg/appsmith" target="_blank" rel="noopener">https://github.com/appsmithorg/appsmith</a></li>
+<li><a href="https://www.ragic.com.cn/" target="_blank" rel="noopener">https://www.ragic.com.cn/</a> 表格类</li>
+<li><a href="https://www.airtable.com/" target="_blank" rel="noopener">https://www.airtable.com/</a></li>
+<li><a href="https://www.make.com/" target="_blank" rel="noopener">https://www.make.com</a></li>
+</ul>
+<h2 id="未分类"><a href="#未分类" class="headerlink" title="未分类"></a>未分类</h2><ul>
+<li><a href="https://www.litespeedtech.com/experience-litespeed-for-free" target="_blank" rel="noopener">https://www.litespeedtech.com/experience-litespeed-for-free</a> 一个月有效？需要姓名，电话，邮箱，地址。好像只有wordpress，还是只有软件？</li>
+<li><a href="https://github-students.educationhost.co.uk/" target="_blank" rel="noopener">https://github-students.educationhost.co.uk/</a> 免费一年</li>
+<li>有可能与Jupyter有关：<ul>
+<li><a href="https://www.dataquest.io/plans-pricing/" target="_blank" rel="noopener">https://www.dataquest.io/plans-pricing/</a></li>
+<li><a href="https://mode.com/compare-plans/" target="_blank" rel="noopener">https://mode.com/compare-plans/</a></li>
+<li><a href="https://kyso.io/pricing" target="_blank" rel="noopener">https://kyso.io/pricing</a></li>
+</ul>
+</li>
+<li><a href="https://studio.azureml.net/" target="_blank" rel="noopener">https://studio.azureml.net/</a> 可视化机器学习实验工具，可不登陆使用</li>
+<li><a href="https://quic.cloud/" target="_blank" rel="noopener">https://quic.cloud/</a> Wordpress cache cdn</li>
+<li><a href="https://apis.baidu.com/" target="_blank" rel="noopener">https://apis.baidu.com/</a></li>
+<li><a href="https://platform.sh/pricing/" target="_blank" rel="noopener">https://platform.sh/pricing/</a> 好像只免费30天</li>
+<li>API聚合</li>
+<li><a href="https://rapidapi.com/" target="_blank" rel="noopener">https://rapidapi.com/</a> 只是一个平台，经过它反代到各个提供者的服务器上，大部分质量很低，速度超慢。作为提供者大概简化了收费和验证途径吧。有点用的：simple-file-storage、secure-storage、postput。各种cors-proxy反代。ProxyPage代理ip</li>
+<li><a href="https://promptapi.com/" target="_blank" rel="noopener">https://promptapi.com</a></li>
+<li><a href="https://qingfuwu.cn/" target="_blank" rel="noopener">https://qingfuwu.cn/</a> 轻服务，字节出的</li>
+</ul>
+<h1 id="有云服务器时能自建的项目"><a href="#有云服务器时能自建的项目" class="headerlink" title="有云服务器时能自建的项目"></a>有云服务器时能自建的项目</h1><ul>
+<li>ss：<a href="https://github.com/lrinQVQ/script" target="_blank" rel="noopener">https://github.com/lrinQVQ/script</a> <a href="https://github.com/mritd/dockerfile/tree/master/shadowsocks" target="_blank" rel="noopener">https://github.com/mritd/dockerfile/tree/master/shadowsocks</a></li>
+<li>网盘<ul>
+<li>Seafile：国产，C，同步盘，但必须依赖Py2.7</li>
+<li><a href="https://github.com/nextcloud/docker" target="_blank" rel="noopener">https://github.com/nextcloud/docker</a> <a href="https://docs.nextcloud.com/server/17/user_manual/" target="_blank" rel="noopener">https://docs.nextcloud.com/server/17/user_manual/</a> ：owncloud的同作者，PHP。<a href="https://github.com/e-alfred/ocdownloader" target="_blank" rel="noopener">https://github.com/e-alfred/ocdownloader</a> 离线下载插件</li>
+<li>Cloudreve：国产，GO，支持OSS</li>
+<li>zFile：国产，Java</li>
+<li><a href="https://github.com/syncthing/syncthing" target="_blank" rel="noopener">https://github.com/syncthing/syncthing</a> GO</li>
+<li>BTSync</li>
+<li>oneindex</li>
+<li>OLAINDEX：使用OneDrive API</li>
+<li><a href="https://github.com/zhaojun1998/zfile" target="_blank" rel="noopener">https://github.com/zhaojun1998/zfile</a> 评测：<a href="https://xiaoyou66.com/archives/769" target="_blank" rel="noopener">https://xiaoyou66.com/archives/769</a></li>
+<li><a href="https://www.directorylister.com/" target="_blank" rel="noopener">https://www.directorylister.com/</a> indexer，PHP</li>
+<li><a href="https://github.com/prasathmani/tinyfilemanager" target="_blank" rel="noopener">https://github.com/prasathmani/tinyfilemanager</a> PHP</li>
+<li>sparkleshare</li>
+<li>rclone</li>
+<li><a href="https://freefilesync.org/" target="_blank" rel="noopener">https://freefilesync.org/</a></li>
+</ul>
+</li>
+<li>文件浏览器：<a href="https://larsjung.de/h5ai/" target="_blank" rel="noopener">https://larsjung.de/h5ai/</a> （PHP）、<a href="https://github.com/filebrowser/filebrowser" target="_blank" rel="noopener">https://github.com/filebrowser/filebrowser</a> （GO）</li>
+<li>gitlab</li>
+<li>爬虫</li>
+<li>论坛：discuz（PHP，维护不快），Flarum（PHP），vanilla (PHP)</li>
+<li>监控程序/API<ul>
+<li><a href="https://github.com/ivbeg/awesome-status-pages" target="_blank" rel="noopener">https://github.com/ivbeg/awesome-status-pages</a> 合集</li>
+<li><a href="https://cachethq.io/" target="_blank" rel="noopener">https://cachethq.io/</a> 合集中最活跃的但是PHP</li>
+<li><a href="https://github.com/hunterlong/statping" target="_blank" rel="noopener">https://github.com/hunterlong/statping</a> GO</li>
+<li><a href="https://github.com/bazzite/statusfy" target="_blank" rel="noopener">https://github.com/bazzite/statusfy</a> JS</li>
+<li><a href="https://uptimerobot.com/" target="_blank" rel="noopener">https://uptimerobot.com/</a> 不开源有免费版</li>
+<li><a href="https://www.atlassian.com/zh/software/statuspage" target="_blank" rel="noopener">https://www.atlassian.com/zh/software/statuspage</a> 有免费版</li>
+<li><a href="https://github.com/nicolargo/glances" target="_blank" rel="noopener">https://github.com/nicolargo/glances</a> Py</li>
+<li><a href="https://eheh.org/" target="_blank" rel="noopener">https://eheh.org/</a> 国产</li>
+<li><a href="https://www.fundebug.com/" target="_blank" rel="noopener">https://www.fundebug.com/</a></li>
+<li><a href="https://betteruptime.com/pricing" target="_blank" rel="noopener">https://betteruptime.com/pricing</a> 不开源有免费版</li>
+</ul>
+</li>
+<li>监控服务器状态：<a href="https://github.com/netdata/netdata" target="_blank" rel="noopener">https://github.com/netdata/netdata</a> C+Python，star非常多，有中文翻译。<a href="https://github.com/grafana/grafana" target="_blank" rel="noopener">https://github.com/grafana/grafana</a> TS+GO，star数稍少，但commit数和贡献者数非常多。<a href="https://github.com/open-falcon/falcon-plus" target="_blank" rel="noopener">https://github.com/open-falcon/falcon-plus</a> GO，相对而言star数少很多，但是国产的，需要mysql；<a href="https://github.com/CokeMine/ServerStatus-Hotaru" target="_blank" rel="noopener">https://github.com/CokeMine/ServerStatus-Hotaru</a></li>
+<li>各种可以装的软件的收集：<a href="https://github.com/Kickball/awesome-selfhosted" target="_blank" rel="noopener">https://github.com/Kickball/awesome-selfhosted</a> 、<a href="https://www.softaculous.com/softaculous/apps" target="_blank" rel="noopener">https://www.softaculous.com/softaculous/apps</a> 、 <a href="https://github.com/luong-komorebi/Awesome-Linux-Software" target="_blank" rel="noopener">https://github.com/luong-komorebi/Awesome-Linux-Software</a> 、<a href="https://statusfy.co/" target="_blank" rel="noopener">https://statusfy.co/</a></li>
+<li>自己挂广告</li>
+<li>图床：<a href="https://xiaoyou66.com/archives/774" target="_blank" rel="noopener">https://xiaoyou66.com/archives/774</a> <a href="https://molunerfinn.com/PicGo/" target="_blank" rel="noopener">https://molunerfinn.com/PicGo/</a> <a href="https://github.com/wisp-x/lsky-pro" target="_blank" rel="noopener">https://github.com/wisp-x/lsky-pro</a> <a href="https://github.com/chevereto/Chevereto-Free" target="_blank" rel="noopener">https://github.com/chevereto/Chevereto-Free</a></li>
+<li>可视化日志：<a href="https://goaccess.io/" target="_blank" rel="noopener">https://goaccess.io</a></li>
+<li>BT下载：<a href="https://github.com/jpillora/cloud-torrent" target="_blank" rel="noopener">https://github.com/jpillora/cloud-torrent</a></li>
+<li>创建网页版的Shell：<a href="https://github.com/instantbox/instantbox" target="_blank" rel="noopener">https://github.com/instantbox/instantbox</a></li>
+<li>jupyter notebook: <a href="https://xiaoyou66.com/archives/1095" target="_blank" rel="noopener">https://xiaoyou66.com/archives/1095</a></li>
+<li>OSS: <a href="https://github.com/minio/minio" target="_blank" rel="noopener">https://github.com/minio/minio</a> <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-object-storage-server-using-minio-on-ubuntu-18-04" target="_blank" rel="noopener">https://www.digitalocean.com/community/tutorials/how-to-set-up-an-object-storage-server-using-minio-on-ubuntu-18-04</a> 但协议是最严格的AGPL</li>
+<li>短链接：UOURLS（PHP，需要二次开发）Polr（也是PHP，不过偏向开箱即用）<a href="https://github.com/ellisonleao/pyshorteners" target="_blank" rel="noopener">https://github.com/ellisonleao/pyshorteners</a> <a href="https://shlink.io/" target="_blank" rel="noopener">https://shlink.io/</a></li>
+<li><a href="https://apex.sh/up/" target="_blank" rel="noopener">https://apex.sh/up/</a> 一键部署几种语言的Serverless应用到AWS</li>
+<li><a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="noopener">https://github.com/chrislusf/seaweedfs</a> 分布式文件系统，支持S3的API；<a href="https://github.com/syncthing/syncthing" target="_blank" rel="noopener">https://github.com/syncthing/syncthing</a></li>
+<li>当我有服务器时我做了什么（别人的集合）：<a href="https://shanyue.tech/op" target="_blank" rel="noopener">https://shanyue.tech/op</a></li>
+<li>后台控制面板：<a href="https://www.jianshu.com/p/3bc7404af887" target="_blank" rel="noopener">https://www.jianshu.com/p/3bc7404af887</a></li>
+<li>搜索引擎：<a href="https://github.com/benbusby/whoogle-search" target="_blank" rel="noopener">https://github.com/benbusby/whoogle-search</a> <a href="https://github.com/milvus-io/milvus" target="_blank" rel="noopener">https://github.com/milvus-io/milvus</a> <a href="https://github.com/meilisearch/MeiliSearch" target="_blank" rel="noopener">https://github.com/meilisearch/MeiliSearch</a></li>
+<li>控制面板：<a href="https://github.com/cockpit-project/cockpit" target="_blank" rel="noopener">https://github.com/cockpit-project/cockpit</a></li>
+<li>性能测试：<code>curl -L bench.sh | bash</code></li>
+<li>CMS: <a href="https://www.storyblok.com/" target="_blank" rel="noopener">https://www.storyblok.com/</a></li>
+<li>CI<ul>
+<li><a href="https://www.jetbrains.com/teamcity/" target="_blank" rel="noopener">https://www.jetbrains.com/teamcity/</a></li>
+<li><a href="https://drone.io/" target="_blank" rel="noopener">https://drone.io/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="自建Paas"><a href="#自建Paas" class="headerlink" title="自建Paas"></a>自建Paas</h2><p>集合：<a href="https://paasfinder.org/" target="_blank" rel="noopener">https://paasfinder.org</a></p>
+<ul>
+<li><a href="https://dokku.com/" target="_blank" rel="noopener">https://dokku.com/</a></li>
+<li>openstack，开源IaaS，机器最好有10G以上的内存</li>
+<li>rancher, openshift, CloudFoundry, flynn</li>
+<li><a href="https://www.rainbond.com/" target="_blank" rel="noopener">https://www.rainbond.com/</a> 国产的</li>
+<li><a href="https://letscoded.com/" target="_blank" rel="noopener">https://letscoded.com</a></li>
+<li><a href="https://www.koding.com/" target="_blank" rel="noopener">https://www.koding.com/</a></li>
+<li><a href="https://kodcloud.com/" target="_blank" rel="noopener">https://kodcloud.com/</a> 有使用者表示“每次访问都会采集服务端和客户端的隐私信息，里面流氓脚本一大堆”</li>
+<li><a href="https://github.com/caprover/caprover" target="_blank" rel="noopener">https://github.com/caprover/caprover</a></li>
+<li><a href="https://convox.com/" target="_blank" rel="noopener">https://convox.com/</a></li>
+<li><a href="https://nanobox.io/" target="_blank" rel="noopener">https://nanobox.io/</a></li>
+<li><a href="https://caprover.com/" target="_blank" rel="noopener">https://caprover.com/</a></li>
+<li><a href="https://rio.io/" target="_blank" rel="noopener">https://rio.io/</a></li>
+<li><a href="https://github.com/teamhephy/workflow" target="_blank" rel="noopener">https://github.com/teamhephy/workflow</a></li>
+<li><a href="https://www.kintohub.com/" target="_blank" rel="noopener">https://www.kintohub.com/</a> 基于k8s</li>
+</ul>
+<h1 id="NAT-traversal-amp-amp-DDNS"><a href="#NAT-traversal-amp-amp-DDNS" class="headerlink" title="NAT traversal &amp;&amp; DDNS"></a>NAT traversal &amp;&amp; DDNS</h1><p>DDNS需要公网IP，基本上就是隔一段时间访问一下接口，连接和传输数据是不会消耗服务商的流量的。 内网穿透需要消耗服务器的流量。 还有点对点/内网打洞的技术，但是需要两边都安装软件：xtcp，n2n，moon，zerotier one</p>
+<h2 id="frp"><a href="#frp" class="headerlink" title="frp"></a>frp</h2><ul>
+<li><a href="https://www.natfrp.org/" target="_blank" rel="noopener">https://www.natfrp.org/</a> Sakura Frp</li>
+<li><a href="https://www.lu8.win/" target="_blank" rel="noopener">https://www.lu8.win/</a> ngrok、frp、n2n、nps、免费域名</li>
+<li><a href="https://mefrp.cn/" target="_blank" rel="noopener">https://mefrp.cn/</a> 之前是 <a href="https://frp.msrx.online/" target="_blank" rel="noopener">https://frp.msrx.online/</a></li>
+<li><a href="https://liulifrp.cn/" target="_blank" rel="noopener">https://liulifrp.cn</a></li>
+</ul>
+<h2 id="ngrok"><a href="#ngrok" class="headerlink" title="ngrok"></a>ngrok</h2><p>1.x开源但现在已经停止维护了；2.x不开源。</p>
+<ul>
+<li><a href="https://ngrok.com/" target="_blank" rel="noopener">https://ngrok.com/</a> 官网，服务器在国外</li>
+<li><a href="https://natapp.cn/" target="_blank" rel="noopener">https://natapp.cn/</a> 免费的需实名认证</li>
+<li><a href="https://www.ngrok.cc/" target="_blank" rel="noopener">https://www.ngrok.cc/</a> Sunny Ngrok，不过官网说也支持frp</li>
+<li><a href="https://www.tunnelnat.com/" target="_blank" rel="noopener">https://www.tunnelnat.com/</a> 虽然也写了frp，但好像只有ngrok有免费通道</li>
+</ul>
+<h2 id="其它开源的"><a href="#其它开源的" class="headerlink" title="其它开源的"></a>其它开源的</h2><ul>
+<li><a href="https://github.com/ffay/lanproxy" target="_blank" rel="noopener">https://github.com/ffay/lanproxy</a> Java</li>
+<li><a href="http://wdom.net/" target="_blank" rel="noopener">http://wdom.net/</a> 免费20分钟</li>
+<li><a href="https://github.com/inlets/inlets" target="_blank" rel="noopener">https://github.com/inlets/inlets</a></li>
+</ul>
+<h2 id="其它不开源的"><a href="#其它不开源的" class="headerlink" title="其它不开源的"></a>其它不开源的</h2><ul>
+<li><a href="https://hsk.oray.com/" target="_blank" rel="noopener">https://hsk.oray.com/</a> 花生壳，注册需要手机号；DDNS和内网穿透都支持？后者免费速度1M。</li>
+<li><a href="https://www.kingdriod.cn/" target="_blank" rel="noopener">https://www.kingdriod.cn/</a> 神卓，免费速度1M；需要实名认证上传身份证</li>
+<li><a href="http://www.luyouxia.com/" target="_blank" rel="noopener">http://www.luyouxia.com/</a> 路由侠</li>
+<li><a href="https://www.notr.tech/" target="_blank" rel="noopener">https://www.notr.tech/</a> 免费3小时</li>
+<li><a href="https://www.nsloop.com/" target="_blank" rel="noopener">https://www.nsloop.com/</a> 量子互联，写的不限流量</li>
+<li><a href="http://www.mofasuidao.cn/" target="_blank" rel="noopener">http://www.mofasuidao.cn/</a> 魔法隧道，写的是“免费创建账户”</li>
+<li><a href="http://www.youtusoft.com/" target="_blank" rel="noopener">http://www.youtusoft.com/</a> 网络通</li>
+<li><a href="https://xiaomy.net/" target="_blank" rel="noopener">https://xiaomy.net/</a> 网云穿</li>
+<li><a href="https://localhost.run/" target="_blank" rel="noopener">https://localhost.run/</a> 无需注册？</li>
+</ul>
+<h2 id="免费DDNS"><a href="#免费DDNS" class="headerlink" title="免费DDNS"></a>免费DDNS</h2><ul>
+<li><a href="https://dyndnss.net/eng/" target="_blank" rel="noopener">https://dyndnss.net/eng/</a></li>
+<li><a href="https://freedns.afraid.org/" target="_blank" rel="noopener">https://freedns.afraid.org/</a></li>
+<li><a href="https://www.duckdns.org/" target="_blank" rel="noopener">https://www.duckdns.org/</a></li>
+<li><a href="https://www.noip.com/" target="_blank" rel="noopener">https://www.noip.com/</a></li>
+<li><a href="https://www.spdyn.de/" target="_blank" rel="noopener">https://www.spdyn.de/</a> 只有德语？</li>
+<li><a href="https://dynv6.com/" target="_blank" rel="noopener">https://dynv6.com/</a></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener">https://github.com/ripienaar/free-for-dev</a></p>
+<p><a href="https://gist.github.com/imba-tjd/d73258f0817255dbe77d64d40d985e76" target="_blank" rel="noopener">https://gist.github.com/imba-tjd/d73258f0817255dbe77d64d40d985e76</a></p>
+<p><a href="https://free-for.dev/#/" target="_blank" rel="noopener">https://free-for.dev/#/</a></p>
+
+    </div>
+	
+	
+    
+    
+    
+	
+
+    
+    
+    
+
+    
+      
+      
+        
+        
+      
+      
+        
+      
+      
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/c68c675c.html" rel="bookmark">git基础使用</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/c68c675b.html" rel="bookmark">obsidian的annotator插件</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/c68c6759.html" rel="bookmark">hypothesis同步obsidian</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>文章作者： </strong>hellolinux
+  </li>
+  <li class="post-copyright-link">
+    <strong>原始链接：</strong>
+    <a href="https://hellolinux.xyz/posts/267602e9.html" title="开发者免费资源记录">https://hellolinux.xyz/posts/267602e9.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/cbed84aa.html" rel="prev" title="轻量笔记软件simplenote">
+      <i class="fa fa-chevron-left"></i> 轻量笔记软件simplenote
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/c68c674e.html" rel="next" title="知识管理软件zotero介绍">
+      知识管理软件zotero介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#云"><span class="nav-number">1.</span> <span class="nav-text">云</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#其他人的集合"><span class="nav-number">1.1.</span> <span class="nav-text">其他人的集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paas"><span class="nav-number">1.2.</span> <span class="nav-text">Paas</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#net"><span class="nav-number">1.2.1.</span> <span class="nav-text">.net</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云端空间-IDE"><span class="nav-number">1.3.</span> <span class="nav-text">云端空间&#x2F;IDE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端在线IDE"><span class="nav-number">1.3.1.</span> <span class="nav-text">前端在线IDE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jupyter-Notebook-Lab-大数据机器学习平台"><span class="nav-number">1.3.2.</span> <span class="nav-text">Jupyter Notebook&#x2F;Lab 大数据机器学习平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库DBaaS"><span class="nav-number">1.4.</span> <span class="nav-text">数据库DBaaS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BaaS"><span class="nav-number">1.5.</span> <span class="nav-text">BaaS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Managed-K8S"><span class="nav-number">1.6.</span> <span class="nav-text">Managed K8S</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Serverless-Node-Paas（无状态的api）"><span class="nav-number">1.7.</span> <span class="nav-text">Serverless&#x2F;Node Paas（无状态的api）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态网页托管（必须要能自动更新）"><span class="nav-number">1.8.</span> <span class="nav-text">静态网页托管（必须要能自动更新）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#也许可用的IaaS"><span class="nav-number">1.9.</span> <span class="nav-text">也许可用的IaaS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IBM-Cloud"><span class="nav-number">1.9.1.</span> <span class="nav-text">IBM Cloud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#腾讯云"><span class="nav-number">1.9.2.</span> <span class="nav-text">腾讯云</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里云"><span class="nav-number">1.9.3.</span> <span class="nav-text">阿里云</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#低代码平台-aPaaS"><span class="nav-number">1.10.</span> <span class="nav-text">低代码平台&#x2F;aPaaS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#国内的"><span class="nav-number">1.10.1.</span> <span class="nav-text">国内的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国外的"><span class="nav-number">1.10.2.</span> <span class="nav-text">国外的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未分类"><span class="nav-number">1.11.</span> <span class="nav-text">未分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有云服务器时能自建的项目"><span class="nav-number">2.</span> <span class="nav-text">有云服务器时能自建的项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自建Paas"><span class="nav-number">2.1.</span> <span class="nav-text">自建Paas</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NAT-traversal-amp-amp-DDNS"><span class="nav-number">3.</span> <span class="nav-text">NAT traversal &amp;&amp; DDNS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#frp"><span class="nav-number">3.1.</span> <span class="nav-text">frp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngrok"><span class="nav-number">3.2.</span> <span class="nav-text">ngrok</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它开源的"><span class="nav-number">3.3.</span> <span class="nav-text">其它开源的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它不开源的"><span class="nav-number">3.4.</span> <span class="nav-text">其它不开源的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#免费DDNS"><span class="nav-number">3.5.</span> <span class="nav-text">免费DDNS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hellolinux"
+      src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+  <p class="site-author-name" itemprop="name">hellolinux</p>
+  <div class="site-description" itemprop="description">每天进步百分之一</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Changeli0n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Changeli0n" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">酷壳</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://macshuo.com/" title="http:&#x2F;&#x2F;macshuo.com&#x2F;" rel="noopener" target="_blank">MacTack</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://travelwithbook.com/" title="https:&#x2F;&#x2F;travelwithbook.com&#x2F;" rel="noopener" target="_blank">chin的故事散文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+		  <div class="links-of-blogroll-title">
+		    <!-- modify icon to fire by szw -->
+		    <i class="fa fa-history fa-" aria-hidden="true"></i>
+		    近期文章
+		  </div>
+		  <ul class="links-of-blogroll-list">
+		    
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		  </ul>
+	    </div>
+	  
+	  
+	  
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/95/" rel="tag">95</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hypothesis/" rel="tag">Hypothesis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KDA/" rel="tag">KDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NEAR/" rel="tag">NEAR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCR/" rel="tag">OCR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCT/" rel="tag">OCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaulGraham/" rel="tag">PaulGraham</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aave/" rel="tag">aave</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amm/" rel="tag">amm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ampl/" rel="tag">ampl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/basis/" rel="tag">basis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compound/" rel="tag">compound</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cosmos/" rel="tag">cosmos</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cre/" rel="tag">cre</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crv/" rel="tag">crv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defi/" rel="tag">defi</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esd/" rel="tag">esd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frax/" rel="tag">frax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hugo/" rel="tag">hugo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jitsi/" rel="tag">jitsi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layerzero/" rel="tag">layerzero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/luna/" rel="tag">luna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/magic/" rel="tag">magic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mastodon/" rel="tag">mastodon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nft/" rel="tag">nft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/obsidian/" rel="tag">obsidian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ohm/" rel="tag">ohm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pocket/" rel="tag">pocket</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rct/" rel="tag">rct</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/telegram/" rel="tag">telegram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uni/" rel="tag">uni</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web3/" rel="tag">web3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E9%93%BE/" rel="tag">公链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag">创业</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%BD%9C/" rel="tag">创作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%B3%E6%80%A7/" rel="tag">女性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%95%E8%B5%84/" rel="tag">投资</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E8%8D%90/" rel="tag">推荐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%B3%E5%AE%9A%E5%B8%81/" rel="tag">稳定币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E/" rel="tag">经济</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E5%9D%80/" rel="tag">网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E9%93%BE/" rel="tag">跨链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%83%B3/" rel="tag">随想</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	  
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <!---
+<script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+---!>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hellolinux</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">149k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+<!---
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e8315ca5fd61bd3" async="async"></script>
+  </div>
+---!>
+<!---
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+---!>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

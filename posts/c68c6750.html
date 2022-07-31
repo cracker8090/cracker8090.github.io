@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gK77_o5sjFpw2K4KqFStbOtHEl8m_97Zb9BMK88lWZY">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hellolinux.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="NEAR介绍Near Protocol作为主打“分片”概念的高性能区块链之一，相比于其它公链，DeFi布局比较缓慢，首个去中心化交易所Ref Finance在2021年4月正式上线，首个跨链预言机Flux 12月份才上线主网。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Octopus及NEAR生态项目介绍">
+<meta property="og:url" content="https://hellolinux.xyz/posts/c68c6750.html">
+<meta property="og:site_name" content="无拘无束的猪">
+<meta property="og:description" content="NEAR介绍Near Protocol作为主打“分片”概念的高性能区块链之一，相比于其它公链，DeFi布局比较缓慢，首个去中心化交易所Ref Finance在2021年4月正式上线，首个跨链预言机Flux 12月份才上线主网。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-29T04:50:25.000Z">
+<meta property="article:modified_time" content="2022-06-29T04:50:25.000Z">
+<meta property="article:author" content="hellolinux">
+<meta property="article:tag" content="区块链">
+<meta property="article:tag" content="公链">
+<meta property="article:tag" content="NEAR">
+<meta property="article:tag" content="OCT">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hellolinux.xyz/posts/c68c6750.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Octopus及NEAR生态项目介绍 | 无拘无束的猪</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162293825-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-162293825-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="无拘无束的猪" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无拘无束的猪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">hellolinux的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hellolinux.xyz/posts/c68c6750.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+      <meta itemprop="name" content="hellolinux">
+      <meta itemprop="description" content="每天进步百分之一">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无拘无束的猪">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Octopus及NEAR生态项目介绍
+        </h1>
+
+        <div class="post-meta">
+		
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-29 12:50:25" itemprop="dateCreated datePublished" datetime="2022-06-29T12:50:25+08:00">2022-06-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url" rel="index"><span itemprop="name">区块链</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/c68c6750.html" class="post-meta-item leancloud_visitors" data-flag-title="Octopus及NEAR生态项目介绍" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="NEAR介绍"><a href="#NEAR介绍" class="headerlink" title="NEAR介绍"></a>NEAR介绍</h1><p>Near Protocol作为主打“分片”概念的高性能区块链之一，相比于其它公链，DeFi布局比较缓慢，首个去中心化交易所Ref Finance在2021年4月正式上线，首个跨链预言机Flux 12月份才上线主网。</p>
+<p>NEAR生态的研究和发展公司Proximity Labs成立了价值3亿美金的Grants DAO，用于扶持基于NEAR区块链开发DeFi应用的项目、机构及个人，对标其它公链的生态激励计划。</p>
+<p>在Electric Capital发布的2021年Web3开发者报告中，Near是开发者增速第三快的智能合约平台，次于Terra和Solana。</p>
+<p>除了直接部署在Near主网上的项目之外，Near还借助兼容EVM的Aurora扩展了自己的生态，应用链章鱼网络也正在积极部署中。</p>
+<p>原生项目，如Ref Finance、Burrow、Onomy、Trisolaris，也包括Curve、Sushi、DODO、Kyber、Woo等知名DeFi项目</p>
+<h2 id="Ref-Finance-AMM"><a href="#Ref-Finance-AMM" class="headerlink" title="Ref Finance-AMM"></a>Ref Finance-AMM</h2><p>Near上的首个去中心化交易所。除了简单的AMM功能之外，Ref Finance在2021年第四季度增加了稳定币池、智能路由交易等功能，也就具备了Uniswap V2和Curve的基础功能。它的交易手续费和其它DEX接近，稳定币交易对的兑换手续费为0.05%，其它交易对主要为0.3%。</p>
+<p>帮助它们的代币提供流动性，并提供“双挖”奖励。</p>
+<h2 id="Meta-Pool-流动性质押方案"><a href="#Meta-Pool-流动性质押方案" class="headerlink" title="Meta Pool-流动性质押方案"></a>Meta Pool-流动性质押方案</h2><p>Lido，Solana上的Marinade Finance</p>
+<p>Meta Pool也得到了Near基金会的官方支持，基金会决定将150万NEAR通过Meta Pool进行质押，这代表着Near基金会的信任投票。</p>
+<h2 id="Skyward-Finance-Launchpad平台"><a href="#Skyward-Finance-Launchpad平台" class="headerlink" title="Skyward Finance Launchpad平台"></a>Skyward Finance Launchpad平台</h2><p>采用了流拍卖（Streaming auction）的模式。用户可以在任何时间点参与到拍卖中，拍卖价格将随着区块变化，在每个区块中都将根据资金占比收到代币，若价格过高也可以随时退出。</p>
+<p>拍卖不需要质押平台币SKYWARD，确保了拍卖的公平公开。拍卖代币和拍卖所得资金的1%均会被Skyward财库收取1%的费用，随着拍卖次数的增多，Skyward财库的资产将越来越多。因为用户可以选择销毁SKYWARD赎回财库中的资产，因此SKYWARD的价值也会随着拍卖的次数增加（90%的SKYWARD通过拍卖分发，拍卖资金也进入财库）。</p>
+<p>Near生态中的多个知名项目均通过Skyward进行了拍卖，如Ref Finance、Octopus Network、Paras、Aurora、Meta Pool等。</p>
+<h2 id="Burrow-借贷"><a href="#Burrow-借贷" class="headerlink" title="Burrow 借贷"></a>Burrow 借贷</h2><p>测试网中只支持NEAR、ETH、USDT、USDC、DAI这五种资产的借贷，功能上和其它借贷协议类似。</p>
+<p>三大功能：从基础层解锁收益；解锁跨链收益；允许自偿贷款。</p>
+<p>解锁基础层收益即支持质押的NEAR衍生品，如通过Meta Pool质押所得到的stNEAR进行借贷；跨链收益即跨链的质押衍生品，如stSOL、stFTM等；自偿贷款即类似于Alchemix一样，使用生息抵押品进行借贷。不过这些功能并没有包含在现有的测试网中。</p>
+<h2 id="Pulse-Markets-预测市场"><a href="#Pulse-Markets-预测市场" class="headerlink" title="Pulse Markets 预测市场"></a>Pulse Markets 预测市场</h2><p>建立在Near和Flux（去中心化预言机）上的一个预测市场，因为开放和去中心化的特征，预测市场可以让用户无需许可地交易任何资产。Pulse通过AMM让市场对头寸进行定价，当达到结算日期时，正确的预测可以得到回报。</p>
+<p>参与的用户很少</p>
+<h2 id="Aurora"><a href="#Aurora" class="headerlink" title="Aurora"></a>Aurora</h2><p>Near上的EVM解决方案</p>
+<p>通过Rainbow Bridge可以将资产在以太坊、Near、Aurora三者之前跨链，其中Near与Aurora之间代币转移几乎可以瞬间到账。当前AURORA的总市值达到了200多亿美元，这也说明了它作为EVM解决方案的受欢迎程度。</p>
+<h3 id="Trisolaris-AMM"><a href="#Trisolaris-AMM" class="headerlink" title="Trisolaris AMM"></a>Trisolaris AMM</h3><p>Aurora上最大的DEX</p>
+<p>TRI/AURORA、AURORA/ETH两个交易对提供额外的AURORA挖矿奖励，流通性提供者可同时获得AURORA和TRI代币奖励，这表明Trisolaris得到了Aurora更多的支持。</p>
+<p>除了Near上的Rainbow Bridge之外，Trisolaris上还可使用Multichain、Allbridge、Synapse Bridge跨链桥将资产从BSC、Terra、Avalanche等公链跨链到Aurora，LUNA、UST、AVAX、BNB、MATIC都可以和WNEAR组成交易对，参与Trisolaris的流动性挖矿。1月11日，Terra中关于UST流动性激励计划的165号提案获得通过，将激励UST在Aurora（Trisolaris、Rose）、Oasis和Solana上的使用。</p>
+<h3 id="Wannaswap-DEX"><a href="#Wannaswap-DEX" class="headerlink" title="Wannaswap DEX"></a>Wannaswap DEX</h3><p>AURORA相关的交易对并没有额外的奖励。Wannaswap引入了推荐机制，推荐人可以获得被推荐人所得3%的奖励，若没有推荐人，这部分代币将被销毁。</p>
+<h3 id="NearPad"><a href="#NearPad" class="headerlink" title="NearPad"></a>NearPad</h3><p>NearPad包括三个部分，发行平台、DEX和收益聚合器。其中Launchpad在Aurora上已经发起了3个项目，拍卖池分为白名单和质押参与两种，DEX即为下述的Rose。</p>
+<h3 id="Rose-稳定币DEX"><a href="#Rose-稳定币DEX" class="headerlink" title="Rose 稳定币DEX"></a>Rose 稳定币DEX</h3><p>面向稳定币交易对和跨链资产的交易。其中稳定币池DAI/USDT/USDC有大约830万美元的流动性，交易费率为0.04%，在进行稳定币交易时，体验优于Aurora上的其它DEX。</p>
+<h2 id="其他项目"><a href="#其他项目" class="headerlink" title="其他项目"></a>其他项目</h2><p>Awesomenear.com上收录的Near生态项目一共有237个，在基础设施、DApps、开发工具、生态系统方向均有对应的项目。</p>
+<p>Near生态的发展中也存在不均衡的现象，Near主网上DeFi项目中的资金主要集中在Ref Finance和Meta Pool中，已上线项目还不够多，这可能是因为项目的开发成本更高，用户也需要学习使用Near的钱包。而最近两个月才开始发展生态的Aurora，因为兼容EVM，在TVL上已经超越了Near主网上的项目。</p>
+<h1 id="Octopus-Network"><a href="#Octopus-Network" class="headerlink" title="Octopus Network"></a>Octopus Network</h1><p>章鱼网络是一个NEAR-based的多链互操作加密网络，用于启动和运行基于Web3.0 Substrate-based、EVM兼容的应用特定区块链，即应用链。在Digital Currency Group、Electric Capital等顶级风投的支持下，Octopus Network致力于释放Web3.0的新一轮创新浪潮。</p>
+<ul>
+<li><p>组合 Near Protocol 作为多链网络的跨链枢纽，直接享受到 NEAR Protocol 基于分片的几乎无上限的扩容潜力，直接使用 NEAR 和 ETH 跨链互操作的彩虹桥； NEAR Protocol 也将收获 Octopus Network 围绕 NEAR 构建的多链网络生态，社区也相互融合，双方极大共赢。</p>
+</li>
+<li><p>组合 Cosmos 提出的 IBC 协议，天然的让章鱼生态和 Cosmos 生态实现跨链互操作。</p>
+</li>
+</ul>
+<p>章鱼网络的应用链可以与 Cosmos 分区链和 Polkadot 平行链的互操作；进一步结合 NEAR 的彩虹桥，章鱼应用链、NEAR Protocol 、以太坊、Cosmos 和 Polkadot 之间就实现了跨链互操作，整个区块链互联网就实现了全面的互通互联。</p>
+<p>一套智能合约，运转在NEAR上的Octopus Relay内，与一组验证器节点相结合，应用程序链将为其应用程序的安全而支付验证器节点费。它的结构与Polkadot类似，但对于应用链来说，在Octo上启动其网络的成本要比在Polkadot上启动parachains的成本低很多。这些应用链的计划是用Substrate框架和一个专门的应用程序的前端来构建。</p>
+<p>一旦Substrate-IBC Pallet的实施完成，这些应用链也将与IBC兼容，并且能够与其他NEAR项目通信，因为Octo桥将为每个应用链代币部署一个NEP141封装合约。</p>
+<p>如果Octo网络能够有效地引导许多应用链，那么OCT代币将从所有这些需要Octo验证器集的共享安全性的链中大大受益</p>
+<p>Terra和NEAR已经宣布了一项重要的合作关系，因为UST将被整合到NEAR和Aurora所有的生态系统中</p>
+<h2 id="团队"><a href="#团队" class="headerlink" title="团队"></a>团队</h2><p>Octopus团队(以前称为Cdot)已经在区块链通用互操作性协议IBC和跨链集成方面工作了很长时间</p>
+<p>是中国 Rust 社区（包括 RustCon）的组织者。在中国提供了 Substrate 在线培训课程，该课程现在是由Parity, Inc.资助的一门官方课程。基于这些经验，我们正在与包括NEAR教育团队在内的全球合作伙伴协商，在全球范围内提供类似的培训课程。</p>
+<p>Cosmos Eco Foundation ICF资助我们实现基于Substrate的通用跨链协议IBC;我们帮助Oasis、PlatOn和Flow开发了以太坊跨链桥;我们为Chainlink实现了Solana平台预言机等。</p>
+<p>安全级别由所持有的$OCT代币的数量决定。</p>
+<p>验证者在Octopus Relay的应用链上投入 $OCT 并设置一个节点来运行应用链的协议</p>
+<p>在Polkadot网络中，所有的parachains（平行链）具有相同的安全级别，无论质押的DOT数量如何。 在Octopus Newwork中，我们根据项目发展情况做安全级别的考量，从而降低了进入的门槛，每个项目可以选择随着网络的发展而增加质押，使项目能够有机地扩展，而没有恶性通货膨胀的风险。</p>
+<p>不使用collator或XCMP (cross-shard 消息传递协议)。</p>
+<p>预计每年将在网络中推出30-50个appchain</p>
+<p>如果appchain Staking 的长期均衡收益率为每年 5%，那么仅是新推出的appchain每年就会带来约 4 亿美元的资产抵押需求。</p>
+<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p><a href="https://twitter.com/oct_network" target="_blank" rel="noopener">https://twitter.com/oct_network</a></p>
+<p><a href="https://oct.network/" target="_blank" rel="noopener">https://oct.network/</a></p>
+<p><a href="https://medium.com/@octopuswolfi82021" target="_blank" rel="noopener">https://medium.com/@octopuswolfi82021</a></p>
+<p><a href="https://linktr.ee/octopus.network" target="_blank" rel="noopener">https://linktr.ee/octopus.network</a></p>
+<p><a href="https://mainnet.oct.network/home" target="_blank" rel="noopener">https://mainnet.oct.network/home</a></p>
+<p><a href="https://accelerator.oct.network/" target="_blank" rel="noopener">https://accelerator.oct.network/</a></p>
+<p><a href="https://discord.com/invite/6GTJBkZA9Q" target="_blank" rel="noopener">https://discord.com/invite/6GTJBkZA9Q</a></p>
+<p><a href="https://t.me/octopusnetwork" target="_blank" rel="noopener">https://t.me/octopusnetwork</a></p>
+<p><a href="https://www.linkedin.com/company/theoctopusnetwork" target="_blank" rel="noopener">https://www.linkedin.com/company/theoctopusnetwork</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://mirror.xyz/0xFb4c6dF1C62C62fd956546E749821b4a2B4D278b/1F6ufp5kbQ-6z54x6a6s3cxMNL5RplxgNxmHwfWsYHc" target="_blank" rel="noopener">Near生态进入发展快车道，一文了解Near中有哪些值得关注的DeFi项目</a> </p>
+<p><a href="https://www.theblockbeats.info/news/29950" target="_blank" rel="noopener">为什么「可组合性」在 Web3.0 时代变得极其重要</a> </p>
+<p><a href="https://coinfuture.pro/archives/5268" target="_blank" rel="noopener">聚币Jubi | Octopus Network—为开发者和创业者提供创新平台</a> </p>
+
+    </div>
+	
+	
+    
+    
+    
+	
+
+    
+    
+    
+
+    
+      
+      
+        
+        
+      
+      
+        
+      
+      
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/c68c674f.html" rel="bookmark">kadena公链介绍</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>文章作者： </strong>hellolinux
+  </li>
+  <li class="post-copyright-link">
+    <strong>原始链接：</strong>
+    <a href="https://hellolinux.xyz/posts/c68c6750.html" title="Octopus及NEAR生态项目介绍">https://hellolinux.xyz/posts/c68c6750.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag"><i class="fa fa-tag"></i> 区块链</a>
+              <a href="/tags/%E5%85%AC%E9%93%BE/" rel="tag"><i class="fa fa-tag"></i> 公链</a>
+              <a href="/tags/NEAR/" rel="tag"><i class="fa fa-tag"></i> NEAR</a>
+              <a href="/tags/OCT/" rel="tag"><i class="fa fa-tag"></i> OCT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/c68c674f.html" rel="prev" title="kadena公链介绍">
+      <i class="fa fa-chevron-left"></i> kadena公链介绍
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/c68c6751.html" rel="next" title="OCR识别技术库简介">
+      OCR识别技术库简介 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NEAR介绍"><span class="nav-number">1.</span> <span class="nav-text">NEAR介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref-Finance-AMM"><span class="nav-number">1.1.</span> <span class="nav-text">Ref Finance-AMM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Meta-Pool-流动性质押方案"><span class="nav-number">1.2.</span> <span class="nav-text">Meta Pool-流动性质押方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skyward-Finance-Launchpad平台"><span class="nav-number">1.3.</span> <span class="nav-text">Skyward Finance Launchpad平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Burrow-借贷"><span class="nav-number">1.4.</span> <span class="nav-text">Burrow 借贷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pulse-Markets-预测市场"><span class="nav-number">1.5.</span> <span class="nav-text">Pulse Markets 预测市场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aurora"><span class="nav-number">1.6.</span> <span class="nav-text">Aurora</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Trisolaris-AMM"><span class="nav-number">1.6.1.</span> <span class="nav-text">Trisolaris AMM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wannaswap-DEX"><span class="nav-number">1.6.2.</span> <span class="nav-text">Wannaswap DEX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NearPad"><span class="nav-number">1.6.3.</span> <span class="nav-text">NearPad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rose-稳定币DEX"><span class="nav-number">1.6.4.</span> <span class="nav-text">Rose 稳定币DEX</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他项目"><span class="nav-number">1.7.</span> <span class="nav-text">其他项目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Octopus-Network"><span class="nav-number">2.</span> <span class="nav-text">Octopus Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#团队"><span class="nav-number">2.1.</span> <span class="nav-text">团队</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站"><span class="nav-number">2.2.</span> <span class="nav-text">网站</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hellolinux"
+      src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+  <p class="site-author-name" itemprop="name">hellolinux</p>
+  <div class="site-description" itemprop="description">每天进步百分之一</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Changeli0n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Changeli0n" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">酷壳</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://macshuo.com/" title="http:&#x2F;&#x2F;macshuo.com&#x2F;" rel="noopener" target="_blank">MacTack</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://travelwithbook.com/" title="https:&#x2F;&#x2F;travelwithbook.com&#x2F;" rel="noopener" target="_blank">chin的故事散文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+		  <div class="links-of-blogroll-title">
+		    <!-- modify icon to fire by szw -->
+		    <i class="fa fa-history fa-" aria-hidden="true"></i>
+		    近期文章
+		  </div>
+		  <ul class="links-of-blogroll-list">
+		    
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		  </ul>
+	    </div>
+	  
+	  
+	  
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/95/" rel="tag">95</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hypothesis/" rel="tag">Hypothesis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KDA/" rel="tag">KDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NEAR/" rel="tag">NEAR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCR/" rel="tag">OCR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCT/" rel="tag">OCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaulGraham/" rel="tag">PaulGraham</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aave/" rel="tag">aave</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amm/" rel="tag">amm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ampl/" rel="tag">ampl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/basis/" rel="tag">basis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compound/" rel="tag">compound</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cosmos/" rel="tag">cosmos</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cre/" rel="tag">cre</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crv/" rel="tag">crv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defi/" rel="tag">defi</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esd/" rel="tag">esd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frax/" rel="tag">frax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hugo/" rel="tag">hugo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jitsi/" rel="tag">jitsi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layerzero/" rel="tag">layerzero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/luna/" rel="tag">luna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/magic/" rel="tag">magic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mastodon/" rel="tag">mastodon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nft/" rel="tag">nft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/obsidian/" rel="tag">obsidian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ohm/" rel="tag">ohm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pocket/" rel="tag">pocket</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rct/" rel="tag">rct</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/telegram/" rel="tag">telegram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uni/" rel="tag">uni</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web3/" rel="tag">web3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E9%93%BE/" rel="tag">公链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag">创业</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%BD%9C/" rel="tag">创作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%B3%E6%80%A7/" rel="tag">女性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%95%E8%B5%84/" rel="tag">投资</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E8%8D%90/" rel="tag">推荐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%B3%E5%AE%9A%E5%B8%81/" rel="tag">稳定币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E/" rel="tag">经济</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E5%9D%80/" rel="tag">网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E9%93%BE/" rel="tag">跨链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%83%B3/" rel="tag">随想</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	  
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <!---
+<script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+---!>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hellolinux</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">149k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+<!---
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e8315ca5fd61bd3" async="async"></script>
+  </div>
+---!>
+<!---
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+---!>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

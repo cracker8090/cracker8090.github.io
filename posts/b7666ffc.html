@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gK77_o5sjFpw2K4KqFStbOtHEl8m_97Zb9BMK88lWZY">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hellolinux.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="2022年cosmos的跨链安全、跨链账户、超流质押等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cosmos生态-2022年的COSMOS">
+<meta property="og:url" content="https://hellolinux.xyz/posts/b7666ffc.html">
+<meta property="og:site_name" content="无拘无束的猪">
+<meta property="og:description" content="2022年cosmos的跨链安全、跨链账户、超流质押等">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-06T03:09:17.000Z">
+<meta property="article:modified_time" content="2022-04-06T03:09:17.000Z">
+<meta property="article:author" content="hellolinux">
+<meta property="article:tag" content="cosmos">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hellolinux.xyz/posts/b7666ffc.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>cosmos生态-2022年的COSMOS | 无拘无束的猪</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162293825-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-162293825-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="无拘无束的猪" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无拘无束的猪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">hellolinux的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hellolinux.xyz/posts/b7666ffc.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+      <meta itemprop="name" content="hellolinux">
+      <meta itemprop="description" content="每天进步百分之一">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无拘无束的猪">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cosmos生态-2022年的COSMOS
+        </h1>
+
+        <div class="post-meta">
+		
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-06 11:09:17" itemprop="dateCreated datePublished" datetime="2022-04-06T11:09:17+08:00">2022-04-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url" rel="index"><span itemprop="name">区块链</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/cosmos/" itemprop="url" rel="index"><span itemprop="name">cosmos</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/b7666ffc.html" class="post-meta-item leancloud_visitors" data-flag-title="cosmos生态-2022年的COSMOS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">2022年cosmos的跨链安全、跨链账户、超流质押等</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://blog.cosmos.network/cosmos-2021-a-look-back-on-an-interstellar-year-60fc755588f7" target="_blank" rel="noopener">cosmos的2021</a> 。Cosmos Hub 将在 2022 年推出许多新功能，并计划至少每季度进行一次重大升级。如果您想深入了解技术细节并获取所有单独升级的规范，请查看GitHub 上的<a href="https://github.com/cosmos/gaia/blob/main/docs/roadmap/cosmos-hub-roadmap-2.0.md" target="_blank" rel="noopener">Cosmos Hub 路线图 2.0</a> 。如果您想要鸟瞰图，请在下面找到重要内容 - 以及为什么它对您很重要。</p>
+<h1 id="跨链安全"><a href="#跨链安全" class="headerlink" title="跨链安全"></a>跨链安全</h1><p><a href="https://blog.cosmos.network/interchain-security-is-coming-to-the-cosmos-hub-f144c45fb035" target="_blank" rel="noopener">Interchain Security</a>目前由 Interchain Foundation 和<a href="https://informal.systems/2021/11/25/interchain-security/" target="_blank" rel="noopener">Informal Systems 开发</a>。这种共享安全服务允许 Cosmos 链有效地向彼此租用安全性，以便新链可以引导它们的经济，并且更大链上的验证者和委托人可以从该服务中获得奖励。更好的是，Interchain Security 将允许验证者和委托人通过在 Hub 上质押 ATOM 来获得多个代币的多个链上的奖励。新链将受益于强大的验证者安全集，并在早期阶段将其代币呈现在 Cosmos 社区成员面前。同时，Cosmos Hub 的质押者可以及早访问创新项目并提高其 ATOM 的实用性。</p>
+<h1 id="跨链账户"><a href="#跨链账户" class="headerlink" title="跨链账户"></a>跨链账户</h1><p>跨链账户将登陆 Cosmos Hub，预计在 2022 年第一季度完成 Theta 升级。跨链账户对 Cosmos 生态系统有几个重大影响，其中之一是将 Cosmos DeFi 提升到一个新水平的能力。这是因为跨链账户允许生态链安全地控制其他生态链上的账户，而不是简单地将代币从一条链转移到另一条链。</p>
+<p>考虑一下以太坊。复杂的金融工具通过一组智能合约无需许可地进行交易，每个智能合约都处理整个业务流程的一部分。在 Cosmos 生态系统中，智能合约不能立即相互访问，因为每个智能合约或应用程序本质上都是区块链本身。</p>
+<p>使用 IBC，您可以在网络之间移动代币，但您无法像在以太坊上使用智能合约那样触发另一条链上的操作。跨链账户通过提供智能合约所需的可组合性和互操作性来改变这一切，从而在特定于应用程序的区块链中创造 DeFi 爆炸！</p>
+<p>跨链账户还将使开发人员更容易与 IBC 连接，因为新链可以利用现有账户的功能和能力，而不必从头开始重新创建这些功能。你可以在这里阅读更多关于<a href="https://medium.com/chainapsis/why-interchain-accounts-change-everything-for-cosmos-interoperability-59c19032bf11" target="_blank" rel="noopener">跨链账户如何改变一切的信息</a>。</p>
+<h1 id="流动质押"><a href="#流动质押" class="headerlink" title="流动质押"></a>流动质押</h1><p>由 Cosmos 核心贡献者和<a href="https://www.iqlusion.io/" target="_blank" rel="noopener">Iqulsion</a>创始人 Zaki Manian 牵头的第一版 Liquid Staking 最早将于 2022 年 2 月推出，并直接集成到 Cosmos SDK 中。Liquid Staking 的第一版将允许 ATOM 持有者发送交易，这些交易会立即将其绑定的 ATOM 转换为可用于流动性池和其他活动的可转让表示。这开辟了一个 DeFi 可能性的领域，允许持有者最大化他们的 ATOM，同时仍然获得 Staking 奖励。</p>
+<p>在 V1 的 Liquid Staking 中，流动代币与委托人质押其 ATOM 的验证人绑定。然而，这种设计可能是限制性的并且不一定是理想的。这就是 Liquid Staking V2 迅速跟进的原因。<a href="https://stake.lido.fi/" target="_blank" rel="noopener">Lido</a>背后的 P2P 团队起草<a href="https://enchanted-direction-844.notion.site/Adding-CosmWasm-to-Cosmos-Hub-9f919489029e4c9b95478b67242d20bc" target="_blank" rel="noopener">了一份提案</a>，该提案将使 Liquid Staking 成为 Cosmos Hub 的重要组成部分。作为 Cosmos 最古老的验证者之一，P2P 为以太坊 2.0 开发了 Liquid Staking 解决方案，该解决方案允许人们质押他们的以太币，但同时使用它。Lido 现在拥有 ETH 2.0 中 90% 的质押以太币，并且还运行 Terra 流行的 Liquid Staking 实施 bLUNA。</p>
+<p>没有智能合约很难实现 Liquid Staking，因此 Cosmos Hub 团队将 CosmWasm 添加到 Cosmos Hub，允许 Lido 创建此功能所需的智能合约。将来，在 Hub 上安装 CosmWasm 可以让它连接到任何链，并通过 IBC 通信管理他们的质押程序。这将把 Cosmos Hub 直接置于跨链的核心，并根据其价值和优势提高其可用性，成为Cosmos 生态系统中<a href="https://blog.cosmos.network/the-cosmos-hub-is-a-port-city-5b7f2d28debf" target="_blank" rel="noopener">真正的港口城市</a>。观看此空间以获取更多详细信息。</p>
+<h1 id="IBC将成为“200链”的生态系统"><a href="#IBC将成为“200链”的生态系统" class="headerlink" title="IBC将成为“200链”的生态系统"></a>IBC将成为“200链”的生态系统</h1><p>2021 年是<a href="https://blog.cosmos.network/ibc-update-the-internet-of-blockchains-is-growing-fast-dae883228ebf" target="_blank" rel="noopener">IBC 进入市场</a>的一年，主要的 Cosmos 链形成了蓬勃发展的互联经济——明年还会有更多！由于 Cosmos 强大的技术堆栈和对开发人员友好的区块链框架（如带有 IBC 互操作性的 <a href="https://starport.com/" target="_blank" rel="noopener">Starport</a>）在 2022 年，IBC 的采用将非常出色。正如 Tendermint 首席执行官彭忠告诉<a href="https://cryptoslate.com/catching-up-on-the-cosmos-ecosystem-with-tendermint-ceo-peng-zhong/" target="_blank" rel="noopener">CryptoSlate</a>的那样，“我认为我们将很容易看到 200 条链通过 IBC 连接明年的这个时候，从长远来看，甚至是一百万。”</p>
+<p>我们还将看到各种不同团队使用 IBC 将 Cosmos 连接到他们的生态系统的完成工作。在 2022 年，这意味着与比特币、Celo、Polkadot、Kusama、Harmony、Hyperledger Besu、Hyperledger Fabric 等的安全连接。这些主要区块链之间的资产自由流动将为可扩展性和增长创造巨大的机会——最后，一个具有低费用、高吞吐量和大量产品选择的 DeFi 公平竞争环境！</p>
+<h1 id="Cosmos-DeFi-将爆发"><a href="#Cosmos-DeFi-将爆发" class="headerlink" title="Cosmos DeFi 将爆发"></a>Cosmos DeFi 将爆发</h1><p>随着 IBC 连接的更多流动性、跨区块链账户管理复杂交易的能力，以及连接主要生态系统释放流动性的桥梁，Cosmos DeFi 将会爆炸式增长。<a href="https://medium.com/emeris-blog/emeris-the-road-to-public-launch-1f0ca00b72d0" target="_blank" rel="noopener">Emeris</a>的公开发布将于 2022 年春季推出，并将带来许多备受期待的功能，包括用于投资组合可视化、数字资产管理和服务发现的高级功能。还将通过自动组合奖励来最大化奖励生成、跨链 DEX 聚合、空投跟踪器以及与 Emeris Web 仪表板无缝协作的浏览器扩展。</p>
+<p><a href="https://app.osmosis.zone/" target="_blank" rel="noopener">Osmosis</a>还将在未来几个月发布其名为 Superfluid Staking 的 Liquid Staking 版本。这将允许 OSMO 持有者同时使用他们的代币进行质押和提供流动性，并确保协议的治理服务于流动性提供者的利益。</p>
+<p>另一个在 DeFi 方面取得长足进步并努力将以太坊带入 Cosmos 的团队是<a href="https://evmos.org/" target="_blank" rel="noopener">Evmos</a>，“EVM-on-Cosmos”（以前称为 Ethermint）。Evmos 旨在成为 Cosmos 的 EVM 中心，使 EVM 智能合约可以轻松地在 Cosmos 生态系统中部署和通信。已经在<a href="https://evmos.blog/evmos-incentivized-testnet-event-the-mars-meteor-missions-bbbb7ffa1b7c" target="_blank" rel="noopener">激励性测试网</a>中，EVM 兼容性将于 2022 年 1 月登陆 Cosmos。Evmos 是一个与应用程序无关的链，可通过 IBC 与以太坊主网、EVM 兼容环境和其他 BFT 链互操作，并将充当 EVM 中心任何其他 EVM Cosmos 链。</p>
+<p>另外请务必留意2022 年的<a href="https://umee.cc/" target="_blank" rel="noopener">Umee</a>，这是第一个为跨链交互提供基础设施的 DeFi 协议。Umee在 Tendermint、Coinbase Ventures、ConsenSys 的 Jo Lubin 和其他业内知名人士的支持下，于 2021 年筹集<a href="https://medium.com/umeeblog/umee-protocol-raises-6-3mm-seed-round-for-creating-a-cross-chain-defi-hub-75cadec10e4a" target="_blank" rel="noopener">了 630 万美元的种子资金。</a>Umee 允许用户创建借贷头寸，发现收益机会，并探索去信任的跨链 DeFi 应用程序。明年 Cosmos DeFi 会以多快的速度出现，这将是疯狂的！</p>
+<h1 id="NFT-在-Cosmos-上将是巨大的"><a href="#NFT-在-Cosmos-上将是巨大的" class="headerlink" title="NFT 在 Cosmos 上将是巨大的"></a>NFT 在 Cosmos 上将是巨大的</h1><p>除了快速增长的 DeFi 领域之外，2021 年也是 NFT 的一年，人们对数字艺术品、数字收藏品和不可变的数字所有权证明的兴趣激增。由于主流对 NFT 的需求如此之大，它们的受欢迎程度似乎将在 2022 年继续。</p>
+<p>Cosmos 生态系统中的许多项目都在为今年的发布奠定基础，包括<a href="https://stargaze.zone/" target="_blank" rel="noopener">Stargaze</a>，一个 NFT 的公共协议，<a href="https://www.pylons.tech/" target="_blank" rel="noopener">Pylons</a>，一个供品牌和创作者使用 NFT 构建产品的互操作系统，<a href="https://bitsong.io/" target="_blank" rel="noopener">BitSong</a>，第一个音乐 NFT 市场，<a href="https://omniflix.network/" target="_blank" rel="noopener">Omniflix</a>，一个由 NFT 提供支持的去中心化媒体和网络层，以及<a href="https://scrt.network/blog/secret-feature-stashh-privacy-nft-marketplace" target="_blank" rel="noopener">Secret Network 的 Stashh</a>，一个支持 Secret NFT 的全栈平台和市场。Evmos 还将很快支持 NFT 部署并托管市场，让人们可以轻松交易和部署 NFT。</p>
+<p>特别值得一提的是<a href="https://strangeclan.com/" target="_blank" rel="noopener">Strangeclan</a>，因为它在 2021 年发布了其冒险游戏的第一个虚拟城镇，其中包括任务、社交活动、竞争性战斗以及铸造 NFT 角色、商品和代币的能力！该游戏将逐步开发，我们期待在 2022 年发布令人兴奋的未来版本。</p>
+<p>Cosmos 长期贡献者<a href="http://irisnet.com/" target="_blank" rel="noopener">IRISnet</a>也在 2021 年完成了 NFT 领域的开创性工作，在许可环境和公链领域成功进行了<a href="https://blog.cosmos.network/nfts-travel-from-wenchang-chain-to-ethereum-for-the-first-time-through-ibcgang-member-irisnet-8b86490c5e45" target="_blank" rel="noopener">第一次跨链 NFT 跨链转移</a>：BSN 中的文昌链和 IRITA Hub，IRIS Hub（又名 IRISnet ) 和以太坊。现在，作为两幅精美中国画的数字孪生的 NFT 在 OpenSea EASTIP 上面向全球市场提供。</p>
+<p>我们很高兴在接下来的几个月中关注所有这些令人难以置信的 NFT 项目的进展，并将在它们发生时向您更新。</p>
+<h1 id="2022-年更重要的空投"><a href="#2022-年更重要的空投" class="headerlink" title="2022 年更重要的空投"></a>2022 年更重要的空投</h1><p>最后，一定不要错过 2022 年即将到来的一系列惊人的空投。Cosmos 生态系统中一些最具创新性的项目将于明年投入生产，涵盖从 NFT 到去中心化社交媒体、DeFi 到游戏的各个领域。请密切注意来自<a href="https://medium.com/@TharsisHQ/abbe931ba823" target="_blank" rel="noopener">Evmos</a>、<a href="https://www.youtube.com/watch?v=MAOJyS8bzGM" target="_blank" rel="noopener">Umee</a>、<a href="https://blog.cosmos.network/the-gravity-bridge-chain-is-coming-to-cosmos-7010ec7bd0ea" target="_blank" rel="noopener">Gravity Bridge</a>、<a href="https://like.co/" target="_blank" rel="noopener">LikeCoin</a>、<a href="https://medium.com/game/game-airdrop-for-atom-holder-563336c5f32e" target="_blank" rel="noopener">Game</a>、<a href="https://stargaze.zone/airdrop" target="_blank" rel="noopener">Stargaze</a>、<a href="https://bitsong.io/" target="_blank" rel="noopener">BitSong</a>和 Cyber 的空投，并确保将您的 ATOM 与 Cosmos 验证者进行质押以获得资格。</p>
+<h1 id="开发者社区将继续扩大"><a href="#开发者社区将继续扩大" class="headerlink" title="开发者社区将继续扩大"></a>开发者社区将继续扩大</h1><p><a href="https://starport.com/" target="_blank" rel="noopener">Starport</a>将帮助我们实现到 2022 年底与 IBC 连接的 200 个区块链的目标，这是一个使用 Cosmos SDK 在主权和安全区块链上构建、启动和维护任何加密应用程序的一体化平台。Starport 提供业内最佳的开发者体验，并赋能开发者为多链未来构建区块链。</p>
+<p>Starport 开发者社区正在迅速发展，迄今为止已创建并推送到 GitHub的<a href="https://github.com/search?o=desc&q=" target="_blank" rel="noopener"initialized+with+starport"&s=author-date&type=Commits">422 个区块链。</a>仅今年一年，Cosmos 的一些最有趣的项目就是使用 Starport 创建的，包括<a href="https://sifchain.finance/" target="_blank" rel="noopener">SifChain</a>、<a href="https://junochain.com/" target="_blank" rel="noopener">Juno</a>、<a href="https://app.osmosis.zone/" target="_blank" rel="noopener">Osmosis</a>、<a href="https://umee.cc/" target="_blank" rel="noopener">Umee</a>和<a href="https://lum.network/" target="_blank" rel="noopener">Lum Network</a>。在短短两个月内，<a href="https://discord.com/invite/starport" target="_blank" rel="noopener">Starport Discord</a>小组已经发展成为一个拥有近 600 名开发者的活跃社区。新推出的<a href="https://twitter.com/StarportHQ" target="_blank" rel="noopener">Starport Twitter</a>已拥有 5,000 名关注者，每天约有 200 名开发人员访问<a href="https://docs.starport.com/" target="_blank" rel="noopener">Starport 文档</a>以获取说明和教程——这些数字都将在 2022 年呈指数级增长。</p>
+<p>在<a href="https://hackatom.org/" target="_blank" rel="noopener">HackAtom VI</a>期间，我们收到了一些针对 Starport 挑战的高质量提交，我们期待将这些想法融入生产，并与更多的开源贡献者合作。Starport 将在 2022 年添加一些关键的新产品和功能，这将使开发人员在启动其区块链时获得最大的成功。在接下来的几个月中，您将听到更多关于此的信息！</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.cosmos.network/whats-coming-to-cosmos-in-2022-ce8e48d383ab" target="_blank" rel="noopener">What’s Coming to Cosmos in 2022</a> </p>
+<p>欢迎交流： <a href="https://twitter.com/Changeli0n" target="_blank" rel="noopener">个人推特</a> <a href="https://matters.news/@hellolinux" target="_blank" rel="noopener">matters</a> <a href="https://t.me/hellolinuxLab" target="_blank" rel="noopener">个人分享TG频道</a> </p>
+
+    </div>
+	
+	
+    
+    
+    
+	
+
+    
+    
+    
+
+    
+      
+      
+        
+        
+      
+      
+        
+      
+      
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/8a028c0d.html" rel="bookmark">cosmos生态-terra上的收益boost reactor money介绍</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/ffe5b45f.html" rel="bookmark">cosmos生态-Crescent network介绍</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>文章作者： </strong>hellolinux
+  </li>
+  <li class="post-copyright-link">
+    <strong>原始链接：</strong>
+    <a href="https://hellolinux.xyz/posts/b7666ffc.html" title="cosmos生态-2022年的COSMOS">https://hellolinux.xyz/posts/b7666ffc.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/cosmos/" rel="tag"><i class="fa fa-tag"></i> cosmos</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/ffe5b45f.html" rel="prev" title="cosmos生态-Crescent network介绍">
+      <i class="fa fa-chevron-left"></i> cosmos生态-Crescent network介绍
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/22e44a8f.html" rel="next" title="Defi世界-算法稳定币介绍">
+      Defi世界-算法稳定币介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#跨链安全"><span class="nav-number">1.</span> <span class="nav-text">跨链安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跨链账户"><span class="nav-number">2.</span> <span class="nav-text">跨链账户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流动质押"><span class="nav-number">3.</span> <span class="nav-text">流动质押</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IBC将成为“200链”的生态系统"><span class="nav-number">4.</span> <span class="nav-text">IBC将成为“200链”的生态系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cosmos-DeFi-将爆发"><span class="nav-number">5.</span> <span class="nav-text">Cosmos DeFi 将爆发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFT-在-Cosmos-上将是巨大的"><span class="nav-number">6.</span> <span class="nav-text">NFT 在 Cosmos 上将是巨大的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2022-年更重要的空投"><span class="nav-number">7.</span> <span class="nav-text">2022 年更重要的空投</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发者社区将继续扩大"><span class="nav-number">8.</span> <span class="nav-text">开发者社区将继续扩大</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hellolinux"
+      src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+  <p class="site-author-name" itemprop="name">hellolinux</p>
+  <div class="site-description" itemprop="description">每天进步百分之一</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Changeli0n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Changeli0n" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">酷壳</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://macshuo.com/" title="http:&#x2F;&#x2F;macshuo.com&#x2F;" rel="noopener" target="_blank">MacTack</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://travelwithbook.com/" title="https:&#x2F;&#x2F;travelwithbook.com&#x2F;" rel="noopener" target="_blank">chin的故事散文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+		  <div class="links-of-blogroll-title">
+		    <!-- modify icon to fire by szw -->
+		    <i class="fa fa-history fa-" aria-hidden="true"></i>
+		    近期文章
+		  </div>
+		  <ul class="links-of-blogroll-list">
+		    
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		  </ul>
+	    </div>
+	  
+	  
+	  
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/95/" rel="tag">95</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hypothesis/" rel="tag">Hypothesis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KDA/" rel="tag">KDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NEAR/" rel="tag">NEAR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCR/" rel="tag">OCR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCT/" rel="tag">OCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaulGraham/" rel="tag">PaulGraham</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aave/" rel="tag">aave</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amm/" rel="tag">amm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ampl/" rel="tag">ampl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/basis/" rel="tag">basis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compound/" rel="tag">compound</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cosmos/" rel="tag">cosmos</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cre/" rel="tag">cre</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crv/" rel="tag">crv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defi/" rel="tag">defi</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esd/" rel="tag">esd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frax/" rel="tag">frax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hugo/" rel="tag">hugo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jitsi/" rel="tag">jitsi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layerzero/" rel="tag">layerzero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/luna/" rel="tag">luna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/magic/" rel="tag">magic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mastodon/" rel="tag">mastodon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nft/" rel="tag">nft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/obsidian/" rel="tag">obsidian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ohm/" rel="tag">ohm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pocket/" rel="tag">pocket</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rct/" rel="tag">rct</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/telegram/" rel="tag">telegram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uni/" rel="tag">uni</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web3/" rel="tag">web3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E9%93%BE/" rel="tag">公链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag">创业</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%BD%9C/" rel="tag">创作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%B3%E6%80%A7/" rel="tag">女性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%95%E8%B5%84/" rel="tag">投资</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E8%8D%90/" rel="tag">推荐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%B3%E5%AE%9A%E5%B8%81/" rel="tag">稳定币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E/" rel="tag">经济</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E5%9D%80/" rel="tag">网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E9%93%BE/" rel="tag">跨链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%83%B3/" rel="tag">随想</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	  
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <!---
+<script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+---!>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hellolinux</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">149k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+<!---
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e8315ca5fd61bd3" async="async"></script>
+  </div>
+---!>
+<!---
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+---!>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

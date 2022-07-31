@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gK77_o5sjFpw2K4KqFStbOtHEl8m_97Zb9BMK88lWZY">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hellolinux.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="主要是记录unix环境高级编程笔记，供查阅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unix环境高级编程note">
+<meta property="og:url" content="https://hellolinux.xyz/posts/e39ad6a7.html">
+<meta property="og:site_name" content="无拘无束的猪">
+<meta property="og:description" content="主要是记录unix环境高级编程笔记，供查阅">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/deamon_syslog.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/openlog_option.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/openlog_facility.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/syslog_level.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/thread_limit.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/thread_limit2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/%E5%8D%8A%E5%8F%8C%E5%B7%A5%E7%AE%A1%E9%81%93.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/fork-%E5%8D%8A%E5%8F%8C%E5%B7%A5%E7%AE%A1%E9%81%93.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/popen.png">
+<meta property="og:image" content="c:%5CUsers%5Cxubei%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220617161038339.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/msg%E7%B3%BB%E7%BB%9F%E9%99%90%E5%88%B6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%B3%BB%E7%BB%9F%E9%99%90%E5%88%B6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%E9%99%90%E5%88%B6.png">
+<meta property="article:published_time" content="2022-06-18T16:39:45.000Z">
+<meta property="article:modified_time" content="2022-06-18T16:39:45.000Z">
+<meta property="article:author" content="hellolinux">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/deamon_syslog.png">
+
+<link rel="canonical" href="https://hellolinux.xyz/posts/e39ad6a7.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>unix环境高级编程note | 无拘无束的猪</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162293825-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-162293825-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="无拘无束的猪" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无拘无束的猪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">hellolinux的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hellolinux.xyz/posts/e39ad6a7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+      <meta itemprop="name" content="hellolinux">
+      <meta itemprop="description" content="每天进步百分之一">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无拘无束的猪">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          unix环境高级编程note
+        </h1>
+
+        <div class="post-meta">
+		
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-19 00:39:45" itemprop="dateCreated datePublished" datetime="2022-06-19T00:39:45+08:00">2022-06-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/e39ad6a7.html" class="post-meta-item leancloud_visitors" data-flag-title="unix环境高级编程note" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>28k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>26 分钟</span>
+            </span>
+            <div class="post-description">主要是记录unix环境高级编程笔记，供查阅</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <table>
+<thead>
+<tr>
+<th align="center">进程</th>
+<th align="center">线程</th>
+<th align="center">进程间通信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a href="#进程介绍">进程介绍</a></td>
+<td align="center"><a href="#线程介绍">线程介绍</a></td>
+<td align="center"><a href="#管道">管道</a> <a href="#FIFO有名管道">FIFO有名管道</a></td>
+</tr>
+<tr>
+<td align="center"><a href="#守护进程">守护进程</a></td>
+<td align="center"><a href="#线程同步">线程同步</a></td>
+<td align="center"><a href="#XSI-IPC">XSI-IPC</a>  ：<a href="#消息队列">消息队列</a> <a href="#信号量">信号量</a> <a href="#共享存储">共享存储</a></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><a href="#线程控制">线程控制</a></td>
+<td align="center"><a href="#POSIX信号量">POSIX信号量</a> <a href="#套接字">套接字</a></td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><a href="#进程">进程</a> </p>
+<ul>
+<li><a href="#进程介绍">进程介绍</a></li>
+<li><a href="#守护进程">守护进程</a></li>
+</ul>
+</li>
+<li><p><a href="#线程">线程</a></p>
+<ul>
+<li><a href="#线程介绍">线程介绍</a><ul>
+<li><a href="#pthread_create">pthread_create</a></li>
+<li><a href="#pthread_exit">pthread_exit</a></li>
+<li><a href="#pthread_join">pthread_join</a></li>
+<li><a href="#pthread_cancel">pthread_cancel</a></li>
+<li><a href="#线程清理">线程清理</a></li>
+<li><a href="#pthread_detach">pthread_detach</a></li>
+</ul>
+</li>
+<li><a href="#线程同步">线程同步</a><ul>
+<li><a href="#互斥量mutex互斥锁">互斥量mutex互斥锁</a> </li>
+<li><a href="#读写锁rwlock">读写锁rwlock</a></li>
+<li><a href="#条件变量cond">条件变量cond</a></li>
+<li><a href="#自旋锁spin">自旋锁spin</a></li>
+<li><a href="#barrier">barrier</a></li>
+</ul>
+</li>
+<li><a href="#线程控制">线程控制</a><ul>
+<li><a href="#线程属性">线程属性</a></li>
+<li><a href="#同步属性">同步属性</a><ul>
+<li><a href="#互斥锁属性">互斥锁属性</a></li>
+<li><a href="#读写锁属性">读写锁属性</a></li>
+<li><a href="#条件变量属性">条件变量属性</a></li>
+<li><a href="#barrier属性">barrier属性</a></li>
+</ul>
+</li>
+<li><a href="#线程特定数据">线程特定数据</a></li>
+<li><a href="#线程和信号">线程和信号</a></li>
+<li><a href="#线程和fork">线程和fork</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="#进程间通信IPC">进程间通信IPC</a></p>
+<ul>
+<li><a href="#管道">管道</a><ul>
+<li><a href="#创建管道">创建管道</a></li>
+<li><a href="#读写管道规则">读写管道规则</a></li>
+<li><a href="#popen/pclose">popen/pclose</a></li>
+</ul>
+</li>
+<li><a href="#FIFO有名管道">FIFO有名管道</a><ul>
+<li><a href="#创建FIFO">创建FIFO</a></li>
+<li><a href="#打开FIFO">打开FIFO</a></li>
+<li><a href="#读写FIFO">读写FIFO</a></li>
+</ul>
+</li>
+<li><a href="#XSI-IPC">XSI-IPC</a><ul>
+<li><a href="#XSI-IPC介绍">XSI-IPC介绍</a> <ul>
+<li><a href="#标识符和键">标识符和键</a></li>
+<li><a href="#权限和结构">权限和结构</a></li>
+<li><a href="#优缺点">优缺点</a></li>
+</ul>
+</li>
+<li><a href="#消息队列">消息队列</a><ul>
+<li><a href="#创建/打开消息队列">创建/打开消息队列</a></li>
+<li><a href="#添加到队列">添加到队列</a></li>
+<li><a href="#获取消息">获取消息</a></li>
+<li><a href="#操作消息队列">操作消息队列</a></li>
+</ul>
+</li>
+<li><a href="#信号量">信号量</a></li>
+<li><a href="#共享存储">共享存储</a></li>
+</ul>
+</li>
+<li><a href="#POSIX信号量">POSIX信号量</a><ul>
+<li><a href="#创建/获取信号量">创建/获取信号量</a></li>
+<li><a href="#关闭信号量">关闭信号量</a></li>
+<li><a href="#销毁信号量">销毁信号量</a></li>
+<li><a href="#信号量操作">信号量操作</a></li>
+<li><a href="#未命名信号量">未命名信号量</a></li>
+</ul>
+</li>
+<li><a href="#套接字">套接字</a> </li>
+</ul>
+</li>
+</ul>
+<p>在线markdown版本：<a href="https://github.com/cracker8090/personal_books/blob/master/linux_C/Unix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8Bnote.md" target="_blank" rel="noopener">Unix环境高级编程note</a> </p>
+<h1 id="C语言"><a href="#C语言" class="headerlink" title="C语言"></a>C语言</h1><ul>
+<li>void * malloc(size_t n); 未初始化的，memset初始化</li>
+<li>void free(void * p); 只是释放指针指向的内容 野指针，null</li>
+<li>void *calloc(size_t n, size_t size); 初始化为0，适合为数组申请空间</li>
+<li>void * realloc(void * p, size_t n); 将指针 p指向的内存块的大小改变为n字节，可能新地址</li>
+</ul>
+<h1 id="高级I-O"><a href="#高级I-O" class="headerlink" title="高级I/O"></a>高级I/O</h1><h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="进程介绍"><a href="#进程介绍" class="headerlink" title="进程介绍"></a>进程介绍</h2><p>fork函数创建子进程，通常情况用来执行另一个程序的，如果是执行同一个进程那么多数采用线程。</p>
+<p>vfork 和fork 之间的另一个区别是：vfork 保证子进程先运行，在她调用exec 或exit 之后父进程才可能被调度运行。如果在调用这两个函数之前子进程依赖于父进程的进一步动作，则会导致死锁。</p>
+<p>当子进程退出时，系统不会立即删除该子进程的进程描述符，并将进程状态设置为Z（zombie），然后等待父进程处理子进程的退出。如果父进程不处理，那么子进程就会一直处于僵尸状态。</p>
+<p>父进程处理子进程使用wait函数族。当使用wait函数处理完子进程的终止状态后，子进程才彻底的消失了，在次调用wait函数处理该子进程将会出错。</p>
+<p>在使用wait函数时，一般等待三种进程的退出</p>
+<ul>
+<li>等待任意一子进程退出</li>
+<li>等待具体的某个子进程退出</li>
+<li>等待某个进程组的任意一子进程退出</li>
+</ul>
+<p>一般情况下wait函数的目的就是取出子进程的终止状态，但是通过设置一些选项，我们可以控制wait的一些行为，比如非阻塞式的，只查看是否有子进程退出，而不取出该子进程的终止状态等。</p>
+<p>wait阻塞、waitpid不阻塞</p>
+<p>popen、system函数（调用了fork、exec、waitpid，三种返回值）</p>
+<p>system()来执行一个shell命令，popen()也是执行shell命令并且通过管道和shell命令进行通信。</p>
+<p>system在执行期间调用进程会一直等待shell命令执行完成(waitpid等待子进程结束)才返回，但是popen无须等待shell命令执行完成就返回了。我们可以理解system为串行执行，在执行期间调用进程放弃了”控制权”，popen为并行执行。如果你没有在调用popen后调用pclose那么这个子进程就可能变成”僵尸”。</p>
+<h2 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h2><ul>
+<li>一般在系统启动时装入，仅在系统关闭时终止。大多数守护进程以超级用户特权运行。</li>
+<li>用户层守护进程的父进程是 init 进程。</li>
+<li>所有的守护进程都没有控制终端，其终端名设置为问号。<ul>
+<li>内核守护进程以无控制终端方式启动。</li>
+<li>用户层守护进程可以通过调用 setsid 实现。</li>
+</ul>
+</li>
+</ul>
+<p>守护进程是没有控制终端的，无法将自己的消息输出到标准输出或标准错误上，需要一个集中的守护进程记录设施，即 syslog。</p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/deamon_syslog.png" alt=""> </p>
+<p>主要有 3 中产生日志消息的方式：</p>
+<p>1.内核例程调用 log 函数<br>2.大多数用户进程调用 syslog 函数<br>3.将日志消息发送到 UDP 的 514 端口</p>
+<p>syslogd 守护进程接收这些日志消息，在其启动前会读取配置文件（/etc/syslog.conf），以决定各类消息的处理方式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;syslog.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">openlog</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *ident, <span class="keyword">int</span> option, <span class="keyword">int</span> facility)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">syslog</span><span class="params">(<span class="keyword">int</span> priority, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">closelog</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="comment">// Returns: previous log priority mask value</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setlogmask</span><span class="params">(<span class="keyword">int</span> maskpri)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>注：在没有调用 openlog 的情况下，先调用了 syslog，会自动调用 openlog。</p>
+<p>ident 参数指向的字符串会被加到日志消息中去，因此一般指定为程序名称。</p>
+<p>option 参数指定各种选项的位屏蔽</p>
+<p>facility 参数可选值见图</p>
+<p>priority 参数包含 facility 和 level 的组合，如果参数中没有指定 facility，则会使用 openlog 中指定的 facility，如果没有调用 openlog，那么会使用默认值 LOG_USER。</p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/openlog_option.png" alt=""> </p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/openlog_facility.png" alt=""> </p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/syslog_level.png" alt="">  </p>
+<p>守护进程编程规则</p>
+<p>1.调用 umask 函数将文件模式创建屏蔽字设置为指定值（通常为 0）。守护进程可能需要创建一些文件，如果使用继承的屏蔽字，可能文件的权限会不符合预期。</p>
+<p>2.调用 fork 后，使父进程 exit。这样可以保证子进程不是进程组的组长进程。</p>
+<p>3.调用 setsid 创建新会话。这可以保证当前进程没有控制终端，且成为新会话的首进程和新进程组的组长进程。</p>
+<p>4.将当前工作目录改为根目录或某个指定位置。</p>
+<p>5.关闭不再需要的文件描述符。可以使用 getrlimit 函数获取最高文件描述符值，并关闭直到该值的所有描述符。</p>
+<p>6.某些守护进程将文件描述符 0、1 和 2 指向 /dev/null，这样任何需要输入输出的库例程都不会产生影响。</p>
+<p>单实例守护进程</p>
+<p>某些守护进程在同一时刻只能运行一个实例程序，这时候可以使用文件和记录锁（简称文件锁）来实现这个功能。</p>
+<p>守护进程只要创建一个固定名字的文件（一般在 /var/run 目录中），并在该文件整体上加一把写锁，那么此后其他的守护进程如果想要给该文件加锁就会失败，也就不应该继续运行。在守护进程终止时，锁会被自动删除，简化了复原过程。</p>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><h2 id="线程介绍"><a href="#线程介绍" class="headerlink" title="线程介绍"></a>线程介绍</h2><p>线程包含了表示进程内执行环境的必须信息，其中包含进程中表示线程的线程ID，一组寄存器值，栈，调度优先级和策略。信号屏蔽字，errno值以及线程私有数据。</p>
+<p><strong>进程的所有信息对该进程的所有线程都是共享的，包括可执行的程序文本，程序的全局内存和堆内存，栈以及文件描述符。</strong> </p>
+<ul>
+<li>线程标识</li>
+</ul>
+<p>就像每一个进程都有一个进程ID一样，每一个线程也有一个线程ID，进程ID在整个系统中是唯一的，但线程ID不同，线程ID只在它所属的进程环境中有效。线程ID用pthread_t数据类型来表示，（Linux使用无符号长整数表示pthread_t结构）。实现的时候可以用一个结构来代表pthread_t数据类型，所以可移植的系统不能把它当做整数来处理，因此必须使用函数来对两个线程ID进行比较。</p>
+<p><strong>线程可以通过pthread_self函数获取自身的线程ID</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_equal</span><span class="params">(<span class="keyword">pthread_t</span> tid1,<span class="keyword">pthread_t</span> tid2)</span></span>; <span class="comment">//返回0表示相等</span></span><br><span class="line"><span class="function"><span class="keyword">pthread_t</span> <span class="title">pthread_self</span><span class="params">(<span class="keyword">void</span>)</span> <span class="comment">//返回线程的线程ID</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pthread-create"><a href="#pthread-create" class="headerlink" title="pthread_create"></a>pthread_create</h3><p>线程创建</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">pthread_t</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span>  *tidp,<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,<span class="keyword">void</span> *(*start_rtn)(<span class="keyword">void</span>),<span class="keyword">void</span> * arg)</span><span class="comment">//若成功返回0，否则返回错误编号</span></span></span><br></pre></td></tr></table></figure>
+
+<p>新创建的线程的线程 ID 被设置成 tidp 指向的内存单元；attr 参数定制线程的不同属性；start_rtn 函数是线程开始时执行的函数，其参数可以通过 arg 进行传递。</p>
+<p>注意：新线程最好不要通过 tidp 指向的内存空间获取自己的线程 ID，因为如果新线程在主线程调用 pthread_create 返回前就运行了，那么它看到的就是未经初始化的内容，很可能并不是正确的线程 ID。可以使用 pthread_self 函数获取自己的线程 ID。</p>
+<h3 id="pthread-exit"><a href="#pthread-exit" class="headerlink" title="pthread_exit"></a>pthread_exit</h3><ul>
+<li>线程退出</li>
+</ul>
+<p>如果进程中某一个线程调用了exit，_exit或者_Exit，那么整个进程就会终止。类似的，如果信号的默认动作是终止进程，那么把该信号发送到某个线程，整个进程都会终止。</p>
+<p>单个线程可以有三种方式退出：<br>1.直接从启动实例中返回，返回值是线程退出码</p>
+<p>2.被同一进程的其他线程取消</p>
+<p>3.调用 pthread_exit</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_exit</span><span class="params">(<span class="keyword">void</span> *rval_ptr)</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pthread-join"><a href="#pthread-join" class="headerlink" title="pthread_join"></a>pthread_join</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread,<span class="keyword">void</span> ** rval_ptr)</span> <span class="comment">//成功返回0，否则返回错误码</span></span></span><br></pre></td></tr></table></figure>
+
+<p>rval_ptr是一个无类型指针，进程中的其他线程可以通过调用pthread_join函数访问到这个指针</p>
+<p>调用 pthread_join 的线程会一直阻塞，直到指定的线程终止。如果指定的线程直接返回或者是调用 pthread_exit 终止，则可以通过 rval_ptr 查看其返回值；如果线程是被取消的，则 rval_ptr 被设置为 PTHRERAD_CANCELED。</p>
+<p><strong>如果线程已经处于分离状态，那么，pthread_join调用就会失败。</strong></p>
+<p><strong>pthread_create和pthread_exit函数的无类型指针参数能传递的数值不止一个，该指针可以传递更复杂信息的结构地址，但是注意这个结构所使用的内存，在调用者完成调用以后必须仍然是有效的，否则就会出现无效或者非法内存访问。例如在调用线程的栈上分配了该结构，那么其他线程在使用这个结构时内存可能就已经改变了。（可以使用全局栈结构malloc调用分配结构）。</strong> </p>
+<h3 id="pthread-cancel"><a href="#pthread-cancel" class="headerlink" title="pthread_cancel"></a>pthread_cancel</h3><ul>
+<li>取消线程</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cancel</span><span class="params">(<span class="keyword">pthread_t</span> tid)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>线程可以安排退出时它调用的函数，这样的函数成为线程清理处理程序。处理程序记录在栈中，也会就是说他们的执行顺序与注册时相反。</em></strong> </p>
+<h3 id="线程清理"><a href="#线程清理" class="headerlink" title="线程清理"></a>线程清理</h3><ul>
+<li>线程清理处理程序</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_cleanup_push</span><span class="params">(<span class="keyword">void</span> (*rtn)(<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_cleanup_pop</span><span class="params">(<span class="keyword">int</span> execute)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>清理函数 rtn 只有在以下情况会执行：</p>
+<p>1.调用 pthread_exit<br>2.响应取消请求<br>3.用非零execute 参数调用 pthread_cleanup_pop（为 0 时，清理函数不会被调用）</p>
+<p>两个函数需要成对使用。</p>
+<h3 id="pthread-detach"><a href="#pthread-detach" class="headerlink" title="pthread_detach"></a>pthread_detach</h3><ul>
+<li>线程分离</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> tid)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，线程的终止状态会保留，直到调用 pthread_join。如果线程被分离，则资源会在线程终止后被立即收回。</p>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><h3 id="互斥量mutex互斥锁"><a href="#互斥量mutex互斥锁" class="headerlink" title="互斥量mutex互斥锁"></a>互斥量mutex互斥锁</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex,<span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_destroy</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_trylock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>互斥变量为 pthread_mutex_t 类型，如果使用静态分配方式，可以直接使用 PTHREAD_MUTEX_INITIALIZER 进行初始化。对于动态分配的互斥量，在释放内存前需要调用 pthread_mutex_destroy。</p>
+<ul>
+<li>带有超时的互斥锁</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_timedlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex,<span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果不希望线程在访问加锁的互斥量时无限等待，可以通过 pthread_mutex_timedlock 指定等待的绝对时间。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> err;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">tout</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tm</span> *<span class="title">tmp</span>;</span></span><br><span class="line">  <span class="keyword">char</span> buf[<span class="number">64</span>];</span><br><span class="line">  <span class="keyword">pthread_mutex_t</span> lock = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加锁</span></span><br><span class="line">  pthread_mutex_lock(&amp;lock);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"mutex is locked.\n"</span>);</span><br><span class="line">  clock_gettime(CLOCK_REALTIME, &amp;tout);</span><br><span class="line">  tmp = localtime(&amp;tout.tv_sec);</span><br><span class="line">  strftime(buf, <span class="keyword">sizeof</span>(buf), <span class="string">"%r"</span>, tmp);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"current time is %s\n"</span>, buf);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置超时</span></span><br><span class="line">  tout.tv_sec += <span class="number">10</span>;</span><br><span class="line">  err = pthread_mutex_timedlock(&amp;lock, &amp;tout);</span><br><span class="line">  clock_gettime(CLOCK_REALTIME, &amp;tout);</span><br><span class="line">  tmp = localtime(&amp;tout.tv_sec);</span><br><span class="line">  strftime(buf, <span class="keyword">sizeof</span>(buf), <span class="string">"%r"</span>, tmp);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"the time is now %s\n"</span>, buf);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(err == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"mutex locked.\n"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"can't lock mutex:%s\n"</span>,strerror(err));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="读写锁rwlock"><a href="#读写锁rwlock" class="headerlink" title="读写锁rwlock"></a>读写锁rwlock</h3><p>读写锁有 3 中状态：不加锁、读模式加锁和写模式加锁。一次只有一个线程可以占有写模式的读写锁，但是多个线程可以同时占有读模式的读写锁。</p>
+<p>读写锁适合对数据结构读的次数远大于写的情况。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_init</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *<span class="keyword">restrict</span> rwlock,</span></span></span><br><span class="line"><span class="function"><span class="params">                      <span class="keyword">const</span> <span class="keyword">pthread_rwlockattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_destroy</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_rdlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>; <span class="comment">// 读模式锁定</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_wrlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>; <span class="comment">// 写模式锁定</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_unlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_tryrdlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_trywrlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *rwlock)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 带有超时读写锁</span></span><br><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_timedrdlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *<span class="keyword">restrict</span> rwlock,<span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlock_timedwrlock</span><span class="params">(<span class="keyword">pthread_rwlock_t</span> *<span class="keyword">restrict</span> rwlock,<span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="条件变量cond"><a href="#条件变量cond" class="headerlink" title="条件变量cond"></a>条件变量cond</h3><p>当线程等待的条件变量被满足后，该线程就会被唤醒。条件变量需要和互斥量配合使用，条件本身是由互斥量保护的。</p>
+<p>在使用条件变量之前，必须对其进行初始化（有静态和动态 2 种方式）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_init</span><span class="params">(<span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,<span class="keyword">const</span> <span class="keyword">pthread_condattr_t</span> *<span class="keyword">restrict</span> attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_destroy</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,<span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_timedwait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *<span class="keyword">restrict</span> cond,<span class="keyword">pthread_mutex_t</span> *<span class="keyword">restrict</span> mutex,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_signal</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>;    <span class="comment">// 至少唤醒一个</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_broadcast</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>; <span class="comment">// 全部唤醒</span></span><br></pre></td></tr></table></figure>
+
+<p>pthread_cond_wait 操作主要执行如下操作步骤</p>
+<blockquote>
+<ol>
+<li>解锁互斥量 mutex</li>
+<li>阻塞调用线程，直至另一线程就条件变量 cond 发出信号</li>
+<li>重新锁定 mutex</li>
+</ol>
+</blockquote>
+<p>在使用 pthread_cond_wait 函数之前，应该已经取得 mutex 锁。对 pthread_cond_wait 的调用应该放在 while 循环中，因为从 wait 函数返回时，并不能确定条件已经得到满足（其他线程先醒来、虚假唤醒等），需要重新对条件进行判断。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 消费者进程</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">process_msg</span><span class="params">(<span class="keyword">void</span> *arg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    pthread_mutex_lock(&amp;qlock);</span><br><span class="line">    <span class="keyword">while</span> (count &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%s wait msg\n"</span>, tag);</span><br><span class="line">      pthread_cond_wait(&amp;qready, &amp;qlock);</span><br><span class="line">    &#125;</span><br><span class="line">    count--;</span><br><span class="line">    pthread_mutex_unlock(&amp;qlock);</span><br><span class="line">    <span class="comment">/* 处理消息 */</span></span><br><span class="line">    <span class="comment">// 放弃cpu，让另一个处理进场有机会得到数据</span></span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 生产者进程</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    pthread_mutex_lock(&amp;qlock);</span><br><span class="line">    count += <span class="number">4</span>;</span><br><span class="line">    pthread_mutex_unlock(&amp;qlock);</span><br><span class="line">    <span class="comment">// 测试两种唤醒方式</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 1</span></span><br><span class="line">    pthread_cond_broadcast(&amp;qready);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    pthread_cond_signal(&amp;qready);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="comment">// 保证两个消费者进程都可以有时间处理数据</span></span><br><span class="line">    sleep(<span class="number">3</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自旋锁spin"><a href="#自旋锁spin" class="headerlink" title="自旋锁spin"></a>自旋锁spin</h3><p>自旋锁与互斥量大体类似，主要的不同之处在于自旋锁在获取锁之前会一直忙等。因此，使用自旋锁应该保证持有锁的时间很短。</p>
+<p>自旋锁和互斥量的接口类似</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_init</span><span class="params">(<span class="keyword">pthread_spinlock_t</span> *lock, <span class="keyword">int</span> pshared)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_destroy</span><span class="params">(<span class="keyword">pthread_spinlock_t</span> *lock)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_lock</span><span class="params">(<span class="keyword">pthread_spinlock_t</span> *lock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_trylock</span><span class="params">(<span class="keyword">pthread_spinlock_t</span> *lock)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_spin_unlock</span><span class="params">(<span class="keyword">pthread_spinlock_t</span> *lock)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>pshared 表示进程共享（process-shared）属性，表明自旋锁的获取方式。它仅在支持线程进程共享同步（Thread Process-Shared Synchronization）的平台上有效，当设置为 PTHREAD_PROCESS_SHARED，则只要线程可以访问锁底层内存，即使是不同进程的线程都可以获得锁；而设置为 PTHREAD_PROCESS_PRIVATE 后，只有初始化该锁的进程内部的线程可以访问它。</p>
+<h3 id="barrier"><a href="#barrier" class="headerlink" title="barrier"></a>barrier</h3><p>屏障允许多个线程等待，直到所有合作线程满足某个点后，从该点继续执行。主线程可以将某个任务分解多个小任务交给不同的线程，等到所有线程工作完成后，主线程在此基础上继续执行。</p>
+<p>使用 8 个线程分解 800 万个数的排序工作，每个线程对其中的 100 万个数排序，最后由主线程将这些结果进行合并。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrier_init</span><span class="params">(<span class="keyword">pthread_barrier_t</span> *<span class="keyword">restrict</span> barrier,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">const</span> <span class="keyword">pthread_barrierattr_t</span> *<span class="keyword">restrict</span> attr,<span class="keyword">unsigned</span> <span class="keyword">int</span> count)</span></span>;</span><br><span class="line"><span class="comment">// 初始化函数中的 count 参数用于指定所有线程继续运行前，必须到达屏障的线程数。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrier_destroy</span><span class="params">(<span class="keyword">pthread_barrier_t</span> *barrier)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Returns: 0 or PTHREAD_BARRIER_SERIAL_THREAD if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrier_wait</span><span class="params">(<span class="keyword">pthread_barrier_t</span> *barrier)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>wait 函数表明当前线程已完成工作，准备等待其他线程。当线程调用该函数后满足屏障计数，那么函数的返回值为 PTHREAD_BARRIER_SERIAL_THREAD，其余线程该函数返回值为 0。这一特点使得可以很容易的将一个线程作为主线程，它可以工作在其他所有线程已完成的工作结果上。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"apue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_barrier_t</span> pb;</span><br><span class="line"><span class="keyword">pthread_t</span> t1, t2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">th1</span><span class="params">(<span class="keyword">void</span> *a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"start t1\n"</span>);</span><br><span class="line">  sleep(<span class="number">1</span>);</span><br><span class="line">  <span class="comment">// 最后一个完成的线程，返回值应该为-1</span></span><br><span class="line">  <span class="keyword">int</span> r = pthread_barrier_wait(&amp;pb);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"th1  r:%d\n"</span>, r);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">th2</span><span class="params">(<span class="keyword">void</span> *a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"start t2\n"</span>);</span><br><span class="line">  <span class="keyword">int</span> r = pthread_barrier_wait(&amp;pb);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"th2  r:%d\n"</span>, r);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> r;</span><br><span class="line">  pthread_barrier_init(&amp;pb, <span class="literal">NULL</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">  pthread_create(&amp;t1, <span class="literal">NULL</span>, th1, <span class="literal">NULL</span>);</span><br><span class="line">  pthread_create(&amp;t2, <span class="literal">NULL</span>, th2, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">  r = pthread_barrier_wait(&amp;pb);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"main r:%d\n"</span>, r);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 等待子进程结束</span></span><br><span class="line">  pthread_join(t1, <span class="literal">NULL</span>);</span><br><span class="line">  pthread_join(t2, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程控制"><a href="#线程控制" class="headerlink" title="线程控制"></a>线程控制</h2><p>线程属性和同步原语属性，基于进程的系统调用如何与线程进行交互。</p>
+<p>管理这些属性的函数大概有以下几类：</p>
+<p>1.初始化函数，负责给属性设置为默认值<br>2.销毁函数，负责释放初始化函数分配的资源<br>3.获取属性值的函数<br>4.设置属性值的函数</p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/thread_limit.png" alt=""></p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/thread_limit2.png" alt=""> </p>
+<h3 id="线程属性"><a href="#线程属性" class="headerlink" title="线程属性"></a>线程属性</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 初始化和销毁</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_init</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_destroy</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr)</span></span>;</span><br><span class="line"><span class="comment">// destroy 函数除了释放资源外，还会用无效的值初始化属性对象，这样当线程创建函数误用该对象时，会返回错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 分离状态属性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getdetachstate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *<span class="keyword">restrict</span> attr,<span class="keyword">int</span> *detachstate)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setdetachstate</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr, <span class="keyword">int</span> detachstate)</span></span>;</span><br><span class="line"><span class="comment">// 该状态可以设置成 PTHREAD_CREATE_DETACHED 或 PTHREAD_CREATE_JOINABLE，分别表示以分离状态或正常方式启动线程。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 线程栈的相关属性 stackaddr 参数指定的是栈的最低内存地址</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getstack</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                  <span class="keyword">void</span> **<span class="keyword">restrict</span> stackaddr,<span class="keyword">size_t</span> *<span class="keyword">restrict</span> stacksize)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setstack</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr,<span class="keyword">void</span> *stackaddr, <span class="keyword">size_t</span> stacksize)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 如果不想手动设定栈地址，可以通过下面的函数来仅指定栈大小。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getstacksize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="keyword">size_t</span> *<span class="keyword">restrict</span> stacksize)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setstacksize</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr, <span class="keyword">size_t</span> stacksize)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// guardsize 控制线程栈末尾之后用以避免栈溢出的扩展内存的大小。当此值设置为 0 或者修改了线程属性 stackaddr 后，系统不会提供警戒缓冲区。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_getguardsize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="keyword">size_t</span> *<span class="keyword">restrict</span> guardsize)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_setguardsize</span><span class="params">(<span class="keyword">pthread_attr_t</span> *attr, <span class="keyword">size_t</span> guardsize)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="同步属性"><a href="#同步属性" class="headerlink" title="同步属性"></a>同步属性</h3><h4 id="互斥锁属性"><a href="#互斥锁属性" class="headerlink" title="互斥锁属性"></a>互斥锁属性</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// mutex属性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_init</span><span class="params">(<span class="keyword">pthread_mutexattr_t</span> *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_destroy</span><span class="params">(<span class="keyword">pthread_mutexattr_t</span> *attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 进程共享属性（process-shared）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_getpshared</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *</span></span></span><br><span class="line"><span class="function"><span class="params">                           <span class="keyword">restrict</span> attr, <span class="keyword">int</span> *<span class="keyword">restrict</span> pshared)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_setpshared</span><span class="params">(<span class="keyword">pthread_mutexattr_t</span> *attr,<span class="keyword">int</span> pshared)</span></span>;</span><br><span class="line"><span class="comment">// 默认情况下，仅相同进程的线程可以访问同一个同步对象（PTHREAD_PROCESS_PRIVATE），但是在某些情况下，需要多个进程访问同一个同步对象，这时候可以将属性设置为 THREAD_PROCESS_SHARED</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 健壮属性（robust）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_getrobust</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">int</span> *<span class="keyword">restrict</span> robust)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_setrobust</span><span class="params">(<span class="keyword">pthread_mutexattr_t</span> *attr, <span class="keyword">int</span> robust)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_consistent</span><span class="params">(<span class="keyword">pthread_mutex_t</span> * mutex)</span></span>;</span><br><span class="line"><span class="comment">// 当某个线程在终止时没有释放持有的锁，那么当其他线程尝试获取该锁时，会发生问题。如果使用默认的设置（PTHREAD_MUTEX_STALLED），则请求的线程会一直阻塞。可以通过设置为 PTHREAD_MUTEX_ROBUST 解决这个问题，此时 lock 函数的返回值为 EOWNERDEAD</span></span><br><span class="line"><span class="comment">// 如果线程加锁时发现返回值为 EOWNERDEAD，那么在解锁前需要调用 consistent 函数，声明互斥量的一致性（与该互斥量相关的状态在互斥量解锁之前是一致的）。如果没有调用 consistent 函数就解锁，那么互斥量将不再可用，其他线程调用 lock 函数会返回 ENOTRECOVERABLE。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 类型属性（type） 控制互斥量的锁定特性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_gettype</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">int</span> *<span class="keyword">restrict</span> type)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutexattr_settype</span><span class="params">(<span class="keyword">pthread_mutexattr_t</span> *attr, <span class="keyword">int</span> type)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>PTHREAD_MUTEX_NORMAL ：标准互斥量，不进行错误检查或死锁检测。<br>PTHREAD_MUTEX_ERRORCHECK ：提供错误检查<br>PTHREAD_MUTEX_RECURSIVE ：允许同一线程在解锁前多次加锁。<br>PTHREAD_MUTEX_DEFAULT ：提供默认的特性和行为，操作系统可以将其映射为其他类型。</p>
+<p>Mutex type    Relock without unlock?    Unlock when not owned?    Unlock when unlocked?<br>PTHREAD_MUTEX_NORMAL    deadlock    undefined    undefined<br>PTHREAD_MUTEX_ERRORCHECK    returns error    returns error    returns error<br>PTHREAD_MUTEX_RECURSIVE    allowed    returns error    returns error<br>PTHREAD_MUTEX_DEFAULT    undefined    undefined    undefined</p>
+<h4 id="读写锁属性"><a href="#读写锁属性" class="headerlink" title="读写锁属性"></a>读写锁属性</h4><p>读写锁非常适合于对数据结构读的次数远大于写的情况</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 读写锁仅支持进程共享属性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlockattr_init</span><span class="params">(<span class="keyword">pthread_rwlockattr_t</span> *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlockattr_destroy</span><span class="params">(<span class="keyword">pthread_rwlockattr_t</span> *attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlockattr_getpshared</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_rwlockattr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">int</span> *<span class="keyword">restrict</span> pshared)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_rwlockattr_setpshared</span><span class="params">(<span class="keyword">pthread_rwlockattr_t</span> *attr,<span class="keyword">int</span> pshared)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="条件变量属性"><a href="#条件变量属性" class="headerlink" title="条件变量属性"></a>条件变量属性</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 支持进程共享属性和时钟属性 时钟属性用于控制 pthread_cond_timedwait 函数使用哪个系统时钟</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_condattr_init</span><span class="params">(<span class="keyword">pthread_condattr_t</span> *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_condattr_destroy</span><span class="params">(<span class="keyword">pthread_condattr_t</span> *attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_condattr_getpshared</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_condattr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">int</span> *<span class="keyword">restrict</span> pshared)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_condattr_setpshared</span><span class="params">(<span class="keyword">pthread_condattr_t</span> *attr, <span class="keyword">int</span> pshared)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_condattr_getclock</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_condattr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                            <span class="keyword">clockid_t</span> *<span class="keyword">restrict</span> clock_id)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_condattr_setclock</span><span class="params">(<span class="keyword">pthread_condattr_t</span> *attr,<span class="keyword">clockid_t</span> clock_id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="barrier属性"><a href="#barrier属性" class="headerlink" title="barrier属性"></a>barrier属性</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// All return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 只有进程共享属性</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrierattr_init</span><span class="params">(<span class="keyword">pthread_barrierattr_t</span> *attr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrierattr_destroy</span><span class="params">(<span class="keyword">pthread_barrierattr_t</span> *attr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrierattr_getpshared</span><span class="params">(<span class="keyword">const</span> <span class="keyword">pthread_barrierattr_t</span> *<span class="keyword">restrict</span> attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                                 <span class="keyword">int</span> *<span class="keyword">restrict</span> pshared)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_barrierattr_setpshared</span><span class="params">(<span class="keyword">pthread_barrierattr_t</span> *attr, <span class="keyword">int</span> pshared)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程特定数据"><a href="#线程特定数据" class="headerlink" title="线程特定数据"></a>线程特定数据</h3><p>线程模型促进了进程中数据和属性的共享，但是在部分场景下，我们又希望线程的部分数据可以是私有的。</p>
+<p>一个进程中的所有线程都可以访问进程的整个地址空间，因此线程没有办法阻止另一个线程访问它的数据（除非使用寄存器），即使是接下来介绍的线程特定数据（thread-specific data）机制，也不能做到这一点。但是通过这种机制，可以提高线程间的独立性，使得线程不太容易访问到其他线程的线程特定数据。</p>
+<p>每个线程通过 <strong>键（key）</strong> 来访问线程特定数据，键在进程中被所有线程使用，每个线程把自己的线程特定数据和键关联起来。这样，通过同一个键，每个线程可以管理与自己关联的数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Both return: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_key_create</span><span class="params">(<span class="keyword">pthread_key_t</span> *keyp, <span class="keyword">void</span> (*destructor)(<span class="keyword">void</span> *))</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_key_delete</span><span class="params">(<span class="keyword">pthread_key_t</span> key)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>创建新键时，每个线程的数据地址为空。同时，在创建的时候可以指定一个析构函数，当线程退出时，如果数据地址不为空，则会调用这个析构函数（参数是数据地址）。</p>
+<p>所有的线程都可以调用删除函数来取消键与数据之间的关联，但是这不会触发析构函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: thread-specific data value or NULL if no value has been associated with the key</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">pthread_getspecific</span><span class="params">(<span class="keyword">pthread_key_t</span> key)</span></span>;</span><br><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_setspecific</span><span class="params">(<span class="keyword">pthread_key_t</span> key, <span class="keyword">const</span> <span class="keyword">void</span> *value)</span></span>;</span><br><span class="line"><span class="comment">// 可以通过 get 函数的返回值来确定是否需要调用 set 函数。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取消选项</li>
+</ul>
+<p>有 2 个额外的线程属性并没有包含在上述的 pthread_attr_t 中，它们分别是可取消状态和可取消类型。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 可以设置成 PTHREAD_CANCEL_ENABLE 或 PTHREAD_CANCEL_DISABLE</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_setcancelstate</span><span class="params">(<span class="keyword">int</span> state, <span class="keyword">int</span> *oldstate)</span></span>;</span><br><span class="line"><span class="comment">// set 函数把当前的可取消状态设置为 state，同时将原来的状态通过 oldstate 返回</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以使用 pthread_testcancel 函数手动添加取消点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pthread_testcancel</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果将状态设置为 PTHREAD_CANCEL_DISABLE，那么调用 pthread_cancle 函数并不会杀死线程，取消请求会一直处于挂起状态，直到状态被设置为 ENABLE。同理，此时调用 pthread_testcancel 没有任何效果。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 可以设置成 PTHREAD_CANCEL_DEFERRED 或 PTHREAD_CANCEL_ASYNCHRONOUS</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_setcanceltype</span><span class="params">(<span class="keyword">int</span> type, <span class="keyword">int</span> *oldtype)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>默认设置为 PTHREAD_CANCEL_DEFERRED，即推迟取消，线程到达取消点之前不会被真正取消。如果设置为 PTHREAD_CANCEL_ASYNCHRONOUS，即异步取消，那么线程可以在任意时间撤销，而不必等待到达取消点</p>
+<h3 id="线程和信号"><a href="#线程和信号" class="headerlink" title="线程和信号"></a>线程和信号</h3><p>每个线程有自己的信号屏蔽字，通过 pthread_sigmask 函数进行设置，参数与 sigprocmask 类似</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 需要注意的是，如果在主线程中屏蔽了一些信号，那么被创建的线程会继承当前的信号屏蔽字</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_sigmask</span><span class="params">(<span class="keyword">int</span> how, <span class="keyword">const</span> <span class="keyword">sigset_t</span> *<span class="keyword">restrict</span> <span class="built_in">set</span>,<span class="keyword">sigset_t</span> *<span class="keyword">restrict</span> oset)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sigwait</span><span class="params">(<span class="keyword">const</span> <span class="keyword">sigset_t</span> *<span class="keyword">restrict</span> <span class="built_in">set</span>, <span class="keyword">int</span> *<span class="keyword">restrict</span> signop)</span></span>;</span><br><span class="line"><span class="comment">// 线程可以通过 sigwait 函数等待一个或多个信号出现。如果多个线程通过该函数等待信号，则在传递信号的时候，只有一个线程可以从该函数返回。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="comment">// 可以调用 pthread_kill 函数将信号发送给指定的线程（需属于同一进程）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_kill</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">int</span> signo)</span></span>;</span><br><span class="line"><span class="comment">// 如果传递给 signo 的值是 0，则可以用来检测线程是否存在。如果接收信号的线程没有对应的处理函数，则该信号会发送给主线程</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> err;</span><br><span class="line">  <span class="keyword">sigset_t</span> mask, old;</span><br><span class="line">  <span class="keyword">pthread_t</span> pt1, pt2;</span><br><span class="line"></span><br><span class="line">  sigemptyset(&amp;mask);</span><br><span class="line">  sigaddset(&amp;mask, SIGQUIT); <span class="comment">/* 如果不屏蔽QUIT信号，则主线程会收到该信号 */</span></span><br><span class="line">  sigaddset(&amp;mask, SIGINT);</span><br><span class="line">  err = pthread_sigmask(SIG_BLOCK, &amp;mask, &amp;old);</span><br><span class="line">  assert(err == <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  signal(SIGQUIT, main_q); <span class="comment">/* QUIT信号处理函数 */</span></span><br><span class="line"></span><br><span class="line">  err = pthread_create(&amp;pt1, <span class="literal">NULL</span>, th1, <span class="literal">NULL</span>);</span><br><span class="line">  assert(err == <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  sleep(<span class="number">1</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"main:send QUIT signal.\n"</span>);</span><br><span class="line">  <span class="comment">// 线程1未屏蔽QUIT信号，但没有处理程序，会返回给主线程</span></span><br><span class="line">  pthread_kill(pt1, SIGQUIT);</span><br><span class="line"></span><br><span class="line">  sleep(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 线程1</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">th1</span><span class="params">(<span class="keyword">void</span>* a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> err, signo;</span><br><span class="line">  <span class="keyword">sigset_t</span> mask;</span><br><span class="line"></span><br><span class="line">  sigemptyset(&amp;mask);</span><br><span class="line">  sigaddset(&amp;mask, SIGINT);</span><br><span class="line">  pthread_sigmask(SIG_BLOCK, &amp;mask, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    err = sigwait(&amp;mask, &amp;signo);</span><br><span class="line">    assert(err == <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">switch</span> (signo) &#123;</span><br><span class="line">      <span class="keyword">case</span> SIGINT:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\nth1:INT.\n"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\nth1:unexcepted signal %d.\n"</span>, signo);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在多线程中，一般安排专用线程处理信号，通过互斥量的保护，信号处理线程可以安全地改动数据。</p>
+<h3 id="线程和fork"><a href="#线程和fork" class="headerlink" title="线程和fork"></a>线程和fork</h3><p>线程调用 fork 时，为子进程创建了整个进程地址空间的副本，同时还继承了互斥量、读写锁和条件变量的状态。为此，子进程返回后，如果不是马上调用 exec，则需要清理锁的状态。因为子进程中只含有调用 fork 的那个线程的副本，父进程中其他占有锁的线程在子进程中不存在。</p>
+<p>要清除锁的状态，可以使用 pthread_atfork 函数建立 fork 处理程序。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns: 0 if OK, error number on failure</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_atfork</span><span class="params">(<span class="keyword">void</span> (*<span class="built_in">prepare</span>)(<span class="keyword">void</span>), <span class="keyword">void</span> (*parent)(<span class="keyword">void</span>),<span class="keyword">void</span> (*child)(<span class="keyword">void</span>))</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>prepare 由父进程在 fork 创建子进程前调用。任务是获取父进程定义的所有锁。<br>parent 在 fork 创建子进程后、返回之前在父进程上下文中调用。任务是对获取的所有锁进行解锁。<br>child 在 fork 返回前在子进程上下文中调用。任务是释放所有的锁。</p>
+<p>可以多次调用该函数以设置多套 fork 处理程序。对于不需要的某个处理程序，可以传入空指针。多次调用时，parent 和 child 以注册时的顺序执行，而 prepare 的执行顺序与注册时相反。</p>
+<h1 id="进程间通信IPC"><a href="#进程间通信IPC" class="headerlink" title="进程间通信IPC"></a>进程间通信IPC</h1><p>管道pipe-半双工（高级管道popen、有名管道FIFO-半双工）、消息队列、信号量（sem，用来控制多个进程对共享资源的访问，常作为一种锁机制，同步手段）、信号（signal）、共享存储（结合信号量）、套接字socket</p>
+<p>FIFO命名管道</p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>一般来说，管道是半双工的（即数据只能在一个方向上流动），并且只能在具有公共祖先的两个进程之间使用。通常，父进程创建管道后会接着调用 fork，从而利用管道在父子进程之间通信。</p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/%E5%8D%8A%E5%8F%8C%E5%B7%A5%E7%AE%A1%E9%81%93.png" alt=""> </p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/fork-%E5%8D%8A%E5%8F%8C%E5%B7%A5%E7%AE%A1%E9%81%93.png" alt=""></p>
+<p>父子进程可以分别关闭管道的读 / 写端，以利用管道在父子进程中传递信息。例如，如果想要创建从父进程到子进程的管道，则可以关闭父进程的读端和子进程的写端。由于管道半双工的特性，想要在父子进程间双向传递信息需要建立 2 个管道。</p>
+<h3 id="创建管道"><a href="#创建管道" class="headerlink" title="创建管道"></a>创建管道</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: 0 if OK, −1 on error</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>fd 参数返回两个文件描述符，fd[0] 为读而打开，fd[1] 为写而打开。fd[1] 的输出是 fd[0] 的输入。</p>
+<h3 id="读写管道规则"><a href="#读写管道规则" class="headerlink" title="读写管道规则"></a>读写管道规则</h3><ul>
+<li><p>当读一个写端被关闭的管道，在所有数据被读取后，read 返回 0</p>
+</li>
+<li><p>当写一个读端被关闭的管道，会产生 SIGPIPE 信号。如果忽略该信号或从信号处理程序返回，则 write 返回 - 1，且设置 errno 为 EPIPE</p>
+</li>
+<li><p>写入不超过 PIPE_ BUF 字节的操作是原子的，如果写入数据的大小超过该值，在多个进程同时写一个管道时，所写的数据可能交叉</p>
+</li>
+</ul>
+<h3 id="popen-pclose"><a href="#popen-pclose" class="headerlink" title="popen/pclose"></a>popen/pclose</h3><p>管道的通常用法是创建一个连接到另一个进程的管道，然后读取其输出或者向其输入端发送数据。可以使用 popen 和 pclose 实现这一功能。</p>
+<p>这两个函数实现的操作是：创建一个管道，fork 一个子进程，关闭未使用的管道，执行 shell 运行命令，然后等待命令终止。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: file pointer if OK, NULL on error</span></span><br><span class="line"><span class="function">FILE *<span class="title">popen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *cmdstring, <span class="keyword">const</span> <span class="keyword">char</span> *type)</span></span>;</span><br><span class="line"><span class="comment">// Returns: termination status of cmdstring, or −1 on error</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pclose</span><span class="params">(FILE *fp)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>popen 先执行 fork，然后调用 exec 执行 cmdstring，并且返回一个标准 I/O 文件指针。</p>
+<p>如果 type 是 “r”，则文件指针连接到 cmdstring 的标准输出，如果是 “w” 则连接到标准输入。cmdstring 以 sh -c cmdstring 的方式执行。pclose 函数关闭标准 I/O 流，等待命令终止，然后返回 shell 的终止状态。（注意不要使用 fclose 函数，它不会等待子进程结束）。</p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/popen.png" alt=""></p>
+<h2 id="FIFO命名管道"><a href="#FIFO命名管道" class="headerlink" title="FIFO命名管道"></a>FIFO命名管道</h2><p>管道只能用于两个进程之间线性连接，FIFO有名字，可用于非线性连接。使得不相关的进程间也能交换数据，也是一种文件类型，创建 FIFO 与创建文件类似，需要指定其路径。</p>
+<blockquote>
+<p><code>FIFO</code>是一种文件类型，通过<code>stat</code>结构的<code>st_mode</code>成员的编码可以知道文件是否是<code>FIFO</code>类型。可以用<code>S_ISFIFO</code>宏对此进行测试</p>
+</blockquote>
+<p>FIFO有以下2个<strong>用途</strong>：</p>
+<ol>
+<li>shell命令使用FIFO将数据从一条管道传送到另一条时，无需创建中间临时文件</li>
+<li>客户进程-服务器进程应用程序中，FIFO用作汇聚点（多个客户进程向服务器同一个众所周知的FIFO写），在客户进程和服务器进程二者之间传递数据</li>
+</ol>
+<h3 id="创建FIFO"><a href="#创建FIFO" class="headerlink" title="创建FIFO"></a>创建FIFO</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="comment">// Both return: 0 if OK, −1 on error</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkfifo</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">mode_t</span> mode)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkfifoat</span><span class="params">(<span class="keyword">int</span> dirfd, <span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">mode_t</span> mode)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>mkfifo：mode 参数指明 FIFO 的文件权限，与 open 函数中的 mode 相同。</p>
+</li>
+<li><p>mkfifoat：path 参数有如下几种情况：</p>
+<ul>
+<li>如果指定为绝对路径，则会忽略 dirfd 参数，行为与 mkfifo 类似</li>
+<li>如果指定为相对路径，则该路径与 dirfd 打开的目录有关</li>
+<li>如果指定为相对路径，且 dirfd 有参数 AT_FDCWD，那么路径以当前目录开始</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>应用程序可以用<code>mknod</code>和<code>mknodat</code>函数创建FIFO。因为POSIX.1原先并没有包括<code>mknod</code>函数，所以<code>mkfifo</code>是专门为POSIX.1设计的。<code>mknod</code>和<code>mknodat</code>函数现在已包括在POSIX.1的XSI扩展中</p>
+</blockquote>
+<h3 id="打开FIFO"><a href="#打开FIFO" class="headerlink" title="打开FIFO"></a>打开FIFO</h3><p>可以使用 open 打开 FIFO</p>
+<ul>
+<li>一般情况下，在打开时如果没有设置非阻塞标志 O_NONBLOCK，只读（O_RDONLY）<code>open</code>要阻塞到某个其它进程为写而打开这个FIFO为止。类似地，只写（O_ WRONL ）<code>open</code>要阻塞到某个其它进程为读而打开它为止</li>
+</ul>
+<p>但是，不应该使用 O_RDWR 的方式来绕过这种阻塞行为，而应该使用非阻塞标志。使用读写方式打开 FIFO，会导致读取数据时永远看不到文件结束，因为至少会有一个写描述符是打开着的。</p>
+<h3 id="读写FIFO"><a href="#读写FIFO" class="headerlink" title="读写FIFO"></a>读写FIFO</h3><ul>
+<li>若<code>write</code>一个尚无进程为读而打开的FIFO，则产生信号<code>SIGPIPE</code> </li>
+<li>若某个FIFO的最后一个写进程关闭了该FIFO，则将为该FIFO的读进程产生一个文件结束标志</li>
+</ul>
+<p>一个给定的FIFO有多个写进程是常见的。这意味着，如果不希望多个进程所写的数据交叉，则必须考虑原子写操作。和管道一样，常量<code>PIPE_BUF</code>说明了可被原子地写到FIFO的最大数据量。</p>
+<p><img data-src="C:%5CUsers%5Cxubei%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220617161038339.png" alt="image-20220617161038339"> </p>
+<p>使用 FIFO 进行客户进程与服务器进程之间的通信。每个客户进程可以将自己的请求写到一个公共的 FIFO 文件中（请求长度需要小于 PIPE_BUF 以避免客户进程之间的数据交叉），服务器进程针对每个客户进程创建 FIFO，用于向客户进程发送数据。客户进程的 FIFO 的路径名可以使用客户进程的 PID 号作为基础，如 /tmp/servv1.PID，这样客户进程就知道该从哪个 FIFO 读取服务器进程返回的数据了。</p>
+<h2 id="XSI-IPC"><a href="#XSI-IPC" class="headerlink" title="XSI-IPC"></a>XSI-IPC</h2><p>每个 IPC 对象与键（key）相关联，以使得多个进程可以通过它进行联系。在创建 IPC 结构时，必须指定一个键。而在系统内部，则使用标识符引用 IPC 结构。——<strong>消息队列、信号量、共享内存。</strong> </p>
+<h3 id="XSI-IPC介绍"><a href="#XSI-IPC介绍" class="headerlink" title="XSI-IPC介绍"></a>XSI-IPC介绍</h3><h4 id="标识符和键"><a href="#标识符和键" class="headerlink" title="标识符和键"></a>标识符和键</h4><p>标识符</p>
+<ul>
+<li>每个内核中的IPC结构（消息队列、信号量或共享内存）都用一个非负整数的<strong>标识符</strong>加以引用</li>
+<li>与文件描述符不同，<strong>IPC标识符</strong>不是小的整数。当一个IPC结构被创建，然后又被删除时，与这种结构相关的标识符连续加1，直至到达一个整形数的最大正值，然后又回转到0</li>
+</ul>
+<p>键</p>
+<ul>
+<li><strong>标识符是IPC对象的内部名</strong>。为使多个合作进程能够在同一IPC对象上汇聚，需要提供一个外部命名方案。为此，<strong>每个IPC对象都与一个键相关联，将这个键作为该对象的外部名</strong>（创建IPC结构时，应指定一个键）。<strong>键的类型是基本系统数据类型<code>key_t</code></strong>，通常在<code>&lt;sys/types.h&gt;</code>中被定义为长整形。这个键由内核变换成标识符。</li>
+</ul>
+<h4 id="权限和结构"><a href="#权限和结构" class="headerlink" title="权限和结构"></a>权限和结构</h4><p>每个IPC结构关联了一个<code>ipc_perm</code>结构（<code>&lt;sys/ipc.h&gt;</code>），规定了权限和所有者，至少包括以下成员</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ipc_perm</span>&#123;</span></span><br><span class="line">    <span class="keyword">uid_t</span> uid;      <span class="comment">/* 拥有者的有效用户ID */</span></span><br><span class="line">    <span class="keyword">gid_t</span> gid;      <span class="comment">/* 拥有者的有效组ID */</span></span><br><span class="line">    <span class="keyword">uid_t</span> cuid;     <span class="comment">/* 创建者的有效用户ID */</span></span><br><span class="line">    <span class="keyword">gid_t</span> cgid;     <span class="comment">/* 创建者的有效组ID */</span></span><br><span class="line">    <span class="keyword">mode_t</span> mode;    <span class="comment">/* 访问模式 */</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建IPC结构时，对所有字段都赋初值</li>
+<li>IPC结构的创建者或超级用户可以调用<code>msgctl</code>、<code>semctl</code>或<code>shmctl</code>修改<code>uid</code>、<code>gid</code>和<code>mode</code>字段。修改这些字段类似于对文件调用chown和chmod</li>
+</ul>
+<p><strong>对于任何IPC结构都不存在执行权限</strong>，消息队列和共享内存使用术语”读“和”写“，信号量则用”读“和”更改“。</p>
+<p>键的创建方式，主要有如下几种：</p>
+<ul>
+<li><p>指定为 IPC_PRIVATE，这会创建一个新的 IPC 结构，可以将返回的标识符存入文件供其他进程使用，也可直接给 fork 后的子进程使用</p>
+</li>
+<li><p>在公共头文件中定义一个键，然后由一个进程（通常是服务器进程）根据这个键来创建新的 IPC 结构。但是这种方式可能会与已经存在的键冲突，需要进程删除原有的 IPC 结构再重新创建。</p>
+</li>
+<li><p>使用 ftok 函数，将路径名和某个数字（0-255）变换为一个键。</p>
+</li>
+</ul>
+<blockquote>
+<p>key_t ftok(const char *path, int id);  // Returns: key if OK, (key_t)−1 on error</p>
+</blockquote>
+<p>path 参数必须引用的是现有的文件，id 参数只使用其低 8 位。</p>
+<p>在创建 IPC 结构时还需要指定其权限，与文件权限类似，但是不存在执行权限。</p>
+<p>注意：</p>
+<ul>
+<li>IPC_PRIVATE 只能用于创建新的 IPC 结构，而不能用来引用一个现有的 IPC 结构。</li>
+<li>如果希望确保新创建的 IPC 结构没有引用具有同一标识符的现有 IPC 结构，则可以在 flag 中同时指定 IPC_CREAT 和 IPC_EXCL。这样，如果已经存在则会返回 EEXIST。</li>
+</ul>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><ul>
+<li><p>在系统范围内起作用，没有引用计数</p>
+<ul>
+<li>如果创建一个消息队列，放入消息后终止，消息队列和内容不会删除，直到调用msgrcv或msgctl读取或删除消息队列，或者ipcrm删除消息队列或自举系统删除消息队列，</li>
+</ul>
+</li>
+<li><p>在文件系统重没有名字</p>
+<ul>
+<li>不能用ls查看IPC对象</li>
+<li>不能对它们使用多路转接I/O函数（select-poll） </li>
+</ul>
+</li>
+</ul>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>消息队列是消息的链接表，存储在内核中，由消息队列标识符标识。以下简称队列。相关的数据结构很少用到，后面的信号量和共享存储同理。</p>
+<p>结构</p>
+<p>每个队列都有一个<code>msqid_ds</code>结构与其关联，这个结构定义了队列的当前状态</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msqid_ds</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ipc_perm</span>    <span class="title">msg_perm</span>;</span></span><br><span class="line">    <span class="keyword">msgqnum_t</span>          msg_qnum;    <span class="comment">/* 队列中的消息数 */</span></span><br><span class="line">    <span class="keyword">msglen_t</span>           msg_qbytes;  <span class="comment">/* 队列中消息的字节 */</span></span><br><span class="line">    <span class="keyword">pid_t</span>              msg_lspid;   <span class="comment">/* 最后调用msgsnd()的进程ID */</span></span><br><span class="line">    <span class="keyword">pid_t</span>              msg_lrpid;   <span class="comment">/* 最后调用msgrcv()的进程ID */</span></span><br><span class="line">    <span class="keyword">time_t</span>             msg_stime;   <span class="comment">/* 最后调用msgsnd()的时间 */</span> </span><br><span class="line">    <span class="keyword">time_t</span>             msg_rtime;   <span class="comment">/* 最后调用msgrcv()的时间 */</span></span><br><span class="line">    <span class="keyword">time_t</span>             msg_ctime;   <span class="comment">/* 最后一次修改队列的时间 */</span></span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/msg%E7%B3%BB%E7%BB%9F%E9%99%90%E5%88%B6.png" alt=""></p>
+<p>最大消息队列数，消息队列最大容量，一个消息最大长度8192。</p>
+<p><a href="https://www.programminghunter.com/article/8679861259/" target="_blank" rel="noopener">linux 消息队列的限制</a> ipcs -q</p>
+<h4 id="创建-打开消息队列"><a href="#创建-打开消息队列" class="headerlink" title="创建/打开消息队列"></a>创建/打开消息队列</h4><p>msgget 用于创建或打开一个队列</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: message queue ID if OK, −1 on error</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgget</span><span class="params">(<span class="keyword">key_t</span> key, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<p>key 参数可以是通过 ftok 函数生成的，也可以是 IPC_PRIVATE。flag 用于设定读写权限，如果是新建该 IPC 结构则可以添加 IPC_CREAT。</p>
+<h4 id="添加到队列"><a href="#添加到队列" class="headerlink" title="添加到队列"></a>添加到队列</h4><p>将新消息添加到队列尾端</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  Returns: 0 if OK, −1 on error</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgsnd</span><span class="params">(<span class="keyword">int</span> msqid, <span class="keyword">const</span> <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> nbytes, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// msqid 是 get 函数返回的队列 ID，nbytes 是消息数据的长度</span></span><br><span class="line"><span class="comment">// ptr 指向一个结构，其包含一个正的消息类型，和消息数据（nbytes 为 0 则无消息数据）,可以定义其结构如下</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msgbuf</span> &#123;</span></span><br><span class="line">    <span class="keyword">long</span> mtype;       <span class="comment">/* message type, must be &gt; 0 */</span></span><br><span class="line">    <span class="keyword">char</span> mtext[<span class="number">1</span>];    <span class="comment">/* message data, of length nbytes */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>flag 可以指定为 IPC_NOWAIT，当消息队列满时（或达到系统限制），会立即出错返回 EAGAIN。</p>
+<p>否则，进程会一直阻塞直到：有空间容纳消息；队列被删除（返回 EIDRM)；或捕捉到信号并从处理程序返回（返回 EINTR）。</p>
+<h4 id="获取消息"><a href="#获取消息" class="headerlink" title="获取消息"></a>获取消息</h4><p>用于从队列中取出消息，可以指定获取某些类型的数据，而不是必须按照先进先出的次序。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">msgrcv</span><span class="params">(<span class="keyword">int</span> msqid, <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> nbytes, <span class="keyword">long</span> type, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// ptr 指向的结构与 snd 函数一样，而 nbytes 则指定了消息长度，如果返回的消息长度 &gt; nbytes，而 flag 中设置了 MSG_NOERROR，则消息被截断。如果没有设置则出错返回 E2BIG，而消息仍然留在队列中。</span></span><br></pre></td></tr></table></figure>
+
+<p>type==0：返回队列中的第一个消息</p>
+<p>type&gt;0：返回消息类型为 type 的第一个消息</p>
+<p>type&lt;0：返回消息类型≤type 绝对值的消息，如果有若干个满足则取类型最小的。</p>
+<p>flag 参数同样可以指定为非阻塞</p>
+<h4 id="操作消息队列"><a href="#操作消息队列" class="headerlink" title="操作消息队列"></a>操作消息队列</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgctl</span><span class="params">(<span class="keyword">int</span> msqid, <span class="keyword">int</span> cmd, struct msqid_ds *buf )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>对队列执行多种操作，msqid 队列ID（标识符），<code>msgget</code>的返回值</p>
+<p>cmd 参数指定队列需要执行的操作：</p>
+<ul>
+<li>IPC_STAT：获取队列的 msqid_ds 结构信息，存放于 buf 指向的结构中</li>
+<li>IPC_SET：将 msg_perm.uid，msg_perm.gid，msg_perm.mode 和 msg_qbytes 通过 buf 复制到队列的 msqid_ds 结构中。该命令只能由超级用户或者有效用户 ID 等于 msg_perm.cuid 或 msg_perm.uid 的用户执行。</li>
+<li>IPC_RMID：删除队列及其中的数据。也只能由上述的两类用户执行。</li>
+</ul>
+<p>这 3 条命令也适用与信号量（semctl）和共享存储（shmctl）。</p>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p>信号量是一个计数器，用于为多个进程提供对共享数据对象的访问。创建的时候需要指明信号量的个数，在使用的时候也要指明用的是哪个信号量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/sem.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: semaphore ID if OK, −1 on error// </span></span><br><span class="line"><span class="comment">// 创建或打开一个信号量合集 id</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semget</span><span class="params">(<span class="keyword">key_t</span> key, <span class="keyword">int</span> nsems, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// nsems 用于指定该集合中的信号量数，如果是创建新集合，则需要指定数量；如果是引用现有的集合，则将其设置为 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 包含多种信号量操作</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semctl</span><span class="params">(<span class="keyword">int</span> semid, <span class="keyword">int</span> semnum, <span class="keyword">int</span> cmd, ... <span class="comment">/* union semun arg */</span> )</span></span>;</span><br><span class="line"><span class="comment">// 第 4 个参数 arg 由 cmd 的实际值来决定是否使用，注意该参数并不是指针。如果需要使用该参数，其类型需要自己定义</span></span><br><span class="line"><span class="keyword">union</span> semun &#123;</span><br><span class="line">    <span class="keyword">int</span>              val;   <span class="comment">/* for SETVAL */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">semid_ds</span> *<span class="title">buf</span>;</span>   <span class="comment">/* for IPC_STAT and IPC_SET */</span></span><br><span class="line">    <span class="keyword">unsigned</span> short  *<span class="built_in">array</span>; <span class="comment">/* for GETALL and SETALL */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 参数 semnum 用于指定信号量集合中的某个成员，该值在 0 ~ nsmes-1 之间</span></span><br><span class="line"><span class="comment">// cmd 由如下 10 个可选项: 1.IPC_STAT，IPC_SET，IPC_RMID：与队列类似；2.GETVAL，SETVAL：返回 / 设置（通过 arg.val）semnum 指定的成员的信号量值（semval）;3.GETPID，GETNCNT，GETZCNT：返回指定成员的 sempid，semncnt，semzcnt；4.GETALL，SETALL：取 / 设置所有的信号量值（通过 arg.array）</span></span><br><span class="line"><span class="comment">// 除 GETALL 以外所有的 GET 命令都由函数的返回值返回，其他命令则是成功返回 0，失败返回 - 1 并设置 errno</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自动执行信号量集合上的操作数组</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semop</span><span class="params">(<span class="keyword">int</span> semid, struct sembuf semoparray[], <span class="keyword">size_t</span> nops)</span></span>;</span><br><span class="line"><span class="comment">// nops 是数组 semoparray 的元素个数，semoparray 是一个信号量操作数组，其中存放每个信号量的操作，其结构如下：</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sembuf</span> &#123;</span></span><br><span class="line">  <span class="keyword">unsigned</span> short sem_num; <span class="comment">/* member # in set (0, 1, ..., nsems-1) */</span></span><br><span class="line">  short          sem_op;  <span class="comment">/* operation (negative, 0, or positive) */</span></span><br><span class="line">  short          sem_flg; <span class="comment">/* IPC_NOWAIT, SEM_UNDO */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>sem_flg 的 SEM_UNDO 标志标识当进程终止时，该操作修改的信号量值会被恢复，即重新设置为调用该操作之前的数值。</p>
+<p>sem_op 可以指定如下 3 种值：</p>
+<ul>
+<li><p>正值，表示进程释放的占用的资源数，sem_op 值会加到对应的信号量的值上。</p>
+</li>
+<li><p>0，表示进程希望等待该信号量值变为 0。IPC_NOWAIT 标志可以控制进程是否阻塞，相关的出错返回信息可以查阅手册，此处省略。</p>
+</li>
+<li><p>负值，表示进程想要获取的资源数。如果信号量值≥sem_op 的绝对值（满足需求），则会从当前的信号量值上减去对应的值，否则由 IPC_NOWAIT 标志决定进程是否阻塞。<br>semop 函数具有原子性，即要么执行数组中所有的操作，要么什么也不做。</p>
+</li>
+</ul>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%B3%BB%E7%BB%9F%E9%99%90%E5%88%B6.png" alt=""> </p>
+<h3 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h3><p>共享存储允许两个或多个进程共享一个给定的存储区。但是，需要注意存储区访问的同步问题，当进程在写入数据时其他进程不应该去读取这些数据。一般使用信号量来解决这一同步问题。</p>
+<p>相比与通过文件映射的方式来共享存储区的方式，XSI 共享存储没有相关的文件，它共享的是内存的匿名段。</p>
+<blockquote>
+<p>mmap就是共享存储的一种形式，但是XSI共享存储与其区别在于，XSI共享存储没有相关文件。XSI共享存储段是内存的匿名段</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: shared memory ID if OK, −1 on error</span></span><br><span class="line"><span class="comment">// 用于创建或引用一个共享存储段</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmget</span><span class="params">(<span class="keyword">key_t</span> key, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 实现一般将大小向上取整为系统页长的整数倍，若指定的 size 不是整数倍，则余下的空间是不可使用的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  IPC_STAT，IPC_SET 和 IPC_RMID，相关解释可以参考消息队列部分</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmctl</span><span class="params">(<span class="keyword">int</span> shmid, <span class="keyword">int</span> cmd, struct shmid_ds *buf )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将共享存储段连接到进程的地址空间。具体连接到地址空间的什么位置由 2、3 两个参数决定</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">shmat</span><span class="params">(<span class="keyword">int</span> shmid, <span class="keyword">const</span> <span class="keyword">void</span> *addr, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// flag 还可以指定 SHM_RDONLY 以只读方式连接共享段</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 分离共享存储段</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmdt</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *addr)</span></span>;</span><br><span class="line"><span class="comment">// 这一操作不会删除系统中共享存储段的标识符及其数据结构。想要删除对应的数据结构，需要调用 shmctl 的 IPC_RMID 命令。</span></span><br></pre></td></tr></table></figure>
+
+<p>shmat 用于将共享存储段连接到进程的地址空间。具体连接到地址空间的什么位置由 2、3 两个参数决定。</p>
+<p>1.addr=0，则连接到内核选择的第一个可用地址上。（推荐）<br>2.addr≠0，且 flag 没有指定 SHM_RND，那么连接到 addr 指定的地址。<br>3.addr≠0，且指定了 SHM_RND，那么系统会按照公式 (addr-(addr % SHMLBA)) 决定连接地址。该公式作用是将地址向下取最近的 SHMLBA 的倍数，而常数 SHMLBA 表示 “低边界地址倍数”。<br>flag 还可以指定 SHM_RDONLY 以只读方式连接共享段。</p>
+<p><img data-src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F%E9%99%90%E5%88%B6.png" alt=""> </p>
+<h2 id="POSIX信号量"><a href="#POSIX信号量" class="headerlink" title="POSIX信号量"></a>POSIX信号量</h2><p>POSIX 信号量与 XSI 信号量最大的不同就是没有信号量集的概念，一次只能操作一个信号量。还有就是在删除信号量时，正在使用 XSI 信号量的操作会失败；而 POSIX 信号量的操作会正常执行，直到该信号量的最有一个引用被释放。</p>
+<p>POSIX 信号量有两种形式：命名的和未命名的。两者的差异在于创建和销毁的形式上，使用的方式是一样的。未命名的信号量只存在于内存中，因此想要使用这些信号量的进程需要有对应的访问权限，如同一进程中的线程，或者是不同进程中映射相同的内存内容到自己的地址空间的线程。而命名信号量可以被任何直到它们名字的进程访问。</p>
+<p>命名信号量：名字的第一个字符应该是 /。因为一般 POSIX 信号量的实现要使用文件系统；名字不应该包含其他斜杠；名字长度是实现定义的，不应长于_POSIX_NAME_MAX。</p>
+<h4 id="创建-获取信号量"><a href="#创建-获取信号量" class="headerlink" title="创建/获取信号量"></a>创建/获取信号量</h4><p>用于创建一个新的信号量或使用一个现有的信号量 oflag可为0</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;semaphore.h&gt;</span></span></span><br><span class="line"><span class="comment">// Returns: Pointer to semaphore if OK, SEM_FAILED on error</span></span><br><span class="line"><span class="function"><span class="keyword">sem_t</span> *<span class="title">sem_open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag, ... <span class="comment">/* mode_t mode,unsigned int value */</span> )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>当 oflag 包含 O_CREAT 标志时，如果信号量不存在则会创建新的，如果存在则会被使用，但不会重新初始化。指定此标志时，还需要提供后面的 2 个参数。mode 指定访问权限，这与打开文件的权限相同；value 指定信号量的初值。<br>如果 oflag 同时指定了 O_EXCL 标志，则在创建信号量时，如果信号量已经存在就会出错</p>
+<ul>
+<li>使用现有的命名信号量时，仅指定2个参数：<ul>
+<li><code>name</code>：信号量的名字</li>
+<li><code>oflag</code>：设为0</li>
+</ul>
+</li>
+<li>创建新的命名信号量<ul>
+<li><code>name</code>：信号量的名字</li>
+<li><code>oflag</code>：指定了<code>O_CREAT</code>标志。当该参数置为<code>O_CREAT|O_EXCL</code>并且信号量存在时，函数会失败</li>
+<li><code>mode</code>：谁可以访问信号量，值与<a href="https://github.com/arkingc/note/blob/master/操作系统/UNIX环境高级编程.md#21-打开文件" target="_blank" rel="noopener">open函数</a>的权限位相同</li>
+<li><code>value</code>：信号量的初始值（<code>0~SEM_VALUE_MAX</code>）</li>
+</ul>
+</li>
+</ul>
+<p><strong>为了移植性，信号量的命名应该遵循下列规则</strong>：</p>
+<ul>
+<li>名字的第一个字符应该为斜杠(<code>/</code>)</li>
+<li>名字不应该包含其他斜杠以此避免实现定义的行为</li>
+<li>信号量名字的最大长度是实现定义的，不应该鲳鱼<code>_POSIX_NAME_MAX</code>个字符长度。因为这是文件系统的实现能允许的最大名字长度的限制</li>
+</ul>
+<h4 id="关闭信号量"><a href="#关闭信号量" class="headerlink" title="关闭信号量"></a>关闭信号量</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_close</span><span class="params">(<span class="keyword">sem_t</span> *sem)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>sem_close关闭一个信号量，释放相关资源, 进程退出时如果没有调用该函数，系统也会自动关闭打开的信号量。POSIX 信号量没有 UNDO 机制，所以信号量的值不会受到影响</p>
+<h4 id="销毁信号量"><a href="#销毁信号量" class="headerlink" title="销毁信号量"></a>销毁信号量</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</span><br><span class="line"><span class="comment">// sem_unlink，</span></span><br></pre></td></tr></table></figure>
+
+<p>删除信号量的名字,如果没有打开的信号量引用，信号量会被立即销毁，否则会延迟到最后一个打开的引用关闭</p>
+<h4 id="信号量操作"><a href="#信号量操作" class="headerlink" title="信号量操作"></a>信号量操作</h4><p>与 XSI 信号量不同，POSIX 信号量一次操作只能 + 1 或者 - 1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="comment">// All return: 0 if OK, −1 on error</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_trywait</span><span class="params">(<span class="keyword">sem_t</span> *sem)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_wait</span><span class="params">(<span class="keyword">sem_t</span> *sem)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_timedwait</span><span class="params">(<span class="keyword">sem_t</span> *<span class="keyword">restrict</span> sem,<span class="keyword">const</span> struct timespec *<span class="keyword">restrict</span> tsptr)</span></span>;</span><br><span class="line"><span class="comment">// 这 3 个函数实现信号量的 - 1 操作</span></span><br><span class="line"><span class="comment">// 当信号量计数为 0 时，使用 sem_wait 函数会阻塞，直到成功使信号量 - 1 或者被信号中断；而 sem_trywait 会返回 - 1 且设置 errno 为 EAGAIN。</span></span><br><span class="line"><span class="comment">// 使用 sem_timedwait 可以设定等待时间，超时后会返回 - 1 且设置 errno 为 ETIMEOUT</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_post</span><span class="params">(<span class="keyword">sem_t</span> *sem)</span></span>;</span><br><span class="line"><span class="comment">// 使信号量计数 + 1。如果有进程被改信号量阻塞，那么进程会被唤醒。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_getvalue</span><span class="params">(<span class="keyword">sem_t</span> *<span class="keyword">restrict</span> sem, <span class="keyword">int</span> *<span class="keyword">restrict</span> valp)</span></span>;</span><br><span class="line"><span class="comment">// 获取信号量值，该数值存储在 valp 指向的地址处。注意函数返回的数值有可能是过时的</span></span><br></pre></td></tr></table></figure>
+
+<p>如果在多个进程间共享一个资源，则可使用3种技术中的一种来协调访问，可以使用映射到两个进程地址空间中的信号量、记录锁或者（共享存储中的）互斥量，（共享存储中的）互斥量更快，但是记录锁简单也快</p>
+<h4 id="未命名信号量"><a href="#未命名信号量" class="headerlink" title="未命名信号量"></a>未命名信号量</h4><p>主要用于单个进程</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个未命名信号量，value 指定其初值，pshared 值为 0 时，信号量仅在进程的线程之间共享；不为 0 则表明会在进程之间共享</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_init</span><span class="params">(<span class="keyword">sem_t</span> *sem, <span class="keyword">int</span> pshared, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_destroy</span><span class="params">(<span class="keyword">sem_t</span> *sem)</span></span>;</span><br><span class="line"><span class="comment">// 销毁未命名信号量。销毁之后不能使用任何带有 sem 的信号量函数，除非通过 sem_init 重新初始化它</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="comment">// 成功时返回一个套接字描述符，失败则返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>int domain : 用于确定网络类型</p>
+<p>int type : 用于确定协议类型</p>
+<p>int protocol : 用于消歧义，决定网络协议，通常是0</p>
+<p>参考：<a href="https://github.com/arkingc/note/blob/master/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/UNIX%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B.md" target="_blank" rel="noopener">Unix高级编程笔记</a> </p>
+<p>书籍：<a href="https://awesome-programming-books.github.io/linux/UNIX环境高级编程(第三版).pdf" target="_blank" rel="noopener">《UNIX环境高级编程(第三版)》</a> </p>
+
+    </div>
+	
+	
+    
+    
+    
+	
+
+    
+    
+    
+
+    
+      
+      
+        
+        
+      
+      
+        
+      
+      
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/c68c6756.html" rel="bookmark">python selenium自动化操作社交媒体</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2aa161a4.html" rel="bookmark">从零开始创作</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/b938b046.html" rel="bookmark">jitsi-meet安装使用</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>文章作者： </strong>hellolinux
+  </li>
+  <li class="post-copyright-link">
+    <strong>原始链接：</strong>
+    <a href="https://hellolinux.xyz/posts/e39ad6a7.html" title="unix环境高级编程note">https://hellolinux.xyz/posts/e39ad6a7.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"><i class="fa fa-tag"></i> 技术</a>
+              <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/d5fb7a8a.html" rel="prev" title="2022年罗永浩创业访谈">
+      <i class="fa fa-chevron-left"></i> 2022年罗永浩创业访谈
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/32584f8d.html" rel="next" title="每日效率提升步骤">
+      每日效率提升步骤 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C语言"><span class="nav-number">1.</span> <span class="nav-text">C语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级I-O"><span class="nav-number">2.</span> <span class="nav-text">高级I&#x2F;O</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">3.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程介绍"><span class="nav-number">3.1.</span> <span class="nav-text">进程介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#守护进程"><span class="nav-number">3.2.</span> <span class="nav-text">守护进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">4.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程介绍"><span class="nav-number">4.1.</span> <span class="nav-text">线程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-create"><span class="nav-number">4.1.1.</span> <span class="nav-text">pthread_create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-exit"><span class="nav-number">4.1.2.</span> <span class="nav-text">pthread_exit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-join"><span class="nav-number">4.1.3.</span> <span class="nav-text">pthread_join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-cancel"><span class="nav-number">4.1.4.</span> <span class="nav-text">pthread_cancel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程清理"><span class="nav-number">4.1.5.</span> <span class="nav-text">线程清理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pthread-detach"><span class="nav-number">4.1.6.</span> <span class="nav-text">pthread_detach</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步"><span class="nav-number">4.2.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#互斥量mutex互斥锁"><span class="nav-number">4.2.1.</span> <span class="nav-text">互斥量mutex互斥锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写锁rwlock"><span class="nav-number">4.2.2.</span> <span class="nav-text">读写锁rwlock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量cond"><span class="nav-number">4.2.3.</span> <span class="nav-text">条件变量cond</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自旋锁spin"><span class="nav-number">4.2.4.</span> <span class="nav-text">自旋锁spin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#barrier"><span class="nav-number">4.2.5.</span> <span class="nav-text">barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程控制"><span class="nav-number">4.3.</span> <span class="nav-text">线程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程属性"><span class="nav-number">4.3.1.</span> <span class="nav-text">线程属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步属性"><span class="nav-number">4.3.2.</span> <span class="nav-text">同步属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#互斥锁属性"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">互斥锁属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读写锁属性"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">读写锁属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件变量属性"><span class="nav-number">4.3.2.3.</span> <span class="nav-text">条件变量属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#barrier属性"><span class="nav-number">4.3.2.4.</span> <span class="nav-text">barrier属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程特定数据"><span class="nav-number">4.3.3.</span> <span class="nav-text">线程特定数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程和信号"><span class="nav-number">4.3.4.</span> <span class="nav-text">线程和信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程和fork"><span class="nav-number">4.3.5.</span> <span class="nav-text">线程和fork</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信IPC"><span class="nav-number">5.</span> <span class="nav-text">进程间通信IPC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">5.1.</span> <span class="nav-text">管道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建管道"><span class="nav-number">5.1.1.</span> <span class="nav-text">创建管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写管道规则"><span class="nav-number">5.1.2.</span> <span class="nav-text">读写管道规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#popen-pclose"><span class="nav-number">5.1.3.</span> <span class="nav-text">popen&#x2F;pclose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIFO命名管道"><span class="nav-number">5.2.</span> <span class="nav-text">FIFO命名管道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建FIFO"><span class="nav-number">5.2.1.</span> <span class="nav-text">创建FIFO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开FIFO"><span class="nav-number">5.2.2.</span> <span class="nav-text">打开FIFO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写FIFO"><span class="nav-number">5.2.3.</span> <span class="nav-text">读写FIFO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSI-IPC"><span class="nav-number">5.3.</span> <span class="nav-text">XSI-IPC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSI-IPC介绍"><span class="nav-number">5.3.1.</span> <span class="nav-text">XSI-IPC介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标识符和键"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">标识符和键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限和结构"><span class="nav-number">5.3.1.2.</span> <span class="nav-text">权限和结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优缺点"><span class="nav-number">5.3.1.3.</span> <span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息队列"><span class="nav-number">5.3.2.</span> <span class="nav-text">消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-打开消息队列"><span class="nav-number">5.3.2.1.</span> <span class="nav-text">创建&#x2F;打开消息队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加到队列"><span class="nav-number">5.3.2.2.</span> <span class="nav-text">添加到队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取消息"><span class="nav-number">5.3.2.3.</span> <span class="nav-text">获取消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作消息队列"><span class="nav-number">5.3.2.4.</span> <span class="nav-text">操作消息队列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量"><span class="nav-number">5.3.3.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享存储"><span class="nav-number">5.3.4.</span> <span class="nav-text">共享存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POSIX信号量"><span class="nav-number">5.4.</span> <span class="nav-text">POSIX信号量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-获取信号量"><span class="nav-number">5.4.0.1.</span> <span class="nav-text">创建&#x2F;获取信号量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭信号量"><span class="nav-number">5.4.0.2.</span> <span class="nav-text">关闭信号量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#销毁信号量"><span class="nav-number">5.4.0.3.</span> <span class="nav-text">销毁信号量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号量操作"><span class="nav-number">5.4.0.4.</span> <span class="nav-text">信号量操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#未命名信号量"><span class="nav-number">5.4.0.5.</span> <span class="nav-text">未命名信号量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#套接字"><span class="nav-number">5.5.</span> <span class="nav-text">套接字</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hellolinux"
+      src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+  <p class="site-author-name" itemprop="name">hellolinux</p>
+  <div class="site-description" itemprop="description">每天进步百分之一</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Changeli0n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Changeli0n" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">酷壳</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://macshuo.com/" title="http:&#x2F;&#x2F;macshuo.com&#x2F;" rel="noopener" target="_blank">MacTack</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://travelwithbook.com/" title="https:&#x2F;&#x2F;travelwithbook.com&#x2F;" rel="noopener" target="_blank">chin的故事散文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+		  <div class="links-of-blogroll-title">
+		    <!-- modify icon to fire by szw -->
+		    <i class="fa fa-history fa-" aria-hidden="true"></i>
+		    近期文章
+		  </div>
+		  <ul class="links-of-blogroll-list">
+		    
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		  </ul>
+	    </div>
+	  
+	  
+	  
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/95/" rel="tag">95</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hypothesis/" rel="tag">Hypothesis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KDA/" rel="tag">KDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NEAR/" rel="tag">NEAR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCR/" rel="tag">OCR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCT/" rel="tag">OCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaulGraham/" rel="tag">PaulGraham</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aave/" rel="tag">aave</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amm/" rel="tag">amm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ampl/" rel="tag">ampl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/basis/" rel="tag">basis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compound/" rel="tag">compound</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cosmos/" rel="tag">cosmos</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cre/" rel="tag">cre</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crv/" rel="tag">crv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defi/" rel="tag">defi</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esd/" rel="tag">esd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frax/" rel="tag">frax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hugo/" rel="tag">hugo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jitsi/" rel="tag">jitsi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layerzero/" rel="tag">layerzero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/luna/" rel="tag">luna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/magic/" rel="tag">magic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mastodon/" rel="tag">mastodon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nft/" rel="tag">nft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/obsidian/" rel="tag">obsidian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ohm/" rel="tag">ohm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pocket/" rel="tag">pocket</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rct/" rel="tag">rct</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/telegram/" rel="tag">telegram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uni/" rel="tag">uni</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web3/" rel="tag">web3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E9%93%BE/" rel="tag">公链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag">创业</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%BD%9C/" rel="tag">创作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%B3%E6%80%A7/" rel="tag">女性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%95%E8%B5%84/" rel="tag">投资</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E8%8D%90/" rel="tag">推荐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%B3%E5%AE%9A%E5%B8%81/" rel="tag">稳定币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E/" rel="tag">经济</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E5%9D%80/" rel="tag">网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E9%93%BE/" rel="tag">跨链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%83%B3/" rel="tag">随想</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	  
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <!---
+<script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+---!>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hellolinux</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">149k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+<!---
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e8315ca5fd61bd3" async="async"></script>
+  </div>
+---!>
+<!---
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+---!>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

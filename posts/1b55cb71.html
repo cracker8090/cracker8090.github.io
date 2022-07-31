@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gK77_o5sjFpw2K4KqFStbOtHEl8m_97Zb9BMK88lWZY">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hellolinux.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Curve Finance介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Defi世界-Curve Finance介绍">
+<meta property="og:url" content="https://hellolinux.xyz/posts/1b55cb71.html">
+<meta property="og:site_name" content="无拘无束的猪">
+<meta property="og:description" content="Curve Finance介绍">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hellolinux.xyz/images/crv1.png">
+<meta property="og:image" content="https://hellolinux.xyz/images/crv2.png">
+<meta property="article:published_time" content="2022-04-04T03:09:17.000Z">
+<meta property="article:modified_time" content="2022-04-04T03:09:17.000Z">
+<meta property="article:author" content="hellolinux">
+<meta property="article:tag" content="defi">
+<meta property="article:tag" content="crv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hellolinux.xyz/images/crv1.png">
+
+<link rel="canonical" href="https://hellolinux.xyz/posts/1b55cb71.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Defi世界-Curve Finance介绍 | 无拘无束的猪</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162293825-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-162293825-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="无拘无束的猪" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无拘无束的猪</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">hellolinux的点点滴滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hellolinux.xyz/posts/1b55cb71.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+      <meta itemprop="name" content="hellolinux">
+      <meta itemprop="description" content="每天进步百分之一">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无拘无束的猪">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Defi世界-Curve Finance介绍
+        </h1>
+
+        <div class="post-meta">
+		
+		  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-04 11:09:17" itemprop="dateCreated datePublished" datetime="2022-04-04T11:09:17+08:00">2022-04-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url" rel="index"><span itemprop="name">区块链</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/defi/" itemprop="url" rel="index"><span itemprop="name">defi</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/1b55cb71.html" class="post-meta-item leancloud_visitors" data-flag-title="Defi世界-Curve Finance介绍" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+            <div class="post-description">Curve Finance介绍</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="V1"><a href="#V1" class="headerlink" title="V1"></a>V1</h1><p>价格会使用恒定产品(<a href="https://ethresear.ch/t/improving-front-running-resistance-of-x-y-k-market-makers/1281" target="_blank" rel="noopener"><code>x*y=k</code></a>)</p>
+<p>维持 <code>eth_pool（ETH 数量） * token_pool（代币数量） = invariant（不变量）</code> 这个关系来实现</p>
+<p>ETH → OMG</p>
+<blockquote>
+<p>TH_pool（ETH 资金池） = 10</p>
+<p>OMG_pool（OMG 资金池） = 500</p>
+<p>invariant（不变量） = 10 * 500 = 5000</p>
+</blockquote>
+<p>OMG 购买者发送 1 ETH 到这个合约。其中 0.25% 的手续费会被划分给流动性提供者，剩余的 0.9975 ETH 会被放入 # Curve简介</p>
+<p>Curve.fi借鉴Uniswap、Balancer等前人经验，给稳定币的发展的提供了孵化地，各种创新稳定币可以通过Curve来为自身做初期价值锚定，为项目的场景发展争取时间。Curve作为这些稳定币之间的桥梁将会成为一个长期Defi基础设施，这些稳定币的交易量便是Curve.fi的价值根基。大规模的稳定币AMM兑换市场，他们独有的算法使得池子大部分时候滑点极低，<a href="https://curve.fi/files/stableswap-paper.pdf" target="_blank" rel="noopener">白皮书</a> 。</p>
+<p>定位在稳定币或者等价币之间的交换（如ETH和sETH，BTC和wBTC等）：</p>
+<ul>
+<li><p>在流动性池中的代币充足的情况下，滑点尽可能的小甚至没有；</p>
+</li>
+<li><p>避免流动性池中某一种代币被全部兑换，在某一种代币数量很少的时候要提升代币价格；</p>
+</li>
+</ul>
+<p>以流动性池中只有两种代币为例，如USDC/DAI，交易价格是由-dy/dx来决定的，如果让交易价格稳定为1，最简单直接的恒等式就是采用一个斜率为-1的直线</p>
+<blockquote>
+<p>x + y = const</p>
+</blockquote>
+<p>需要考虑到一个价格自调整的能力，像Uniswap、Bancor等协议，是通过乘积恒等式来实现价格调整：</p>
+<blockquote>
+<p>x * y = const</p>
+</blockquote>
+<p>价格滑点会比较明显，单笔交易量越大，价格变化越大，因此不太适合稳定币之间的交易。<br><img data-src="../images/crv1.png" alt=""> </p>
+<p>蓝色曲线即代表稳定币之间交易的AMM曲线，和Uniswap这种乘积恒等式的AMM设计来比，在预期的稳定价格附近有比较小的滑点，和恒定总和的AMM设计相比，在某一种代币余额产生较大偏离时，交易价格会发生比较大的变化，促使流动性提供者或者套利者通过市场行为恢复流动性池中代币余额的均衡。</p>
+<p>Curve需要做的就是通过函数关系，能够在一定范围类，通过函数某些参数，都能够切换到这两个的任意一种状态，比如，交易量特别大的时候接近恒定和，在流动性快枯竭的时候接近恒定积。</p>
+<p>引入一个因子 X，用来调整恒定总和恒等式影响占比，值越大，则曲线更加倾向于零滑点的直线，值越小，则曲线更加倾向于高滑点的恒定乘积曲线。在curve finance的白皮书中也成为杠杆（leverage），动态杠杆需要满足两个特性：</p>
+<ul>
+<li>自适应梯度，当流动性池中的各个代币余额相等或者接近的时候， X 的值增大，降低滑点，反之值减小，增加曲线梯度，即交易价格，控制余额比例的偏离；</li>
+<li>与交易池中代币种类不相关，即与维度不相关。<br><img data-src="../images/crv2.png" alt=""></li>
+<li>在这个恒等式中，A的值是在创建流动性池的时候选择的，恒定不变，D的值在质押代币之后需进行计算，并且在swap过程中要不断的进行迭代更新。</li>
+</ul>
+<p><strong>Curve Finance支持与其他DeFi协议的融合，Curve的流动性池也因此分为三种类型：</strong></p>
+<ul>
+<li><p>Plain pools：两个或多个稳定币交易流动性池，用于交易的流动性池，目前有3CRV和其他稳定币的池子；</p>
+</li>
+<li><p>Lending pools：这个交易池中，对原生的代币进行了一个再包装（wrapped tokens），例如用户质押的是DAI，但实际流动性池里是cDAI，这样做的目的是为了可以将质押到流动性池中的代币再借贷出去赚取利润，而用于交易的流动性池中实际保存的是wrapped tokens，比如ETH的sETH、BTC的sBTC等；</p>
+</li>
+<li><p>Metapools：与另外一个流动性池中的流动性代币（LP）组成的流动性池，这种流动性池的目的是为了给用户一个重叠质押的机会，例如用户质押DAI到一个Plain pool获得LP，然后又将LP质押到Metapool继续赚取收益，就像是你买了债券，然后又用债券换了一个理财，这样你既能获得债券的收益，又能获得理财的收益，目前Curve池子中最主要的是稳定币的3CRV跟其他某代币组成的池子，获取3CRV本身收益，这个池子的收益，还有跟3CRV组的这个币本身的分红。额外token、额外奖励、gasfee。</p>
+</li>
+</ul>
+<h1 id="veCRV机制"><a href="#veCRV机制" class="headerlink" title="veCRV机制"></a>veCRV机制</h1><p>质押Curve代币获取veCRV，能够对收益加速，veCRV介绍：</p>
+<ul>
+<li><p>收取Curve协议50%的交易手续费，收取手续费比例按照veCRV占比均分。</p>
+</li>
+<li><p>Vote Power。veCRV的投票权机制非常简单，投票权跟锁仓时间成正比，veCRV会随着时间衰退的，所以如果为了保持足够的投票权，意味着要一直刷新锁仓的时间。</p>
+</li>
+<li><p>Boost 机制。Boost是流动性挖矿的加速机制，在没有boost的情况下，流动性挖矿的基数只有40%，通过足够拥有足够量级的veCRV的情况，才能获得Boost倍速的增加，最高2.5x，是一个线性增加的机制。</p>
+</li>
+</ul>
+<p>一切共识都需要时间的积累，时间-&gt;共识-&gt;价值。Curve.fi最简单的手法：锁仓，并且量化锁仓的价值 — 投票权力。其实锁仓增加投票权并非什么新鲜事物，而为什么veCRV成功了？主要还是跟boost的机制的配合，用户们有了非常直接争夺CRV的理由：更多投票代表更多收益，这便是veCRV的博弈基础。这个功能让项目方几乎是永远锁住了一部分CRV来保持自己的在Curve上的权力。同时这个veCRV也对抗了为了投票瞬间直接大量买入，再投票结束再大量抛售的情况，保持了币价的平稳。一个地址在提供流动性的同时还需要跟流动性对应足够量级的CRV才能收益最大化。</p>
+<p>由于项目预挖和前期的通胀太快，导致后期如果用户想到最大的程度的boost需要CRV数量过于庞大，大量拥有CRV的鲸鱼和流动性提供散户最终分叉成两个无法交集的集体，veCRV机制正式成为一个缺陷，也导致了接下来介绍的优化平台的战争开端。</p>
+<p><strong>目前为止治理白名单：yearn finance、stakeDAO、Convex</strong> 。</p>
+<p>StakeDAO后面将旗下的CRV转入Convex中，帮助convex完成原始积累。</p>
+<h1 id="CRV代币"><a href="#CRV代币" class="headerlink" title="CRV代币"></a>CRV代币</h1><p>CurveDAO于2020年8月13日正式启动，推出治理token CRV。CRV的最大供应量为30.3亿枚，其中62%将分配给社区流动性提供者、30%分配给项目团队和早期投资者（2-4年归属）、5%作为社区储备、3%分配给拥有2年归属权的员工。</p>
+<p>CRV目前具有三个主要用途：社区投票，质押获取社区治理费分成和提高流动性池的收益（最高达2.5倍）。而实现以上用途的前提是将CRV锁定并获得veCRV。与常规采用DAO治理的DEX协议相比，Curve的创新之处在于在CRV的锁仓规则中添加了时间函数：veCRV=CRV*T/4（T为锁仓年限），即质押CRV的时间越长，收到的veCRV就越多，选择CRV锁仓4年才能1：1的获得veCRV。需要注意的是，且该质押锁仓行为不可逆转且veCRV不可流通。</p>
+<h1 id="Convex"><a href="#Convex" class="headerlink" title="Convex"></a>Convex</h1><p>收益和流动性出现矛盾，所以就有Convex的出现，就是实现收益和流动性的分离，用户可以只获取较高收益，出卖自己的投票权，这就是Convex做的事情。</p>
+<p>Convex的协议token是CVX，其最大供应量为1亿，其中的50%将分配给通过Convex平台向Curve平台提供流动性的用户（为初始的流动性提供者增厚一层收益）、25%向CVX/ETH和cvxCRV/CRV矿池提供流动性挖矿激励（矿池的建立使得cvxCRV的流动性大大改善，是Convex破解veCRV流动性不足的手段之一）、10%归属Convex团队、9.7%归属合约、3.3%归属早期投资者、2%空投给veCRV的持有者。</p>
+<p>Convex其实就是一个像比较大银行，用户把钱存在这里，获取比Curve高一点的收益，而Curve就只能定期存取。Convex本身它是把所有的CRV都锁了四年的，因为从平台角度，越久对它来说越好，前提是不会跑路。质押一枚CRV即可获得一枚cvxCRV，这一过程有些类似资产证券化。就有点像，集中散户手中的东西干大事。</p>
+<p><strong>CRV token持有者选择</strong></p>
+<ul>
+<li><p>持有CRV，等待币价上涨</p>
+</li>
+<li><p>Curve质押CRV换取veCRV，将获得Curve协议的投票权与管理费分成，但要牺牲流动性</p>
+</li>
+<li><p>前往Convex质押CRV取得cvxCRV，其将可以在不牺牲流动性的前提下获得veCRV持有者所能享受的最高收益与CVX，但加速收益的16%会作为平台费被收取。（基于Convex平台）</p>
+</li>
+<li><p>前往SushiSwap提供流动性，其将可以获得SUSHI、交易手续费分成与CVX激励。（基于Convex平台）</p>
+</li>
+</ul>
+<p>Convex运行良好来自于CVX的价格支撑，CVX价格过低，第三种收益就会下降，SushiSwap的流动性挖矿收益率下降或将引发cvxCRV的流动性不足，Convex需要减少CVX与cvxCRV的流通盘，收取的16%费用可以激励CVX与cvxCRV的持有者质押他们手中的token。</p>
+<ul>
+<li><p>10% 激励cvxCRV质押者，以CRV形式给出</p>
+</li>
+<li><p>5% 鼓励CVX质押者，以cvxCRV形式给出</p>
+</li>
+<li><p>1% 偿付合约调用gas费</p>
+</li>
+</ul>
+<p>引导 CVX 和 cxvCRV 早期的流动性，如果在 SushiSwap 的 cvxCRV/CRV 和 CVX/ETH 交易对提供流动性，则可将对应的 LP 令牌存放在 Convex 上，并获得对应的 CVX 奖励。cvxCRV 保留收益权 没有投票权，收益会高一点。</p>
+<p>vICVX（convex治理权： 锁定16周 略高5%收益</p>
+<h2 id="CVX代币"><a href="#CVX代币" class="headerlink" title="CVX代币"></a>CVX代币</h2><p>CVX 是 Convex 的原生代币，最大供应量为 1 亿枚</p>
+<p>50%（5000 万枚）是 Curve LP 奖励，按比例直接分发</p>
+<p>25%（2500 万枚）用于流动性挖矿奖励，支持 CVX/ETH 和 cvxCRV/CRV 交易池，分发期为 4 年</p>
+<p>10% （1000 万枚）是 Convex 创始团队激励，在产品上线后锁定一年</p>
+<p>9.7%（970 万枚）作为国库储备，锁定一年，用于未来的社区激励或其他社区活动</p>
+<p>3.3%（330 万枚）分发给投资者，全部锁定一年（此部分 CVX 没有 cvxCRV 铸造）</p>
+<p>1%（100 万枚）的 CVX 被空投给 veCRV 代币持有者</p>
+<p>1%（100 万枚）的 CVX 奖励给参与 Curve.fi 治理投票（即支持将 Convex 列入 Curve.fi 白名单）的用户</p>
+<h1 id="Curve的治理控制权"><a href="#Curve的治理控制权" class="headerlink" title="Curve的治理控制权"></a>Curve的治理控制权</h1><p>投票控制权的获取目前以大型的算法稳定币项目为主，一些衍生品和周边服务的游击队也不停的加入到混战当中，后续应该衍生品等项目应该也是有这个需求的。</p>
+<ul>
+<li><p>Frax/FXS：老牌算稳项目。Convex专门开辟了Frax专区，FXS也开启了自己的veFXS模式。</p>
+</li>
+<li><p>Spell/MIM：Abracadabra, 一个扬言要彻底打败Maker的生息资产稳定币项目，稳定币是MIM。MIM/3CRV池子，利用Curve的站住脚跟成功典型代表。核心人物Daniele。</p>
+</li>
+<li><p>UST：Terra系得算法稳定币。跟上面的Daniele合作，把两个非传统抵押型稳定币绑定在一起。Terra 2022刚开始就购入了超过60w的CVX，也加入了Curve大家庭。</p>
+</li>
+<li><p>OHN/Redacted：非传统形态的算法稳定币。Ohm和Frax的关系密切，在<a href="https://forum.olympusdao.finance/d/325-oip-43-launch-cvx-bonds" target="_blank" rel="noopener">OIP-43</a>中就已经提议增加CVX债权，增持CVX放入国库中，为应对未来的竞争做准备。Ohm加持的Redacted(BTRFLY)协议更是作为一种Convex之上的优化策略方案进入了战争当中，使用Ohm机制发放债券吸引了大量CRV和CVX，帮助用户更好的发挥手中的CRV和CVX收益。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Curve还接入了iEarn、Compound、Synthetix等借贷协议与合成资产协议，在提高资金利用率的同时给予流动性提供者额外的收益，这种乐高式的金融组合也是DeFi的一大魅力。</p>
+<p>做市收益、Convex 完成治理套娃、进阶的贿赂选票，入局的协议也从 Yearn &amp; Stake DAO、到 Olympus DAO &amp; FRAX、到各类稳定币项目 Alchemix &amp; Abracadabra、到新生项目 [Redacted] Cartel。</p>
+<p>Curve.fi在可见的未来中，会跟Uniswap，Maker，AAVE一样，成为Defi的基石，是每个Defi玩家都应该深入理解的项目。</p>
+<p>作为一个稳定币的DeFi协议，Curve Finance为上层的应用或者衍生品提供了基础支撑，相信未来肯定还会有更多的创新性的尝试，包括跟元宇宙的结合等。</p>
+<p>长远来看，就如Uniswap创始人在推特上说的而言，Curve是以博弈论为基础，这种激励不能够长久。我个人的看法并不否认这种看法，我相信几年后会有新的机制和产品出来，但是，目前状况下，局面还没有打开的情况下，Curve是所有稳定币启动的最好去处，有了先发优势，但是资本本身是逐利的，谁又知道会有什么新的产品会更吸引人呢，比如AC的solid，至少是一个改进和有利的竞争，但是还是在一条路子上，尽管AC已经退出或者隐匿。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://curve.fi/files/stableswap-paper.pdf" target="_blank" rel="noopener">Curve StableSwap Whitepaper</a></p>
+<p><a href="https://curve.fi/files/crypto-pools-paper.pdf" target="_blank" rel="noopener">Curve Crypto Pools Whitepaper</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/461398413" target="_blank" rel="noopener">深入浅出Curve Finance的自动化做市商（AMM）原理</a></p>
+<p><a href="https://mirror.xyz/0xd05cFA28Eaf8B4eaFD8Cd86d33c6CeD1a1875417/K6rMxszmPIWIuOKJHavs7yZnhMis_DYYFIHi690afsU" target="_blank" rel="noopener">Curve War（流动性战争）</a></p>
+<p><a href="https://mirror.xyz/0xe3FF118cACfC37b79563D846cDe9d8C4D33E302d/qQtIuwI49ds1L5RQ9j5T7O2bhuoBidzWHgCq-Ktfqnk" target="_blank" rel="noopener">DeFi最大流动性中心：收益聚合器Convex的秘密</a></p>
+<p><a href="https://raw.githubusercontent.com/Convex-Dev/design/main/papers/convex-whitepaper.pdf" target="_blank" rel="noopener">Convex白皮书</a> </p>
+
+    </div>
+	
+	
+    
+    
+    
+	
+
+    
+    
+    
+
+    
+      
+      
+        
+        
+      
+      
+        
+      
+      
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/22e44a8f.html" rel="bookmark">Defi世界-算法稳定币介绍</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/335282b3.html" rel="bookmark">Defi世界-AMM Uniswap</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/aac4301d.html" rel="bookmark">Defi世界-借贷Compound介绍</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/9092711e.html" rel="bookmark">Defi世界-defi2.0 olympus DAO介绍</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>文章作者： </strong>hellolinux
+  </li>
+  <li class="post-copyright-link">
+    <strong>原始链接：</strong>
+    <a href="https://hellolinux.xyz/posts/1b55cb71.html" title="Defi世界-Curve Finance介绍">https://hellolinux.xyz/posts/1b55cb71.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/defi/" rel="tag"><i class="fa fa-tag"></i> defi</a>
+              <a href="/tags/crv/" rel="tag"><i class="fa fa-tag"></i> crv</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/aac4301d.html" rel="prev" title="Defi世界-借贷Compound介绍">
+      <i class="fa fa-chevron-left"></i> Defi世界-借贷Compound介绍
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/335282b3.html" rel="next" title="Defi世界-AMM Uniswap">
+      Defi世界-AMM Uniswap <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#V1"><span class="nav-number">1.</span> <span class="nav-text">V1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#veCRV机制"><span class="nav-number">2.</span> <span class="nav-text">veCRV机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CRV代币"><span class="nav-number">3.</span> <span class="nav-text">CRV代币</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Convex"><span class="nav-number">4.</span> <span class="nav-text">Convex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CVX代币"><span class="nav-number">4.1.</span> <span class="nav-text">CVX代币</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Curve的治理控制权"><span class="nav-number">5.</span> <span class="nav-text">Curve的治理控制权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hellolinux"
+      src="https://raw.githubusercontent.com/cracker8090/imgbed/master/blogImg/V.jpg">
+  <p class="site-author-name" itemprop="name">hellolinux</p>
+  <div class="site-description" itemprop="description">每天进步百分之一</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Changeli0n" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Changeli0n" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情连接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">酷壳</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://macshuo.com/" title="http:&#x2F;&#x2F;macshuo.com&#x2F;" rel="noopener" target="_blank">MacTack</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://travelwithbook.com/" title="https:&#x2F;&#x2F;travelwithbook.com&#x2F;" rel="noopener" target="_blank">chin的故事散文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+		  <div class="links-of-blogroll-title">
+		    <!-- modify icon to fire by szw -->
+		    <i class="fa fa-history fa-" aria-hidden="true"></i>
+		    近期文章
+		  </div>
+		  <ul class="links-of-blogroll-list">
+		    
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		     <li>
+			   <a href="/" title="" target="_blank"></a>
+		     </li>
+		    
+		  </ul>
+	    </div>
+	  
+	  
+	  
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/95/" rel="tag">95</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hypothesis/" rel="tag">Hypothesis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KDA/" rel="tag">KDA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NEAR/" rel="tag">NEAR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCR/" rel="tag">OCR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCT/" rel="tag">OCT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaulGraham/" rel="tag">PaulGraham</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aave/" rel="tag">aave</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amm/" rel="tag">amm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ampl/" rel="tag">ampl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/basis/" rel="tag">basis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compound/" rel="tag">compound</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cosmos/" rel="tag">cosmos</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cre/" rel="tag">cre</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crv/" rel="tag">crv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/defi/" rel="tag">defi</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esd/" rel="tag">esd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frax/" rel="tag">frax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gamefi/" rel="tag">gamefi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hugo/" rel="tag">hugo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jitsi/" rel="tag">jitsi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layerzero/" rel="tag">layerzero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/luna/" rel="tag">luna</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/magic/" rel="tag">magic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mastodon/" rel="tag">mastodon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nft/" rel="tag">nft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/obsidian/" rel="tag">obsidian</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ohm/" rel="tag">ohm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pocket/" rel="tag">pocket</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rct/" rel="tag">rct</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/telegram/" rel="tag">telegram</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uni/" rel="tag">uni</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web3/" rel="tag">web3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E9%93%BE/" rel="tag">公链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%B8%9A/" rel="tag">创业</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%9B%E4%BD%9C/" rel="tag">创作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%B3%E6%80%A7/" rel="tag">女性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%95%E8%B5%84/" rel="tag">投资</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E8%8D%90/" rel="tag">推荐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%B3%E5%AE%9A%E5%B8%81/" rel="tag">稳定币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E6%B5%8E/" rel="tag">经济</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E5%9D%80/" rel="tag">网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E9%93%BE/" rel="tag">跨链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E6%83%B3/" rel="tag">随想</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	  
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <!---
+<script
+  async
+  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+></script>
+---!>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hellolinux</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">149k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+<!---
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e8315ca5fd61bd3" async="async"></script>
+  </div>
+---!>
+<!---
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+---!>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
